@@ -3,17 +3,327 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Portfolio - [Your Name]</title>
-  <link rel="stylesheet" href="styles.css" />
+  <title>Portfolio - Rivindu Kowlinda</title>
+  
+  <!-- External CSS Libraries -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+  <!-- Combined Stock & Enhanced CSS -->
+  <style>
+    /* ======================== */
+    /*       Variables          */
+    /* ======================== */
+    :root {
+      --main-bg: rgb(33,36,40); /* Base color: #212428 */
+      --card-bg: #2a2e34;       /* Slightly lighter for cards */
+      --accent: #ff6a00;        /* Accent color for buttons */
+      --text-color: #e0e0e0;     /* Light text */
+      --transition: 0.5s ease;
+    }
+    /* ======================== */
+    /*    Global Reset          */
+    /* ======================== */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: var(--main-bg);
+      color: var(--text-color);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    /* ======================== */
+    /*   Page Wrapper & Sticky Footer */
+    /* ======================== */
+    .page-wrapper { display: flex; flex-direction: column; min-height: 100vh; }
+    .content { flex: 1; }
+    /* ======================== */
+    /*   Navbar (Always Visible) */
+    /* ======================== */
+    .navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: var(--main-bg);
+      transition: background 0.5s ease, box-shadow 0.5s ease, transform 0.5s ease;
+      z-index: 1000;
+      padding-bottom: 10px;
+    }
+    .navbar.scrolled {
+      background: rgba(33,36,40,0.7);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.6);
+      transform: translateY(0);
+      opacity: 1;
+    }
+    .nav-container {
+      width: 90%;
+      max-width: 1200px;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo a {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: var(--text-color);
+      text-decoration: none;
+      transition: color var(--transition);
+    }
+    .nav-links { list-style: none; display: flex; }
+    .nav-links li { margin-left: 20px; }
+    .nav-links a {
+      color: var(--text-color);
+      text-decoration: none;
+      font-size: 1rem;
+      transition: color var(--transition);
+    }
+    .nav-links a:hover { color: var(--accent); }
+    /* Hamburger Menu for Mobile */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      gap: 5px;
+      transition: background 0.3s ease;
+    }
+    .hamburger span {
+      width: 25px;
+      height: 3px;
+      background: var(--text-color);
+      transition: background 0.3s ease;
+    }
+    .hamburger.active span { background: var(--accent); }
+    .nav-menu { display: flex; }
+    .nav-menu.active { display: block; }
+    @media (max-width: 768px) {
+      .nav-container { flex-direction: row; justify-content: space-between; align-items: center; }
+      .hamburger { display: flex; }
+      .nav-menu { display: none; width: 100%; }
+      .nav-menu.active { display: block; }
+      .nav-links {
+        flex-direction: column;
+        align-items: center;
+        padding: 10px 0;
+      }
+      .nav-links li { margin: 10px 0; }
+    }
+    /* ======================== */
+    /*       Sections           */
+    /* ======================== */
+    .section {
+      padding: 40px 0;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+      scroll-margin-top: 80px;  /* Added scroll margin for fixed navbar */
+    }
+    .section.visible { opacity: 1; transform: translateY(0); }
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: auto;
+      padding: 0 1rem;
+    }
+    /* ======================== */
+    /*       Hero Section       */
+    /* ======================== */
+    .hero {
+      height: 100vh;
+      padding-top: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 50px;
+      position: relative;
+      z-index: 2;
+      width: 100%;
+    }
+    .hero-left { flex: 1; text-align: left; margin-left: 10%; }
+    .hero-title { font-size: 4rem; margin-bottom: 20px; }
+    .hero-subtitle { font-size: 2rem; margin-bottom: 30px; }
+    .btn {
+      display: inline-block;
+      background: var(--accent);
+      color: #fff;
+      padding: 14px 32px;
+      border: none;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+    .btn:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.5); }
+    /* Hero Right: Profile Card */
+    .hero-right {
+      flex: 0 0 320px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      z-index: 3;
+      padding-right: 10%;
+    }
+    .profile-card {
+      width: 320px;
+      height: 320px;
+      border-radius: 50%;
+      overflow: hidden;
+      background: var(--card-bg);
+      border: 4px solid var(--accent);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+    .profile-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .profile-card:hover { transform: scale(1.05); box-shadow: 0 12px 24px rgba(0,0,0,0.6); }
+    /* ======================== */
+    /*         Cards            */
+    /* ======================== */
+    .card {
+      background: var(--card-bg);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+    .card:hover { transform: translateY(-5px); box-shadow: 0 12px 24px rgba(0,0,0,0.6); }
+    /* ======================== */
+    /*       About Section      */
+    /* ======================== */
+    .about-card { margin: 0 auto; text-align: left; }
+    /* ======================== */
+    /*     Projects Section     */
+    /* ======================== */
+    .carousel-container {
+      position: relative;
+      overflow: hidden;
+      padding: 0 80px;
+    }
+    .cards-carousel {
+      display: flex;
+      gap: 20px;
+      padding-top: 10px;
+      padding-bottom: 3px;
+    }
+    .cards-carousel .card {
+      flex: 0 0 auto;
+      width: 300px;
+    }
+    /* Arrow buttons for navigation */
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: var(--accent);
+      border: none;
+      color: #fff;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      opacity: 0.8;
+      transition: opacity 0.3s ease;
+      z-index: 4;
+    }
+    .carousel-btn:hover { opacity: 1; }
+    .left-btn { left: 10px; }
+    .right-btn { right: 10px; }
+    /* ======================== */
+    /*       Contact Form       */
+    /* ======================== */
+    .contact-form .form-group { margin-bottom: 15px; }
+    .contact-form label {
+      margin-bottom: 5px;
+      display: block;
+      font-weight: bold;
+    }
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 5px;
+      background: var(--card-bg);
+      color: var(--text-color);
+      transition: background var(--transition), box-shadow var(--transition);
+    }
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+      outline: none;
+      box-shadow: 0 0 10px rgba(255,255,255,0.3);
+    }
+    /* ======================== */
+    /*         Footer           */
+    /* ======================== */
+    .footer {
+      text-align: center;
+      padding: 20px 0;
+      background: var(--main-bg);
+      color: var(--text-color);
+    }
+    #signature { max-width: 250px; }
+    #logo { padding-top: 20px; max-width: 70px; }
+    /* ======================== */
+    /*    Additional Enhanced CSS   */
+    /* ======================== */
+    #particles-js {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      top: 0;
+      left: 0;
+    }
+    [data-aos] { opacity: 0; transition-property: opacity, transform; }
+    [data-aos].aos-animate { opacity: 1; }
+    /* Responsive Styles */
+    @media (max-width: 768px) {
+      .hero-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 30px;
+      }
+      .hero-left, .hero-right { width: 100%; }
+      .hero-title { font-size: 2.5rem; }
+      .hero-subtitle { font-size: 1.3rem; }
+      .btn { padding: 12px 24px; font-size: 0.9rem; }
+      .profile-card { width: 280px; height: 280px; }
+    }
+    @media (max-width: 480px) {
+      .nav-links a { font-size: 0.9rem; }
+      .hero-title { font-size: 2.2rem; }
+      .hero-subtitle { font-size: 1.1rem; }
+      .btn { padding: 10px 20px; font-size: 0.8rem; }
+    }
+  </style>
 </head>
 <body>
+  <!-- Particles Background -->
+  <div id="particles-js"></div>
+
   <!-- Navbar -->
-  <header class="navbar">
-    <div class="container nav-container">
+  <header class="navbar" data-aos="fade-down">
+    <div class="nav-container">
       <div class="logo">
-        <a href="#hero"><img src="logo.png"alt="[Your Profile Image]" id="logo"/></a>
+        <a href="#hero"><img src="logo.png" alt="Logo" id="logo" /></a>
       </div>
-      <!-- Hamburger icon for mobile -->
       <div class="hamburger" id="hamburger">
         <span></span>
         <span></span>
@@ -22,100 +332,116 @@
       <nav class="nav-menu" id="nav-menu">
         <ul class="nav-links">
           <li><a href="#hero">Home</a></li>
-          <li><a href="#aboutSection">About</a></li>
-          <li><a href="#projectsSection">Projects</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#projects">Projects</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
       </nav>
     </div>
   </header>
 
-  <!-- Page Wrapper for sticky footer -->
+  <!-- Page Wrapper -->
   <div class="page-wrapper">
-    <!-- Main Content -->
     <main class="content">
-      <!-- Hero Section: Full-screen with typing effect on name only -->
-      <section id="hero" class="section hero">
-        <div class="container hero-content">
+      <!-- Hero Section -->
+      <section id="hero" class="hero" data-aos="fade-up">
+        <div class="hero-content">
           <div class="hero-left">
-            <h1 class="hero-title typing">
-              <span class="typing-text">Hello, I'm Rivindu Kowlida</span>
-            </h1>
-            <p class="hero-subtitle">
-              Software Engineer | Designer | Innovator
-            </p>
-            <a href="#projectsSection" class="btn">View Projects</a>
+            <h1 class="hero-title"><span id="typed"></span></h1>
+            <p class="hero-subtitle">Software Engineer | Designer | Innovator</p>
+            <a href="#projects" class="btn">View Projects</a>
           </div>
           <div class="hero-right">
             <div class="profile-card">
-              <img src="profile.jpg" alt="[Your Profile Image]" />
+              <img src="profile.jpg" alt="Profile Image" />
             </div>
           </div>
         </div>
       </section>
-      <div></div>
+
       <!-- About Section -->
-       <p id="aboutSection">&nbsp</p>
-       <p>&nbsp</p>
-    </div>
-      <section id="about" class="section about">
+      <section id="about" class="section about" data-aos="fade-right">
         <div class="container">
           <div class="card about-card">
             <h2>About Me</h2>
             <p>
-                Rivindu Kowlinda is a driven and accomplished software engineering undergraduate at IIT, recognized for his impressive technical expertise and leadership qualities. Throughout his academic journey, he has built a strong foundation in a wide array of programming languages, including HTML, CSS, JavaScript, Java, Python, Flutter, and TypeScript. His practical experience is further enriched by his work with modern frameworks such as Spring Boot and Angular, enabling him to design and develop innovative solutions that effectively bridge theory with real-world application.<br><br>
-
-                With a natural aptitude for leadership and communication, Rivindu excels in collaborative environments. His fluency in English allows him to articulate complex technical concepts clearly, making him an asset in team projects and professional settings alike. His ability to motivate and guide peers has been demonstrated in various group initiatives, where he has consistently contributed to achieving shared objectives with creativity and precision.<br><br>
-                
-                Rivindu’s passion for technology is matched by his commitment to continuous learning. He eagerly embraces emerging technologies and industry trends, constantly seeking out new challenges to further refine his skills. Whether working on a dynamic user interface or architecting robust backend systems, Rivindu approaches each project with a blend of technical acumen, creativity, and a dedication to quality, positioning him as a forward-thinking contributor in the ever-evolving field of software engineering.
+              Rivindu Kowlinda is a driven and accomplished software engineering undergraduate at IIT, recognized for his impressive technical expertise and leadership qualities. Throughout his academic journey, he has built a strong foundation in a wide array of programming languages, including HTML, CSS, JavaScript, Java, Python, Flutter, and TypeScript. His practical experience is further enriched by his work with modern frameworks such as Spring Boot and Angular, enabling him to design and develop innovative solutions that effectively bridge theory with real-world application.
+              <br /><br />
+              With a natural aptitude for leadership and communication, Rivindu excels in collaborative environments. His fluency in English allows him to articulate complex technical concepts clearly, making him an asset in team projects and professional settings alike. His ability to motivate and guide peers has been demonstrated in various group initiatives, where he has consistently contributed to achieving shared objectives with creativity and precision.
+              <br /><br />
+              Rivindu’s passion for technology is matched by his commitment to continuous learning. He eagerly embraces emerging technologies and industry trends, constantly seeking out new challenges to further refine his skills.
             </p>
-            <p id="projectsSection"></p>
           </div>
         </div>
       </section>
+
       <!-- Projects Section -->
-      <section id="projects" class="section projects">
+      <section id="projects" class="section projects" data-aos="zoom-in">
         <div class="container">
-        <div class="card about-card">
-          <h2>Projects</h2><br>
-          <div class="cards-grid">
-            <!-- Project Card 1 -->
-            <div class="card project-card">
-              <img src="https://via.placeholder.com/300x200" alt="Project 1" />
-              <div class="card-content">
-                <h3>Project Title 1</h3>
-                <p>Short description of project 1.</p>
-                <br>
-                <a href="project.html?project=1" class="btn">Learn More</a>
+          <div class="card about-card">
+            <h2>Projects</h2><br />
+            <div class="carousel-container">
+              <button class="carousel-btn left-btn">&#10094;</button>
+              <div class="cards-carousel">
+                <!-- Project Card 1 -->
+                <div class="card project-card">
+                  <img src="https://via.placeholder.com/300x200" alt="Project 1" />
+                  <div class="card-content">
+                    <h3>Project Title 1</h3>
+                    <p>Short description of project 1.</p>
+                    <br />
+                    <a href="project.html?project=1" class="btn">Learn More</a>
+                  </div>
+                </div>
+                <!-- Project Card 2 -->
+                <div class="card project-card">
+                  <img src="https://via.placeholder.com/300x200" alt="Project 2" />
+                  <div class="card-content">
+                    <h3>Project Title 2</h3>
+                    <p>Short description of project 2.</p>
+                    <br />
+                    <a href="project.html?project=2" class="btn">Learn More</a>
+                  </div>
+                </div>
+                <!-- Project Card 3 -->
+                <div class="card project-card">
+                  <img src="https://via.placeholder.com/300x200" alt="Project 3" />
+                  <div class="card-content">
+                    <h3>Project Title 3</h3>
+                    <p>Short description of project 3.</p>
+                    <br />
+                    <a href="project.html?project=3" class="btn">Learn More</a>
+                  </div>
+                </div>
+                <!-- Project Card 4 -->
+                <div class="card project-card" style="opacity: 0;">
+                  <img src="https://via.placeholder.com/300x200" alt="Project 4" />
+                  <div class="card-content">
+                    <h3>Project Title 4</h3>
+                    <p>Short description of project 4.</p>
+                    <br />
+                    <a href="project.html?project=4" class="btn">Learn More</a>
+                  </div>
+                </div>
+                <!-- Project Card 5 -->
+                <div class="card project-card" style="opacity: 0;">
+                  <img src="https://via.placeholder.com/300x200" alt="Project 5" />
+                  <div class="card-content">
+                    <h3>Project Title 5</h3>
+                    <p>Short description of project 5.</p>
+                    <br />
+                    <a href="project.html?project=5" class="btn">Learn More</a>
+                  </div>
+                </div>
               </div>
+              <button class="carousel-btn right-btn">&#10095;</button>
             </div>
-            <!-- Project Card 2 -->
-            <div class="card project-card">
-              <img src="https://via.placeholder.com/300x200" alt="Project 2" />
-              <div class="card-content">
-                <h3>Project Title 2</h3>
-                <p>Short description of project 2.</p>
-                <br>
-                <a href="project.html?project=2" class="btn">Learn More</a>
-              </div>
-            </div>
-            <!-- Project Card 3 -->
-            <div class="card project-card">
-              <img src="https://via.placeholder.com/300x200" alt="Project 3" />
-              <div class="card-content">
-                <h3>Project Title 3</h3>
-                <p>Short description of project 3.</p>
-                <br>
-                <a href="project.html?project=3" class="btn">Learn More</a>
-              </div>
-            </div>
-          </div>
           </div>
         </div>
       </section>
 
       <!-- Contact Section -->
-      <section id="contact" class="section contact">
+      <section id="contact" class="section contact" data-aos="fade-up">
         <div class="container">
           <div class="card contact-card">
             <h2>Contact Me</h2>
@@ -139,15 +465,130 @@
       </section>
     </main>
 
-    <!-- Sticky Footer -->
-    <footer class="footer">
+    <!-- Footer -->
+    <footer class="footer" data-aos="fade-up">
       <div class="container">
-        <img src="signature.png"alt="[Your Profile Image]" id="signature"/>
+        <img src="signature.png" alt="Signature" id="signature" />
         <p>&copy; 2025. All rights reserved.</p>
       </div>
     </footer>
   </div>
 
-  <script src="script.js"></script>
+  <!-- External JS Libraries -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+  
+  <!-- Combined JavaScript -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // Reveal sections on scroll
+      const sections = document.querySelectorAll(".section");
+      const observerOptions = { threshold: 0.3 };
+      const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            obs.unobserve(entry.target);
+          }
+        });
+      }, observerOptions);
+      sections.forEach(section => observer.observe(section));
+    
+      // Navbar glass effect
+      const navbar = document.querySelector(".navbar");
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 50) {
+          navbar.classList.add("scrolled");
+        } else {
+          navbar.classList.remove("scrolled");
+        }
+      });
+    
+      // Mobile Hamburger Menu toggle
+      const hamburger = document.getElementById("hamburger");
+      const navMenu = document.getElementById("nav-menu");
+      hamburger.addEventListener("click", () => {
+        navMenu.classList.toggle("active");
+        hamburger.classList.toggle("active");
+        gsap.fromTo(navMenu, {opacity: 0, y: -20}, {opacity: 1, y: 0, duration: 0.5});
+      });
+    
+      // Initialize AOS
+      AOS.init({ duration: 1000, once: true });
+    
+      // Typed.js for hero title
+      new Typed('#typed', {
+        strings: ["Hello, I'm Rivindu Kowlinda"],
+        typeSpeed: 50,
+        backSpeed: 25,
+        showCursor: false,
+        loop: false
+      });
+    
+      // Initialize Particles.js (static background)
+      particlesJS('particles-js', {
+        "particles": {
+          "number": { "value": 80, "density": { "enable": true, "value_area": 800 } },
+          "color": { "value": "#ff6a00" },
+          "shape": { "type": "circle" },
+          "opacity": { "value": 0.5, "random": true },
+          "size": { "value": 3, "random": true },
+          "line_linked": { "enable": true, "distance": 150, "color": "#ffffff", "opacity": 0.4, "width": 1 },
+          "move": { "enable": true, "speed": 3 }
+        },
+        "interactivity": {
+          "detect_on": "canvas",
+          "events": { "onhover": { "enable": false }, "onclick": { "enable": false } }
+        },
+        "retina_detect": true
+      });
+    
+      // GSAP page load animations for hero elements
+      gsap.from(".hero-left", { duration: 1, opacity: 0, y: 50, ease: "power2.out" });
+      gsap.from(".hero-right", { duration: 1, opacity: 0, y: 50, ease: "power2.out", delay: 0.3 });
+    
+      // ----- Carousel Setup -----
+      const carousel = document.querySelector('.cards-carousel');
+      const cards = document.querySelectorAll('.cards-carousel .card');
+      const leftBtn = document.querySelector('.left-btn');
+      const rightBtn = document.querySelector('.right-btn');
+      
+      // Each card is 300px wide plus a 20px gap = 320px per card
+      const cardWidth = 320;
+      let currentIndex = 0;
+      let isAnimating = false;
+      
+      // Set initial opacities: indices 0,1,2 visible; others hidden
+      cards.forEach((card, index) => {
+        gsap.set(card, { opacity: index < 3 ? 1 : 0 });
+      });
+      
+      // Right arrow: slide to next card
+      rightBtn.addEventListener('click', () => {
+        if (isAnimating || currentIndex >= cards.length - 3) return;
+        isAnimating = true;
+        const tl = gsap.timeline({
+          onComplete: () => { currentIndex++; isAnimating = false; }
+        });
+        tl.to(cards[currentIndex], { opacity: 0, duration: 0.3 }, 0)
+          .to(carousel, { x: -(currentIndex + 1) * cardWidth, duration: 0.5, ease: "power2.out" }, 0)
+          .fromTo(cards[currentIndex + 3], { opacity: 0 }, { opacity: 1, duration: 0.3 }, 0.2);
+      });
+      
+      // Left arrow: slide to previous card
+      leftBtn.addEventListener('click', () => {
+        if (isAnimating || currentIndex <= 0) return;
+        isAnimating = true;
+        const tl = gsap.timeline({
+          onComplete: () => { currentIndex--; isAnimating = false; }
+        });
+        tl.to(cards[currentIndex + 2], { opacity: 0, duration: 0.3 }, 0)
+          .to(carousel, { x: -((currentIndex - 1) * cardWidth), duration: 0.5, ease: "power2.out" }, 0)
+          .fromTo(cards[currentIndex - 1], { opacity: 0 }, { opacity: 1, duration: 0.3 }, 0.2);
+      });
+    });
+  </script>
 </body>
 </html>
