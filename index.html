@@ -15,15 +15,13 @@
     /*       Variables          */
     /* ======================== */
     :root {
-      --main-bg: rgb(33,36,40); /* Base color: #212428 */
-      --card-bg: #2a2e34;       /* Slightly lighter for cards */
-      --accent: #ff6a00;        /* Accent color for buttons */
-      --text-color: #e0e0e0;     /* Light text */
+      --main-bg: rgb(33,36,40);
+      --card-bg: #2a2e34;
+      --accent: #ff6a00;
+      --text-color: #e0e0e0;
       --transition: 0.5s ease;
     }
-    /* ======================== */
-    /*    Global Reset          */
-    /* ======================== */
+    /* Global Reset */
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
     body {
@@ -33,14 +31,10 @@
       line-height: 1.6;
       overflow-x: hidden;
     }
-    /* ======================== */
-    /*   Page Wrapper & Sticky Footer */
-    /* ======================== */
+    /* Page Wrapper & Sticky Footer */
     .page-wrapper { display: flex; flex-direction: column; min-height: 100vh; }
     .content { flex: 1; }
-    /* ======================== */
-    /*   Navbar (Always Visible) */
-    /* ======================== */
+    /* Navbar */
     .navbar {
       position: fixed;
       top: 0;
@@ -54,8 +48,6 @@
       background: rgba(33,36,40,0.7);
       backdrop-filter: blur(10px);
       box-shadow: 0 2px 8px rgba(0,0,0,0.6);
-      transform: translateY(0);
-      opacity: 1;
     }
     .nav-container {
       width: 90%;
@@ -81,7 +73,7 @@
       transition: color var(--transition);
     }
     .nav-links a:hover { color: var(--accent); }
-    /* Hamburger Menu for Mobile */
+    /* Hamburger Menu */
     .hamburger {
       display: none;
       flex-direction: column;
@@ -90,37 +82,30 @@
       cursor: pointer;
       gap: 5px;
       transition: background 0.3s ease;
+      position: relative;
+      z-index: 1100;
     }
     .hamburger span {
       width: 25px;
       height: 3px;
       background: var(--text-color);
-      transition: background 0.3s ease;
+      transition: transform 0.3s ease, opacity 0.3s ease;
     }
-    .hamburger.active span { background: var(--accent); }
+    .hamburger.active span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+    .hamburger.active span:nth-child(2) { opacity: 0; }
+    .hamburger.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }
     .nav-menu { display: flex; }
-    .nav-menu.active { display: block; }
-    @media (max-width: 768px) {
-      .nav-container { flex-direction: row; justify-content: space-between; align-items: center; }
-      .hamburger { display: flex; }
-      .nav-menu { display: none; width: 100%; }
-      .nav-menu.active { display: block; }
-      .nav-links {
-        flex-direction: column;
-        align-items: center;
-        padding: 10px 0;
-      }
-      .nav-links li { margin: 10px 0; }
-    }
-    /* ======================== */
-    /*       Sections           */
-    /* ======================== */
+    /* Sections */
     .section {
       padding: 40px 0;
       opacity: 0;
       transform: translateY(20px);
       transition: opacity 0.8s ease, transform 0.8s ease;
-      scroll-margin-top:130px;  /* Added scroll margin for fixed navbar */
+      scroll-margin-top: 130px;
     }
     .section.visible { opacity: 1; transform: translateY(0); }
     .container {
@@ -129,9 +114,7 @@
       margin: auto;
       padding: 0 1rem;
     }
-    /* ======================== */
-    /*       Hero Section       */
-    /* ======================== */
+    /* Hero Section */
     .hero {
       height: 100vh;
       padding-top: 80px;
@@ -150,7 +133,11 @@
       z-index: 2;
       width: 100%;
     }
-    .hero-left { flex: 1; text-align: left; margin-left: 10%; }
+    .hero-left {
+      flex: 1;
+      text-align: left;
+      margin-left: 10%;
+    }
     .hero-title { font-size: 4rem; margin-bottom: 20px; }
     .hero-subtitle { font-size: 2rem; margin-bottom: 30px; }
     .btn {
@@ -165,14 +152,14 @@
       transition: transform var(--transition), box-shadow var(--transition);
     }
     .btn:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.5); }
-    /* Social Buttons (New 3D Style with Smooth White Glow) */
+    /* Social Buttons */
     .social-buttons {
       display: flex;
       gap: 15px;
       margin-bottom: 30px;
     }
     .social-btn {
-      background: #333; /* Dark grey background */
+      background: #333;
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -186,18 +173,16 @@
     }
     .social-btn:hover { 
       transform: perspective(500px) translateZ(10px) translateY(-3px);
-      box-shadow: 0 12px 24px rgba(0,0,0,0.5); 
+      box-shadow: 0 12px 24px rgba(0,0,0,0.5);
     }
     .social-btn svg {
       width: 24px;
       height: 24px;
       transition: filter 0.3s ease;
     }
-    /* Smooth white glow on hover */
     .social-btn:hover svg {
       filter: drop-shadow(0 0 5px white);
     }
-    /* Hero Right: Profile Card */
     .hero-right {
       flex: 0 0 320px;
       display: flex;
@@ -224,9 +209,7 @@
       display: block;
     }
     .profile-card:hover { transform: scale(1.05); box-shadow: 0 12px 24px rgba(0,0,0,0.6); }
-    /* ======================== */
-    /*         Cards            */
-    /* ======================== */
+    /* Cards */
     .card {
       background: var(--card-bg);
       border: 1px solid rgba(255,255,255,0.1);
@@ -236,13 +219,9 @@
       transition: transform 0.4s ease, box-shadow 0.4s ease;
     }
     .card:hover { transform: translateY(-5px); box-shadow: 0 12px 24px rgba(0,0,0,0.6); }
-    /* ======================== */
-    /*       About Section      */
-    /* ======================== */
+    /* About Section */
     .about-card { margin: 0 auto; text-align: left; }
-    /* ======================== */
-    /*     Projects Section     */
-    /* ======================== */
+    /* Projects Section */
     .carousel-container {
       position: relative;
       overflow: hidden;
@@ -258,7 +237,6 @@
       flex: 0 0 auto;
       width: 300px;
     }
-    /* Arrow buttons for navigation */
     .carousel-btn {
       position: absolute;
       top: 50%;
@@ -277,9 +255,7 @@
     .carousel-btn:hover { opacity: 1; }
     .left-btn { left: 10px; }
     .right-btn { right: 10px; }
-    /* ======================== */
-    /*       Contact Form       */
-    /* ======================== */
+    /* Contact Form */
     .contact-form .form-group { margin-bottom: 15px; }
     .contact-form label {
       margin-bottom: 5px;
@@ -301,9 +277,7 @@
       outline: none;
       box-shadow: 0 0 10px rgba(255,255,255,0.3);
     }
-    /* ======================== */
-    /*         Footer           */
-    /* ======================== */
+    /* Footer */
     .footer {
       text-align: center;
       padding: 20px 0;
@@ -312,9 +286,7 @@
     }
     #signature { max-width: 250px; }
     #logo { padding-top: 20px; max-width: 70px; }
-    /* ======================== */
-    /*    Additional Enhanced CSS   */
-    /* ======================== */
+    /* Additional Enhanced CSS */
     #particles-js {
       position: absolute;
       width: 100%;
@@ -325,24 +297,80 @@
     }
     [data-aos] { opacity: 0; transition-property: opacity, transform; }
     [data-aos].aos-animate { opacity: 1; }
-    /* Responsive Styles */
+
+    /* ------------------- Mobile View Adjustments ------------------- */
     @media (max-width: 768px) {
+      .hero {
+        padding-top: 140px;
+        min-height: 100vh;
+        height: auto;
+      }
       .hero-content {
         flex-direction: column;
-        text-align: center;
-        gap: 30px;
+        gap: 20px;
+        align-items: center;
+        justify-content: center;
       }
-      .hero-left, .hero-right { width: 100%; }
-      .hero-title { font-size: 2.5rem; }
-      .hero-subtitle { font-size: 1.3rem; }
-      .btn { padding: 12px 24px; font-size: 0.9rem; }
-      .profile-card { width: 280px; height: 280px; }
-    }
-    @media (max-width: 480px) {
-      .nav-links a { font-size: 0.9rem; }
+      .hero-left {
+        margin: 0 auto;
+        text-align: center;
+      }
+      .hero-right {
+        margin: 20px 0 0 0;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        padding-right: 0; /* Remove extra right padding */
+      }
+      .profile-card {
+        width: 250px;
+        height: 250px;
+        margin: 0 auto; /* Center the profile image */
+      }
       .hero-title { font-size: 2.2rem; }
-      .hero-subtitle { font-size: 1.1rem; }
+      .hero-subtitle { font-size: 1rem; }
       .btn { padding: 10px 20px; font-size: 0.8rem; }
+      .social-buttons {
+        justify-content: center;
+      }
+      .nav-container { flex-direction: row; justify-content: space-between; align-items: center; }
+      .hamburger { display: flex; }
+      .nav-menu {
+         display: none;
+         opacity: 0;
+         transition: opacity 0.5s ease;
+         position: absolute;
+         top: 60px;
+         left: 0;
+         width: 100%;
+         padding: 10px 0;
+         text-align: center;
+      }
+      .nav-menu.active {
+         display: block;
+         opacity: 1;
+         background: rgba(33,36,40,0.7);
+         backdrop-filter: blur(10px);
+         box-shadow: 0 2px 8px rgba(0,0,0,0.6);
+      }
+      .nav-links {
+        flex-direction: column;
+        align-items: center;
+        padding: 10px 0;
+      }
+      .nav-links li { margin: 10px 0; }
+      .nav-links a { font-size: 0.9rem; }
+      .carousel-container { padding: 0 10px; }
+      .cards-carousel {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+      .cards-carousel .card {
+        width: 80%;
+        flex: 0 0 auto;
+        opacity: 1 !important;
+      }
+      .carousel-btn { display: none; }
     }
   </style>
 </head>
@@ -392,14 +420,14 @@
               <!-- LinkedIn -->
               <a href="https://www.linkedin.com/in/rivindu-kowlinda-52929527b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" class="social-btn" target="_blank" title="LinkedIn">
                 <svg class="social-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white">
-                  <path d="M20.447 20.452H17.2v-5.569c0-1.327-.027-3.037-1.851-3.037-1.851 0-2.136 1.445-2.136 2.941v5.665H10.05V9h3.112v1.561h.044c.434-.823 1.494-1.688 3.073-1.688 3.29 0 3.895 2.164 3.895 4.98v6.599zM5.337 7.433a1.808 1.808 0 110-3.616 1.808 1.808 0 010 3.616zm1.672 13.019H3.665V9h3.344v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.407.792 24 1.771 24h20.451C23.207 24 24 23.407 24 22.271V1.729C24 .774 23.207 0 22.225 0z"/>
+                  <path d="M20.447 20.452H17.2v-5.569c0-1.327-.027-3.037-1.851-3.037-1.851 0-2.136 1.445-2.136 2.941v5.665H10.05V9h3.112v1.561h.044c.434-.823 1.494-1.688 3.073-1.688 3.29 0 3.895 2.164 3.895 4.98v6.599zM5.337 7.433a1.808 1.808 0 110-3.616 1.808 1.808 0 010 3.616zm1.672 13.019H3.665V9h3.344v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.407.792 24 1.771 24h20.451C23.207 24 24 23.407 24 22.271V1.729C24 .593 23.207 0 22.225 0z"/>
                 </svg>
               </a>
-              <!-- Instagram (Updated SVG) -->
+              <!-- Instagram -->
               <a href="https://www.instagram.com/rivindu_kowlinda?igsh=MWoyOHJieDdzMDVjdA==" class="social-btn" target="_blank" title="Instagram">
                 <svg class="social-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" fill="white">
                   <title>Instagram</title>
-                  <path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9 114.9-51.3 114.9-114.9S287.7 141 224.1 141zm0 189.6c-41.3 0-74.7-33.4-74.7-74.7 0-41.3 33.4-74.7 74.7-74.7 41.3 0 74.7 33.4 74.7 74.7 0 41.3-33.4 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.9-26.9 26.9-14.9 0-26.9-12-26.9-26.9s12-26.9 26.9-26.9 26.9 12 26.9 26.9zm76.1 27.2c-1.7-35.7-9.9-67.3-36.2-93.5-26.2-26.2-57.8-34.4-93.5-36.2-37-2.1-147.9-2.1-184.9 0-35.7 1.7-67.3 9.9-93.5 36.2-26.2 26.2-34.4 57.8-36.2 93.5-2.1 37-2.1 147.9 0 184.9 1.7 35.7 9.9 67.3 36.2 93.5 26.2 26.2 57.8 34.4 93.5 36.2 37 2.1 147.9 2.1 184.9 0 35.7-1.7 67.3-9.9 93.5-36.2 26.2-26.2 34.4-57.8 36.2-93.5 2.1-37 2.1-147.9 0-184.9zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.2 9s-102.7 2.6-132.2-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.2s-2.6-102.7 9-132.2c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.2-9s102.7-2.6 132.2 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.2s2.7 102.7-9 132.2z"/>
+                  <path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9 114.9-51.3 114.9-114.9S287.7 141 224.1 141zm0 189.6c-41.3 0-74.7-33.4-74.7-74.7 0-41.3 33.4-74.7 74.7-74.7 41.3 0 74.7 33.4 74.7 74.7 0 41.3-33.4 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.9-26.9 26.9-14.9 0-26.9-12-26.9-26.9s12-26.9 26.9-26.9 26.9 12 26.9 26.9zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.2 9s-102.7 2.6-132.2-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.2s-2.6-102.7 9-132.2c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.2-9s102.7-2.6 132.2 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.2s2.7 102.7-9 132.2z"/>
                 </svg>
               </a>
               <!-- Facebook -->
@@ -556,7 +584,7 @@
       }, observerOptions);
       sections.forEach(section => observer.observe(section));
     
-      // Navbar glass effect
+      // Navbar glass effect on scroll
       const navbar = document.querySelector(".navbar");
       window.addEventListener("scroll", () => {
         if (window.scrollY > 50) {
@@ -566,13 +594,21 @@
         }
       });
     
-      // Mobile Hamburger Menu toggle
+      // Mobile Hamburger Menu toggle with fade in/out effect
       const hamburger = document.getElementById("hamburger");
       const navMenu = document.getElementById("nav-menu");
       hamburger.addEventListener("click", () => {
-        navMenu.classList.toggle("active");
-        hamburger.classList.toggle("active");
-        gsap.fromTo(navMenu, {opacity: 0, y: -20}, {opacity: 1, y: 0, duration: 0.5});
+        if (navMenu.classList.contains("active")) {
+          gsap.to(navMenu, { opacity: 0, y: -20, duration: 0.5, onComplete: () => {
+            navMenu.classList.remove("active");
+            hamburger.classList.remove("active");
+            gsap.set(navMenu, { y: 0 });
+          }});
+        } else {
+          navMenu.classList.add("active");
+          hamburger.classList.add("active");
+          gsap.fromTo(navMenu, {opacity: 0, y: -20}, {opacity: 1, y: 0, duration: 0.5});
+        }
       });
     
       // Initialize AOS
@@ -605,49 +641,49 @@
         "retina_detect": true
       });
     
-      // GSAP page load animations for hero elements
       gsap.from(".hero-left", { duration: 1, opacity: 0, y: 50, ease: "power2.out" });
       gsap.from(".hero-right", { duration: 1, opacity: 0, y: 50, ease: "power2.out", delay: 0.3 });
     
-      // ----- Carousel Setup -----
       const carousel = document.querySelector('.cards-carousel');
       const cards = document.querySelectorAll('.cards-carousel .card');
       const leftBtn = document.querySelector('.left-btn');
       const rightBtn = document.querySelector('.right-btn');
       
-      // Each card is 300px wide plus a 20px gap = 320px per card
-      const cardWidth = 320;
-      let currentIndex = 0;
-      let isAnimating = false;
-      
-      // Set initial opacities: indices 0,1,2 visible; others hidden
-      cards.forEach((card, index) => {
-        gsap.set(card, { opacity: index < 3 ? 1 : 0 });
-      });
-      
-      // Right arrow: slide to next card
-      rightBtn.addEventListener('click', () => {
-        if (isAnimating || currentIndex >= cards.length - 3) return;
-        isAnimating = true;
-        const tl = gsap.timeline({
-          onComplete: () => { currentIndex++; isAnimating = false; }
-        });
-        tl.to(cards[currentIndex], { opacity: 0, duration: 0.3 }, 0)
-          .to(carousel, { x: -(currentIndex + 1) * cardWidth, duration: 0.5, ease: "power2.out" }, 0)
-          .fromTo(cards[currentIndex + 3], { opacity: 0 }, { opacity: 1, duration: 0.3 }, 0.2);
-      });
-      
-      // Left arrow: slide to previous card
-      leftBtn.addEventListener('click', () => {
-        if (isAnimating || currentIndex <= 0) return;
-        isAnimating = true;
-        const tl = gsap.timeline({
-          onComplete: () => { currentIndex--; isAnimating = false; }
-        });
-        tl.to(cards[currentIndex + 2], { opacity: 0, duration: 0.3 }, 0)
-          .to(carousel, { x: -((currentIndex - 1) * cardWidth), duration: 0.5, ease: "power2.out" }, 0)
-          .fromTo(cards[currentIndex - 1], { opacity: 0 }, { opacity: 1, duration: 0.3 }, 0.2);
-      });
+      if (window.innerWidth > 768) {
+          const cardWidth = 320;
+          let currentIndex = 0;
+          let isAnimating = false;
+          
+          cards.forEach((card, index) => {
+            gsap.set(card, { opacity: index < 3 ? 1 : 0 });
+          });
+          
+          rightBtn.addEventListener('click', () => {
+            if (isAnimating || currentIndex >= cards.length - 3) return;
+            isAnimating = true;
+            const tl = gsap.timeline({
+              onComplete: () => { currentIndex++; isAnimating = false; }
+            });
+            tl.to(cards[currentIndex], { opacity: 0, duration: 0.3 }, 0)
+              .to(carousel, { x: -(currentIndex + 1) * cardWidth, duration: 0.5, ease: "power2.out" }, 0)
+              .fromTo(cards[currentIndex + 3], { opacity: 0 }, { opacity: 1, duration: 0.3 }, 0.2);
+          });
+          
+          leftBtn.addEventListener('click', () => {
+            if (isAnimating || currentIndex <= 0) return;
+            isAnimating = true;
+            const tl = gsap.timeline({
+              onComplete: () => { currentIndex--; isAnimating = false; }
+            });
+            tl.to(cards[currentIndex + 2], { opacity: 0, duration: 0.3 }, 0)
+              .to(carousel, { x: -((currentIndex - 1) * cardWidth), duration: 0.5, ease: "power2.out" }, 0)
+              .fromTo(cards[currentIndex - 1], { opacity: 0 }, { opacity: 1, duration: 0.3 }, 0.2);
+          });
+      } else {
+          cards.forEach(card => {
+            gsap.set(card, { opacity: 1 });
+          });
+      }
     });
   </script>
 </body>
