@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Project Details - Medical Reports Management App</title>
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      /* Inline styles for improved flow and spacing */
+      ul {
+        margin: 1em 0;
+        padding-left: 1.5em;
+      }
+      li {
+        margin-bottom: 0.5em;
+      }
+      p {
+        margin-bottom: 1em;
+      }
+      .card-content {
+        line-height: 1.6;
+      }
+
+      /* Gallery Container to hold images and buttons */
+      .image-gallery-container {
+        position: relative;
+        margin: 20px 0;
+      }
+
+      /* Horizontal scrollable image gallery */
+      .image-gallery {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        gap: 20px;
+        padding: 20px;
+        scroll-behavior: smooth;
+      }
+      .image-gallery img {
+        max-height: 500px;
+        width: auto;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+        transition: transform 0.4s ease, box-shadow 0.4s ease;
+      }
+      .image-gallery img:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.6);
+      }
+
+      /* Hide default scrollbar if desired */
+      .image-gallery {
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none;  /* IE 10+ */
+      }
+      .image-gallery::-webkit-scrollbar {
+        display: none; /* Safari and Chrome */
+      }
+
+      /* Scroll Buttons */
+      .scroll-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(0, 0, 0, 0.5);
+        color: #fff;
+        border: none;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        cursor: pointer;
+        z-index: 10;
+      }
+      .scroll-btn.left {
+        left: 10px;
+      }
+      .scroll-btn.right {
+        right: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <header class="navbar">
+      <div class="container nav-container">
+        <div class="logo">
+          <a href="#hero">
+            <img src="logo.png" alt="[Your Profile Image]" id="logo" />
+          </a>
+        </div>
+        <div class="hamburger" id="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <nav class="nav-menu" id="nav-menu">
+          <ul class="nav-links">
+            <li><a href="index.html#hero">Home</a></li>
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="index.html#projects">Projects</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Page Wrapper for sticky footer -->
+    <br />
+    <br />
+    <div class="page-wrapper">
+      <!-- Main Content -->
+      <main class="content">
+        <section id="project-details" class="section project-details">
+          <div class="container">
+            <div class="card project-detail-card">
+              <h1>Axion - Medical Reports Management App</h1>
+              <p class="project-meta">2025 | Mobile Application (Flutter)</p>
+              
+              <!-- Image Gallery with Left and Right Scroll Buttons -->
+              <div class="image-gallery-container">
+                <button id="scroll-left" class="scroll-btn left">&lt;</button>
+                <div class="image-gallery">
+                  <!-- Four mobile view images -->
+                  <img src="images/mobile1.jpg" alt="Mobile View 1" />
+                  <img src="images/mobile2.jpg" alt="Mobile View 2" />
+                  <img src="images/mobile3.jpg" alt="Mobile View 3" />
+                  <img src="images/mobile4.jpg" alt="Mobile View 4" />
+                  <img src="images/mobile5.jpg" alt="Mobile View 5" />
+                  <!-- One laptop screenshot image -->
+                  <img src="images/laptop1.jpg" alt="Code Screenshot (Laptop View)" />
+                </div>
+                <button id="scroll-right" class="scroll-btn right">&gt;</button>
+              </div>
+              
+              <div class="card-content">
+                <!-- Overview -->
+                <p>
+                  The Medical Reports Management App is a comprehensive solution
+                  built to streamline the management and display of various health
+                  reports. It is a mobile application developed using Flutter,
+                  ensuring a seamless experience across both iOS and Android devices.
+                </p>
+                <ul>
+                  <li>
+                    <strong>Functionality:</strong> Displays a wide range of medical
+                    data including CBC, lipid profiles, liver function tests, thyroid
+                    function tests, and more.
+                  </li>
+                  <li>
+                    <strong>User Interaction:</strong> Provides intuitive navigation
+                    and secure login, ensuring each user can access personalized health
+                    data.
+                  </li>
+                  <li>
+                    <strong>Global Reach:</strong> Features internationalization with
+                    multiple language support via ARB files.
+                  </li>
+                </ul>
+
+                <!-- Technical Details -->
+                <p>
+                  <strong>Technical Details & Architecture:</strong>
+                </p>
+                <ul>
+                  <li>
+                    <strong>Developed with Flutter:</strong> Utilizes Flutter and Dart
+                    to build a high-performance mobile application with a single codebase
+                    for iOS and Android.
+                  </li>
+                  <li>
+                    <strong>Modular Codebase:</strong> Organized into directories such as
+                    <code>models/</code>, <code>pages/</code>, <code>services/</code>, and
+                    <code>widgets/</code> for maintainability and scalability.
+                  </li>
+                  <li>
+                    <strong>Data Models & Serialization:</strong> Uses Dart models to
+                    represent various medical tests (e.g., <code>cbc_report</code>,
+                    <code>crp_report</code>, <code>thyroid_function_test_report</code>).
+                    Code generation via <code>.g.dart</code> files streamlines JSON
+                    serialization with <code>json_serializable</code>.
+                  </li>
+                  <li>
+                    <strong>API & GraphQL Integration:</strong> Dedicated services such as
+                    <code>api_service.dart</code> and <code>graphql_config.dart</code>
+                    ensure real-time data synchronization and efficient data querying.
+                  </li>
+                  <li>
+                    <strong>User Authentication & Secure Storage:</strong> Implements
+                    secure login and session management using models (e.g.,
+                    <code>auth.dart</code>, <code>user.dart</code>) and services like
+                    <code>auth_service.dart</code> and <code>session_service.dart</code>,
+                    with sensitive data protected via secure storage.
+                  </li>
+                  <li>
+                    <strong>Custom UI Components:</strong> Reusable widgets such as
+                    <code>report_card.dart</code> and a custom floating navigation bar
+                    ensure a consistent and polished user experience.
+                  </li>
+                  <li>
+                    <strong>Login & Signup Flow:</strong> Enhanced with dedicated screens
+                    and components in the <code>loginSide/</code> directory, featuring
+                    custom buttons, text fields, and progress indicators for a smooth
+                    onboarding process.
+                  </li>
+                </ul>
+
+                <!-- Conclusion -->
+                <p>
+                  Overall, this project not only demonstrates advanced mobile development
+                  skills using Flutter but also emphasizes a robust technical architecture.
+                  The blend of comprehensive functionality, secure data handling, and modern
+                  integration techniques makes this application an outstanding portfolio piece.
+                </p>
+                <br />
+                <a href="index.html#projects" class="btn">Back to Projects</a>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <!-- Sticky Footer -->
+      <footer class="footer">
+        <div class="container">
+          <p>&copy; 2025 [Your Name]. All rights reserved.</p>
+        </div>
+      </footer>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+      // Scroll functionality for the image gallery buttons
+      const scrollLeftBtn = document.getElementById('scroll-left');
+      const scrollRightBtn = document.getElementById('scroll-right');
+      const imageGallery = document.querySelector('.image-gallery');
+      
+      let scrollInterval;
+
+      // Function to start scrolling
+      function startScrolling(direction) {
+        scrollInterval = setInterval(() => {
+          imageGallery.scrollLeft += direction * 150; // Adjust scroll speed (5px per interval)
+        }, 20); // Adjust interval (20ms for smooth scrolling)
+      }
+
+      // Function to stop scrolling
+      function stopScrolling() {
+        clearInterval(scrollInterval);
+      }
+
+      // Event listeners for left button
+      scrollLeftBtn.addEventListener('mousedown', () => startScrolling(-1));
+      scrollLeftBtn.addEventListener('mouseup', stopScrolling);
+      scrollLeftBtn.addEventListener('mouseleave', stopScrolling);
+
+      // Event listeners for right button
+      scrollRightBtn.addEventListener('mousedown', () => startScrolling(1));
+      scrollRightBtn.addEventListener('mouseup', stopScrolling);
+      scrollRightBtn.addEventListener('mouseleave', stopScrolling);
+
+      // Also stop scrolling when mouse is released anywhere in the document
+      document.addEventListener('mouseup', stopScrolling);
+    </script>
+  </body>
+</html>
