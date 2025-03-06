@@ -77,6 +77,31 @@
       .scroll-btn.right {
         right: 10px;
       }
+      .scroll-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0, 0, 0, 0.5);
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      z-index: 10;
+      transition: background 0.3s ease, transform 0.1s ease, box-shadow 0.3s ease;
+    }
+
+    .scroll-btn:hover {
+      background: rgba(255, 94, 0, 0.687); /* Orange tint for the glass effect */
+      backdrop-filter: blur(5px); /* Creates a subtle glass-like blur */
+      box-shadow: 0 0 10px rgba(255, 165, 0, 0.6); /* Adds an orange glow */
+    }
+
+    .scroll-btn:active {
+      background: rgba(255, 72, 0, 0.92); /* Darkens the background on click */
+      transform: translateY(-50%) scale(0.95); /* Slight scale down for a click feeling */
+    }
     </style>
   </head>
   <body>

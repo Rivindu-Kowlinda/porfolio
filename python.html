@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Project Details - Plane Seat Management System</title>
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      /* Inline styles for improved flow and spacing */
+      ul {
+        margin: 1em 0;
+        padding-left: 1.5em;
+      }
+      li {
+        margin-bottom: 0.5em;
+      }
+      p {
+        margin-bottom: 1em;
+      }
+      .card-content {
+        line-height: 1.6;
+      }
+
+      /* Gallery Container to hold images and buttons */
+      .image-gallery-container {
+        position: relative;
+        margin: 20px 0;
+      }
+
+      /* Horizontal scrollable image gallery */
+      .image-gallery {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        gap: 20px;
+        padding: 20px;
+        scroll-behavior: smooth;
+      }
+      .image-gallery img {
+        max-height: 500px;
+        width: auto;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+        transition: transform 0.4s ease, box-shadow 0.4s ease;
+      }
+      .image-gallery img:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.6);
+      }
+
+      /* Hide default scrollbar if desired */
+      .image-gallery {
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none;  /* IE 10+ */
+      }
+      .image-gallery::-webkit-scrollbar {
+        display: none; /* Safari and Chrome */
+      }
+
+      /* Scroll Buttons */
+      .scroll-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(0, 0, 0, 0.5);
+        color: #fff;
+        border: none;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        cursor: pointer;
+        z-index: 10;
+      }
+      .scroll-btn.left {
+        left: 10px;
+      }
+      .scroll-btn.right {
+        right: 10px;
+      }
+      .scroll-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0, 0, 0, 0.5);
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      z-index: 10;
+      transition: background 0.3s ease, transform 0.1s ease, box-shadow 0.3s ease;
+    }
+
+    .scroll-btn:hover {
+      background: rgba(255, 94, 0, 0.687); /* Orange tint for the glass effect */
+      backdrop-filter: blur(5px); /* Creates a subtle glass-like blur */
+      box-shadow: 0 0 10px rgba(255, 165, 0, 0.6); /* Adds an orange glow */
+    }
+
+    .scroll-btn:active {
+      background: rgba(255, 72, 0, 0.92); /* Darkens the background on click */
+      transform: translateY(-50%) scale(0.95); /* Slight scale down for a click feeling */
+    }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <header class="navbar">
+      <div class="container nav-container">
+        <div class="logo">
+          <a href="#hero">
+            <img src="logo.png" alt="[Your Profile Image]" id="logo" />
+          </a>
+        </div>
+        <div class="hamburger" id="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <nav class="nav-menu" id="nav-menu">
+          <ul class="nav-links">
+            <li><a href="index.html#hero">Home</a></li>
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="index.html#projects">Projects</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Page Wrapper for sticky footer -->
+    <br />
+    <br />
+    <div class="page-wrapper">
+      <!-- Main Content -->
+      <main class="content">
+        <section id="project-details" class="section project-details">
+          <div class="container">
+            <div class="card project-detail-card">
+              <h1>Plane Seat Management System</h1>
+              <p class="project-meta">2025 | Console Application (Java)</p>
+              
+              <!-- Image Gallery with Left and Right Scroll Buttons -->
+              <div class="image-gallery-container">
+                <button id="scroll-left" class="scroll-btn left">&lt;</button>
+                <div class="image-gallery">
+                  <!-- Four mobile view images -->
+                  <img src="images/mobile1.jpg" alt="Mobile View 1" />
+                  <img src="images/mobile2.jpg" alt="Mobile View 2" />
+                  <img src="images/mobile3.jpg" alt="Mobile View 3" />
+                  <img src="images/mobile4.jpg" alt="Mobile View 4" />
+                  <img src="images/mobile5.jpg" alt="Mobile View 5" />
+                  <!-- One laptop screenshot image -->
+                  <img src="images/laptop1.jpg" alt="Code Screenshot (Laptop View)" />
+                </div>
+                <button id="scroll-right" class="scroll-btn right">&gt;</button>
+              </div>
+              
+              <div class="card-content">
+                <!-- Overview -->
+                <p>
+                  The Plane Seat Management System is an interactive, console-based application developed in Java. It simulates airplane seat reservations, allowing users to book seats, cancel reservations, search for availability, and review detailed ticket information.
+                </p>
+                <ul>
+                  <li>
+                    <strong>Functionality:</strong> Users can reserve seats, cancel bookings, view the seating plan, and access ticket details with real-time updates.
+                  </li>
+                  <li>
+                    <strong>Dynamic Pricing:</strong> Implements dynamic pricing based on seat location, reflecting varied ticket costs across different rows.
+                  </li>
+                  <li>
+                    <strong>File Persistence:</strong> Ticket details are saved as text files, ensuring a persistent record of transactions.
+                  </li>
+                </ul>
+
+                <!-- Technical Details -->
+                <p>
+                  <strong>Technical Details & Architecture:</strong>
+                </p>
+                <ul>
+                  <li>
+                    <strong>Developed with Java:</strong> Utilizes core Java libraries for console I/O, exception handling, and file operations.
+                  </li>
+                  <li>
+                    <strong>Modular Code Structure:</strong> Organized into distinct classes—<code>PlaneManagement</code>, <code>Ticket</code>, and <code>Person</code>—to enforce separation of concerns and maintainability.
+                  </li>
+                  <li>
+                    <strong>Data Structures:</strong> Employs arrays to manage seating arrangements and dynamic business logic for seat allocation and pricing.
+                  </li>
+                  <li>
+                    <strong>File I/O Operations:</strong> Implements file operations using <code>java.io.File</code> and <code>java.io.FileWriter</code> to save and delete ticket records.
+                  </li>
+                  <li>
+                    <strong>Error Handling:</strong> Uses exception handling (e.g., <code>InputMismatchException</code>) to manage invalid inputs gracefully.
+                  </li>
+                </ul>
+
+                <!-- Conclusion -->
+                <p>
+                  Overall, the Plane Seat Management System demonstrates the effective use of core Java technologies and solid software engineering principles to build a scalable and maintainable console-based application.
+                </p>
+                <br />
+                <a href="index.html#projects" class="btn">Back to Projects</a>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <!-- Sticky Footer -->
+      <footer class="footer">
+        <div class="container">
+          <p>&copy; 2025 [Your Name]. All rights reserved.</p>
+        </div>
+      </footer>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+      // Scroll functionality for the image gallery buttons
+      const scrollLeftBtn = document.getElementById('scroll-left');
+      const scrollRightBtn = document.getElementById('scroll-right');
+      const imageGallery = document.querySelector('.image-gallery');
+      
+      let scrollInterval;
+
+      // Function to start scrolling
+      function startScrolling(direction) {
+        scrollInterval = setInterval(() => {
+          imageGallery.scrollLeft += direction * 150; // Adjust scroll speed (5px per interval)
+        }, 20); // Adjust interval (20ms for smooth scrolling)
+      }
+
+      // Function to stop scrolling
+      function stopScrolling() {
+        clearInterval(scrollInterval);
+      }
+
+      // Event listeners for left button
+      scrollLeftBtn.addEventListener('mousedown', () => startScrolling(-1));
+      scrollLeftBtn.addEventListener('mouseup', stopScrolling);
+      scrollLeftBtn.addEventListener('mouseleave', stopScrolling);
+
+      // Event listeners for right button
+      scrollRightBtn.addEventListener('mousedown', () => startScrolling(1));
+      scrollRightBtn.addEventListener('mouseup', stopScrolling);
+      scrollRightBtn.addEventListener('mouseleave', stopScrolling);
+
+      // Also stop scrolling when mouse is released anywhere in the document
+      document.addEventListener('mouseup', stopScrolling);
+    </script>
+  </body>
+</html>

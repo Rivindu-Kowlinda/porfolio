@@ -1,66 +1,288 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Project Details - [Project Title]</title>
-  <link rel="stylesheet" href="styles.css" />
-</head>
-<body>
-  <!-- Navbar -->
-  <header class="navbar">
-    <div class="container nav-container">
-      <div class="logo">
-        <a href="#hero"><img src="logo.png"alt="[Your Profile Image]" id="logo"/></a>
-      </div>
-      <div class="hamburger" id="hamburger">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-      <nav class="nav-menu" id="nav-menu">
-        <ul class="nav-links">
-          <li><a href="index.html#hero">Home</a></li>
-          <li><a href="index.html#about">About</a></li>
-          <li><a href="index.html#projects">Projects</a></li>
-          <li><a href="index.html#contact">Contact</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Project Details - Interactive 3D Tree Navigation Project</title>
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      /* Inline styles for improved flow and spacing */
+      ul {
+        margin: 1em 0;
+        padding-left: 1.5em;
+      }
+      li {
+        margin-bottom: 0.5em;
+      }
+      p {
+        margin-bottom: 1em;
+      }
+      .card-content {
+        line-height: 1.6;
+      }
 
-  <!-- Page Wrapper for sticky footer -->
-   <br>
-   <br>
-  <div class="page-wrapper">
-    <!-- Main Content -->
-    <main class="content">
-      <section id="project-details" class="section project-details">
-        <div class="container">
-          <div class="card project-detail-card">
-            <h1>Project Title</h1>
-            <p class="project-meta">[Optional: Date | Category]</p>
-            <img src="https://via.placeholder.com/800x450" alt="Project Screenshot" />
-            <div class="card-content">
-              <p>
-                [Insert a detailed description of the project. Explain the problem, your approach, the technologies used, and any outcomes or insights.]
-              </p>
-              <br>
+      /* Gallery Container to hold images and buttons */
+      .image-gallery-container {
+        position: relative;
+        margin: 20px 0;
+      }
+
+      /* Horizontal scrollable image gallery */
+      .image-gallery {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        gap: 20px;
+        padding: 20px;
+        scroll-behavior: smooth;
+      }
+      .image-gallery img,video {
+        max-height: 500px;
+        width: auto;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+        transition: transform 0.4s ease, box-shadow 0.4s ease;
+      }
+      
+      .image-gallery img:hover,
+      .image-gallery video:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.6);
+      }
+
+
+      /* Hide default scrollbar if desired */
+      .image-gallery {
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none;  /* IE 10+ */
+      }
+      .image-gallery::-webkit-scrollbar {
+        display: none; /* Safari and Chrome */
+      }
+
+      /* Scroll Buttons */
+      .scroll-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(0, 0, 0, 0.5);
+        color: #fff;
+        border: none;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        cursor: pointer;
+        z-index: 10;
+      }
+      .scroll-btn.left {
+        left: 10px;
+      }
+      .scroll-btn.right {
+        right: 10px;
+      }
+      .scroll-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0, 0, 0, 0.5);
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      z-index: 10;
+      transition: background 0.3s ease, transform 0.1s ease, box-shadow 0.3s ease;
+    }
+
+    .scroll-btn:hover {
+      background: rgba(255, 94, 0, 0.687); /* Orange tint for the glass effect */
+      backdrop-filter: blur(5px); /* Creates a subtle glass-like blur */
+      box-shadow: 0 0 10px rgba(255, 165, 0, 0.6); /* Adds an orange glow */
+    }
+
+    .scroll-btn:active {
+      background: rgba(255, 72, 0, 0.92); /* Darkens the background on click */
+      transform: translateY(-50%) scale(0.95); /* Slight scale down for a click feeling */
+    }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <header class="navbar">
+      <div class="container nav-container">
+        <div class="logo">
+          <a href="#hero">
+            <img src="logo.png" alt="[Your Profile Image]" id="logo" />
+          </a>
+        </div>
+        <div class="hamburger" id="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <nav class="nav-menu" id="nav-menu">
+          <ul class="nav-links">
+            <li><a href="index.html#hero">Home</a></li>
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="index.html#projects">Projects</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Page Wrapper for sticky footer -->
+    <br />
+    <br />
+    <div class="page-wrapper">
+      <!-- Main Content -->
+      <main class="content">
+        <section id="project-details" class="section project-details">
+          <div class="container">
+            <div class="card project-detail-card">
+              <!-- Replaced title and meta with new descriptive text -->
+              <h1>Interactive 3D Tree Navigation Project</h1>
+              <div class="image-gallery-container">
+                <button id="scroll-left" class="scroll-btn left">&lt;</button>
+                <div class="image-gallery">
+                  <video controls>
+                    <source src="videos/video1.mp4" type="video/mp4">
+                  </video>
+                  <img src="images/mobile1.jpg" alt="Mobile View 1" />
+                  <img src="images/mobile1.jpg" alt="Mobile View 1" />
+                  <img src="images/mobile1.jpg" alt="Mobile View 1" />
+                  
+                </div>
+                <button id="scroll-right" class="scroll-btn right">&gt;</button>
+              </div>
+              <div class="card-content">
+                <p>
+                  This project is an interactive 3D visualization that uses Three.js to create a natural, tree-like navigation interface for a portfolio. It seamlessly blends creative design with advanced technical implementations. Here’s an in-depth look at its key aspects:
+                </p>
+
+                <h2>Overview and Concept</h2>
+                <ul>
+                  <li>
+                    <strong>Interactive Tree Navigation:</strong> The core concept revolves around a procedurally generated tree where each “fruit” on the tree represents a portfolio section or content item (e.g., About Me, Projects). The tree acts as both an artistic metaphor and a functional user interface.
+                  </li>
+                  <li>
+                    <strong>User Engagement:</strong> Visitors can explore the tree by clicking on fruits or using a quicklinks menu. Clicking a fruit triggers a smooth zoom-in animation that centers the camera on the selected fruit and reveals additional content via an info card.
+                  </li>
+                </ul>
+
+                <h2>Technical Breakdown</h2>
+                <ul>
+                  <li>
+                    <strong>Three.js Scene Setup:</strong> The project initializes a Three.js scene with a perspective camera and WebGL renderer. It employs OrbitControls to enable intuitive camera manipulation and provides a dynamic view of the 3D scene.
+                  </li>
+                  <li>
+                    <strong>Lighting and Environment:</strong> The scene is lit with both ambient and directional lights to create realistic shadows and highlights. An infinite grid (using GridHelper) forms the ground, adding context and depth to the environment.
+                  </li>
+                  <li>
+                    <strong>Procedural Tree Generation:</strong>
+                    <ul>
+                      <li>
+                        <strong>Trunk and Branches:</strong> The tree’s trunk is modeled as a cylinder. Branches are generated recursively using a function that creates smooth curves (via THREE.CatmullRomCurve3) and introduces randomness in angles and offsets. This results in a natural, organic look.
+                      </li>
+                      <li>
+                        <strong>Leaves:</strong> At the end of smaller branches, leaves are added using custom shapes, enhancing the tree’s visual appeal with subtle transparency and realistic rotations.
+                      </li>
+                    </ul>
+                  </li>
+                  <li>
+                    <strong>Interactive Fruits as Content Nodes:</strong>
+                    <ul>
+                      <li>
+                        <strong>Creation and Placement:</strong> Fruits are represented by colored spheres attached to the branches. Each fruit’s color and associated content are defined in a data array. Their placement leverages the branch’s curve to determine natural positions.
+                      </li>
+                      <li>
+                        <strong>User Interaction with Raycasting:</strong> A raycaster is used to detect mouse clicks on the fruits. When a fruit is selected, the camera animates smoothly toward it using interpolation, creating a dynamic zoom effect.
+                      </li>
+                    </ul>
+                  </li>
+                  <li>
+                    <strong>UI Elements and Animations:</strong>
+                    <ul>
+                      <li>
+                        <strong>Menu &amp; Quicklinks:</strong> A stylish menu button reveals a quicklinks panel, dynamically generated based on the fruits. This allows users to navigate directly to different sections.
+                      </li>
+                      <li>
+                        <strong>Info Card &amp; Back Button:</strong> Upon zooming into a fruit, an info card appears with detailed content, and a back button is provided to return the camera to its default state. These UI elements use CSS transitions for smooth appearance and disappearance.
+                      </li>
+                      <li>
+                        <strong>Intro and Ongoing Animations:</strong> The experience begins with an introductory camera animation that transitions from a distant bird’s-eye view into an orbit around the tree. Afterwards, subtle rotations and positional tweaks are applied to both the tree and fruits, ensuring the scene feels alive.
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+
+                <h2>Creative and Practical Considerations</h2>
+                <ul>
+                  <li>
+                    <strong>Visual Aesthetics:</strong> The design marries a modern, minimalistic UI with an organic, nature-inspired 3D model. The use of gradients, soft shadows, and smooth animations contribute to an engaging and immersive experience.
+                  </li>
+                  <li>
+                    <strong>User Experience:</strong> The blend of 3D interaction and traditional UI elements (like quicklinks and content cards) provides a novel way for users to explore information. The animations are thoughtfully designed to guide attention and maintain a coherent navigational flow.
+                  </li>
+                  <li>
+                    <strong>Technical Mastery:</strong> This project showcases proficiency in advanced WebGL concepts, procedural geometry, and dynamic UI integration. It leverages linear interpolation for smooth camera transitions, recursive functions for natural structures, and DOM manipulation for interactive overlays.
+                  </li>
+                </ul>
+
+              </div>
+              <!-- End of card-content -->
+              
+              <!-- Retained image gallery for visual interest -->
+              
+              
               <a href="index.html#projects" class="btn">Back to Projects</a>
             </div>
           </div>
+        </section>
+      </main>
+
+      <!-- Sticky Footer -->
+      <footer class="footer">
+        <div class="container">
+          <p>&copy; 2025 [Your Name]. All rights reserved.</p>
         </div>
-      </section>
-    </main>
+      </footer>
+    </div>
 
-    <!-- Sticky Footer -->
-    <footer class="footer">
-      <div class="container">
-        <p>&copy; 2025 [Your Name]. All rights reserved.</p>
-      </div>
-    </footer>
-  </div>
+    <script src="script.js"></script>
+    <script>
+      // Scroll functionality for the image gallery buttons
+      const scrollLeftBtn = document.getElementById('scroll-left');
+      const scrollRightBtn = document.getElementById('scroll-right');
+      const imageGallery = document.querySelector('.image-gallery');
+      
+      let scrollInterval;
 
-  <script src="script.js"></script>
-</body>
+      // Function to start scrolling
+      function startScrolling(direction) {
+        scrollInterval = setInterval(() => {
+          imageGallery.scrollLeft += direction * 150; // Adjust scroll speed
+        }, 20); // Adjust interval for smooth scrolling
+      }
+
+      // Function to stop scrolling
+      function stopScrolling() {
+        clearInterval(scrollInterval);
+      }
+
+      // Event listeners for left button
+      scrollLeftBtn.addEventListener('mousedown', () => startScrolling(-1));
+      scrollLeftBtn.addEventListener('mouseup', stopScrolling);
+      scrollLeftBtn.addEventListener('mouseleave', stopScrolling);
+
+      // Event listeners for right button
+      scrollRightBtn.addEventListener('mousedown', () => startScrolling(1));
+      scrollRightBtn.addEventListener('mouseup', stopScrolling);
+      scrollRightBtn.addEventListener('mouseleave', stopScrolling);
+
+      // Also stop scrolling when mouse is released anywhere in the document
+      document.addEventListener('mouseup', stopScrolling);
+    </script>
+  </body>
 </html>

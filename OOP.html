@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Project Details - Plane Seat Management System</title>
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      /* Inline styles for improved flow and spacing */
+      ul {
+        margin: 1em 0;
+        padding-left: 1.5em;
+      }
+      li {
+        margin-bottom: 0.5em;
+      }
+      p {
+        margin-bottom: 1em;
+      }
+      .card-content {
+        line-height: 1.6;
+      }
+
+      /* Gallery Container to hold images and buttons */
+      .image-gallery-container {
+        position: relative;
+        margin: 20px 0;
+      }
+
+      /* Horizontal scrollable image gallery */
+      .image-gallery {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        gap: 20px;
+        padding: 20px;
+        scroll-behavior: smooth;
+      }
+      .image-gallery img {
+        max-height: 500px;
+        width: auto;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+        transition: transform 0.4s ease, box-shadow 0.4s ease;
+      }
+      .image-gallery img:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.6);
+      }
+
+      /* Hide default scrollbar if desired */
+      .image-gallery {
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none;  /* IE 10+ */
+      }
+      .image-gallery::-webkit-scrollbar {
+        display: none; /* Safari and Chrome */
+      }
+
+      /* Scroll Buttons */
+      .scroll-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(0, 0, 0, 0.5);
+        color: #fff;
+        border: none;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        cursor: pointer;
+        z-index: 10;
+      }
+      .scroll-btn.left {
+        left: 10px;
+      }
+      .scroll-btn.right {
+        right: 10px;
+      }
+      .scroll-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0, 0, 0, 0.5);
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      z-index: 10;
+      transition: background 0.3s ease, transform 0.1s ease, box-shadow 0.3s ease;
+    }
+
+    .scroll-btn:hover {
+      background: rgba(255, 94, 0, 0.687); /* Orange tint for the glass effect */
+      backdrop-filter: blur(5px); /* Creates a subtle glass-like blur */
+      box-shadow: 0 0 10px rgba(255, 165, 0, 0.6); /* Adds an orange glow */
+    }
+
+    .scroll-btn:active {
+      background: rgba(255, 72, 0, 0.92); /* Darkens the background on click */
+      transform: translateY(-50%) scale(0.95); /* Slight scale down for a click feeling */
+    }
+
+    </style>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <header class="navbar">
+      <div class="container nav-container">
+        <div class="logo">
+          <a href="#hero">
+            <img src="logo.png" alt="[Your Profile Image]" id="logo" />
+          </a>
+        </div>
+        <div class="hamburger" id="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <nav class="nav-menu" id="nav-menu">
+          <ul class="nav-links">
+            <li><a href="index.html#hero">Home</a></li>
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="index.html#projects">Projects</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Page Wrapper for sticky footer -->
+    <br />
+    <br />
+    <div class="page-wrapper">
+      <!-- Main Content -->
+      <main class="content">
+        <section id="project-details" class="section project-details">
+          <div class="container">
+            <div class="card project-detail-card">
+              <h1>Plane Seat Management System</h1>
+              <p class="project-meta">2025 | Full-Stack Application (Spring Boot & Angular)</p>
+              
+              <!-- Image Gallery with Left and Right Scroll Buttons -->
+              <div class="image-gallery-container">
+                <button id="scroll-left" class="scroll-btn left">&lt;</button>
+                <div class="image-gallery">
+                  <!-- Four mobile view images -->
+                  <img src="images/mobile1.jpg" alt="Mobile View 1" />
+                  <img src="images/mobile2.jpg" alt="Mobile View 2" />
+                  <img src="images/mobile3.jpg" alt="Mobile View 3" />
+                  <img src="images/mobile4.jpg" alt="Mobile View 4" />
+                  <img src="images/mobile5.jpg" alt="Mobile View 5" />
+                  <!-- One laptop screenshot image -->
+                  <img src="images/laptop1.jpg" alt="Code Screenshot (Laptop View)" />
+                </div>
+                <button id="scroll-right" class="scroll-btn right">&gt;</button>
+              </div>
+              
+              <div class="card-content">
+                <!-- Overview -->
+                <p>
+                  The Plane Seat Management System is a robust full-stack solution designed to manage airplane seat reservations. It integrates a dynamic, responsive Angular frontend with a powerful Java-based backend built using Spring Boot.
+                </p>
+                <ul>
+                  <li>
+                    <strong>Frontend (Angular):</strong>
+                    <ul>
+                      <li>Developed with Angular, featuring a modular, component-based architecture.</li>
+                      <li>Provides a responsive design ensuring a seamless experience across mobile, tablet, and desktop devices.</li>
+                      <li>Utilizes services to interact with RESTful APIs for dynamic data binding and smooth navigation.</li>
+                    </ul>
+                  </li>
+                  <li>
+                    <strong>Backend (Spring Boot with Java):</strong>
+                    <ul>
+                      <li>Implemented in Java using Spring Boot, which leverages Spring MVC for RESTful API development.</li>
+                      <li>Handles core business logic for seat management, dynamic pricing, and file-based persistence of ticket records.</li>
+                      <li>Incorporates robust error handling and exception management to ensure reliable operation.</li>
+                    </ul>
+                  </li>
+                  <li>
+                    <strong>API Testing & Integration:</strong>
+                    <ul>
+                      <li>RESTful endpoints are rigorously tested using Postman to ensure proper functionality and error handling.</li>
+                      <li>Ensures smooth communication between the Angular frontend and the Spring Boot backend.</li>
+                    </ul>
+                  </li>
+                </ul>
+
+                <!-- Technical Details -->
+                <p>
+                  <strong>Technical Details & Architecture:</strong>
+                </p>
+                <ul>
+                  <li>
+                    <strong>Angular Frontend:</strong>
+                    <ul>
+                      <li>Component-based design for clear separation of concerns.</li>
+                      <li>Service integration for API communication and data management.</li>
+                      <li>Responsive UI design with modern CSS and JavaScript enhancements.</li>
+                    </ul>
+                  </li>
+                  <li>
+                    <strong>Spring Boot Backend (Java):</strong>
+                    <ul>
+                      <li>RESTful API development using Spring MVC and dependency injection for modularity.</li>
+                      <li>Business logic encapsulates seat reservation, cancellation, and dynamic pricing algorithms.</li>
+                      <li>File I/O operations using <code>java.io.File</code> and <code>java.io.FileWriter</code> to persist ticket data.</li>
+                    </ul>
+                  </li>
+                  <li>
+                    <strong>Overall System Architecture:</strong>
+                    <ul>
+                      <li>Clear separation between frontend and backend promotes scalability and maintainability.</li>
+                      <li>Modular code structure across both layers simplifies debugging, testing, and future enhancements.</li>
+                      <li>Comprehensive API testing using Postman ensures robust endpoint performance under various scenarios.</li>
+                    </ul>
+                  </li>
+                </ul>
+
+                <!-- Conclusion -->
+                <p>
+                  In summary, the Plane Seat Management System exemplifies advanced full-stack development by seamlessly integrating an Angular-based frontend with a Java-based Spring Boot backend. The system's scalable architecture, modular design, and thorough API testing with Postman ensure a reliable and efficient solution for managing airplane seat reservations.
+                </p>
+                <br />
+                <a href="index.html#projects" class="btn">Back to Projects</a>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <!-- Sticky Footer -->
+      <footer class="footer">
+        <div class="container">
+          <p>&copy; 2025 [Your Name]. All rights reserved.</p>
+        </div>
+      </footer>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+      // Scroll functionality for the image gallery buttons
+      const scrollLeftBtn = document.getElementById('scroll-left');
+      const scrollRightBtn = document.getElementById('scroll-right');
+      const imageGallery = document.querySelector('.image-gallery');
+      
+      let scrollInterval;
+
+      // Function to start scrolling
+      function startScrolling(direction) {
+        scrollInterval = setInterval(() => {
+          imageGallery.scrollLeft += direction * 150; // Adjust scroll speed (5px per interval)
+        }, 20); // Adjust interval (20ms for smooth scrolling)
+      }
+
+      // Function to stop scrolling
+      function stopScrolling() {
+        clearInterval(scrollInterval);
+      }
+
+      // Event listeners for left button
+      scrollLeftBtn.addEventListener('mousedown', () => startScrolling(-1));
+      scrollLeftBtn.addEventListener('mouseup', stopScrolling);
+      scrollLeftBtn.addEventListener('mouseleave', stopScrolling);
+
+      // Event listeners for right button
+      scrollRightBtn.addEventListener('mousedown', () => startScrolling(1));
+      scrollRightBtn.addEventListener('mouseup', stopScrolling);
+      scrollRightBtn.addEventListener('mouseleave', stopScrolling);
+
+      // Also stop scrolling when mouse is released anywhere in the document
+      document.addEventListener('mouseup', stopScrolling);
+    </script>
+  </body>
+</html>
