@@ -36,17 +36,20 @@
         padding: 20px;
         scroll-behavior: smooth;
       }
-      .image-gallery img {
+      .image-gallery img,video {
         max-height: 500px;
         width: auto;
         border-radius: 10px;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
         transition: transform 0.4s ease, box-shadow 0.4s ease;
       }
-      .image-gallery img:hover {
+      
+      .image-gallery img:hover,
+      .image-gallery video:hover {
         transform: translateY(-5px);
         box-shadow: 0 12px 24px rgba(0, 0, 0, 0.6);
       }
+
 
       /* Hide default scrollbar if desired */
       .image-gallery {
@@ -102,7 +105,6 @@
       background: rgba(255, 72, 0, 0.92); /* Darkens the background on click */
       transform: translateY(-50%) scale(0.95); /* Slight scale down for a click feeling */
     }
-
     </style>
   </head>
   <body>
@@ -140,20 +142,18 @@
           <div class="container">
             <div class="card project-detail-card">
               <h1>Plane Seat Management System</h1>
-              <p class="project-meta">2025 | Full-Stack Application (Spring Boot & Angular)</p>
+              <p class="project-meta">2024 | Full-Stack Application (Spring Boot & Angular)</p>
               
               <!-- Image Gallery with Left and Right Scroll Buttons -->
               <div class="image-gallery-container">
                 <button id="scroll-left" class="scroll-btn left">&lt;</button>
                 <div class="image-gallery">
                   <!-- Four mobile view images -->
-                  <img src="images/mobile1.jpg" alt="Mobile View 1" />
-                  <img src="images/mobile2.jpg" alt="Mobile View 2" />
-                  <img src="images/mobile3.jpg" alt="Mobile View 3" />
-                  <img src="images/mobile4.jpg" alt="Mobile View 4" />
-                  <img src="images/mobile5.jpg" alt="Mobile View 5" />
-                  <!-- One laptop screenshot image -->
-                  <img src="images/laptop1.jpg" alt="Code Screenshot (Laptop View)" />
+                  <video controls>
+                    <source src="videos/video2.mp4" type="video/mp4">
+                  </video>
+                  <img src="images/OOP_Backend.jpg" alt="Code Screenshot" />
+                  <img src="images/OOP_Frontend.jpg" alt="Code Screenshot" />
                 </div>
                 <button id="scroll-right" class="scroll-btn right">&gt;</button>
               </div>
