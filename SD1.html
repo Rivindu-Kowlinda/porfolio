@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Project Details - Plane Seat Management System</title>
+    <title>Project Details - Student Progression Outcomes App</title>
     <link rel="stylesheet" href="styles.css" />
     <style>
       /* Inline styles for improved flow and spacing */
@@ -36,20 +36,17 @@
         padding: 20px;
         scroll-behavior: smooth;
       }
-      .image-gallery img,video {
+      .image-gallery img {
         max-height: 500px;
         width: auto;
         border-radius: 10px;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
         transition: transform 0.4s ease, box-shadow 0.4s ease;
       }
-      
-      .image-gallery img:hover,
-      .image-gallery video:hover {
+      .image-gallery img:hover {
         transform: translateY(-5px);
         box-shadow: 0 12px 24px rgba(0, 0, 0, 0.6);
       }
-
 
       /* Hide default scrollbar if desired */
       .image-gallery {
@@ -73,6 +70,7 @@
         height: 40px;
         cursor: pointer;
         z-index: 10;
+        transition: background 0.3s ease, transform 0.1s ease, box-shadow 0.3s ease;
       }
       .scroll-btn.left {
         left: 10px;
@@ -80,31 +78,15 @@
       .scroll-btn.right {
         right: 10px;
       }
-      .scroll-btn {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: rgba(0, 0, 0, 0.5);
-      color: #fff;
-      border: none;
-      border-radius: 50%;
-      width: 40px;
-      height: 40px;
-      cursor: pointer;
-      z-index: 10;
-      transition: background 0.3s ease, transform 0.1s ease, box-shadow 0.3s ease;
-    }
-
-    .scroll-btn:hover {
-      background: rgba(255, 94, 0, 0.687); /* Orange tint for the glass effect */
-      backdrop-filter: blur(5px); /* Creates a subtle glass-like blur */
-      box-shadow: 0 0 10px rgba(255, 165, 0, 0.6); /* Adds an orange glow */
-    }
-
-    .scroll-btn:active {
-      background: rgba(255, 72, 0, 0.92); /* Darkens the background on click */
-      transform: translateY(-50%) scale(0.95); /* Slight scale down for a click feeling */
-    }
+      .scroll-btn:hover {
+        background: rgba(255, 94, 0, 0.687);
+        backdrop-filter: blur(5px);
+        box-shadow: 0 0 10px rgba(255, 165, 0, 0.6);
+      }
+      .scroll-btn:active {
+        background: rgba(255, 72, 0, 0.92);
+        transform: translateY(-50%) scale(0.95);
+      }
     </style>
   </head>
   <body>
@@ -141,19 +123,17 @@
         <section id="project-details" class="section project-details">
           <div class="container">
             <div class="card project-detail-card">
-              <h1>Plane Seat Management System</h1>
-              <p class="project-meta">2024 | Full-Stack Application (Spring Boot & Angular)</p>
+              <h1>Student Progression Outcomes App</h1>
+              <p class="project-meta">2023 | Python Console & Graphics Application</p>
               
               <!-- Image Gallery with Left and Right Scroll Buttons -->
               <div class="image-gallery-container">
                 <button id="scroll-left" class="scroll-btn left">&lt;</button>
                 <div class="image-gallery">
-                  <!-- Four mobile view images -->
-                  <video controls>
-                    <source src="videos/video2.mp4" type="video/mp4">
-                  </video>
-                  <img src="images/OOP_Backend.jpg" alt="Code Screenshot" />
-                  <img src="images/OOP_Frontend.jpg" alt="Code Screenshot" />
+                  <!-- Representative images (if available) -->
+                  <img src="images/SD1_CLI.jpg" alt="Screenshot 1" />
+                  <img src="images/SD1_Histogram.jpg" alt="Screenshot 2" />
+                  <img src="images/SD2_Code.jpg" alt="Screenshot 3" />
                 </div>
                 <button id="scroll-right" class="scroll-btn right">&gt;</button>
               </div>
@@ -161,31 +141,21 @@
               <div class="card-content">
                 <!-- Overview -->
                 <p>
-                  The Plane Seat Management System is a robust full-stack solution designed to manage airplane seat reservations. It integrates a dynamic, responsive Angular frontend with a powerful Java-based backend built using Spring Boot.
+                  The Student Progression Outcomes App is a comprehensive Python solution for calculating and visualizing student progression based on credit inputs. It caters to both staff and student users by providing tailored interactions.
                 </p>
                 <ul>
                   <li>
-                    <strong>Frontend (Angular):</strong>
+                    <strong>Functionality:</strong> Determines progression status using specific credit rules — "Progress" for 120 pass credits, "Trailer" for 100 pass credits, "Exclude" when fail credits are 80 or above, and "Retriever" for all other valid combinations.
+                  </li>
+                  <li>
+                    <strong>User Modes:</strong>  
                     <ul>
-                      <li>Developed with Angular, featuring a modular, component-based architecture.</li>
-                      <li>Provides a responsive design ensuring a seamless experience across mobile, tablet, and desktop devices.</li>
-                      <li>Utilizes services to interact with RESTful APIs for dynamic data binding and smooth navigation.</li>
+                      <li><em>Staff Mode:</em> Supports multiple entries, aggregates outcomes, and records data for later review.</li>
+                      <li><em>Student Mode:</em> Allows a single entry and immediately displays the outcome.</li>
                     </ul>
                   </li>
                   <li>
-                    <strong>Backend (Spring Boot with Java):</strong>
-                    <ul>
-                      <li>Implemented in Java using Spring Boot, which leverages Spring MVC for RESTful API development.</li>
-                      <li>Handles core business logic for seat management, dynamic pricing, and file-based persistence of ticket records.</li>
-                      <li>Incorporates robust error handling and exception management to ensure reliable operation.</li>
-                    </ul>
-                  </li>
-                  <li>
-                    <strong>API Testing & Integration:</strong>
-                    <ul>
-                      <li>RESTful endpoints are rigorously tested using Postman to ensure proper functionality and error handling.</li>
-                      <li>Ensures smooth communication between the Angular frontend and the Spring Boot backend.</li>
-                    </ul>
+                    <strong>Input Validation:</strong> Implements robust checks to ensure that only valid credits (0, 20, 40, 60, 80, 100, 120) are accepted and that the total always equals 120, with graceful error handling.
                   </li>
                 </ul>
 
@@ -195,34 +165,25 @@
                 </p>
                 <ul>
                   <li>
-                    <strong>Angular Frontend:</strong>
-                    <ul>
-                      <li>Component-based design for clear separation of concerns.</li>
-                      <li>Service integration for API communication and data management.</li>
-                      <li>Responsive UI design with modern CSS and JavaScript enhancements.</li>
-                    </ul>
+                    <strong>Python-Based:</strong> Developed entirely in Python, utilizing console input for data collection and a simple graphics library (such as Zelle’s Graphics) for rendering a histogram.
                   </li>
                   <li>
-                    <strong>Spring Boot Backend (Java):</strong>
-                    <ul>
-                      <li>RESTful API development using Spring MVC and dependency injection for modularity.</li>
-                      <li>Business logic encapsulates seat reservation, cancellation, and dynamic pricing algorithms.</li>
-                      <li>File I/O operations using <code>java.io.File</code> and <code>java.io.FileWriter</code> to persist ticket data.</li>
-                    </ul>
+                    <strong>Modular Design:</strong> Uses dedicated functions like <code>progression_outcome</code>, <code>create_bar</code>, and <code>window</code> for clear separation of concerns and reusability.
                   </li>
                   <li>
-                    <strong>Overall System Architecture:</strong>
-                    <ul>
-                      <li>Clear separation between frontend and backend promotes scalability and maintainability.</li>
-                      <li>Modular code structure across both layers simplifies debugging, testing, and future enhancements.</li>
-                      <li>Comprehensive API testing using Postman ensures robust endpoint performance under various scenarios.</li>
-                    </ul>
+                    <strong>File I/O:</strong> Persists outcomes by writing to and reading from a text file, ensuring data is logged for future reference.
+                  </li>
+                  <li>
+                    <strong>Graphical Visualization:</strong> Generates a dynamically scaled histogram to visually represent counts of each progression outcome.
+                  </li>
+                  <li>
+                    <strong>Best Practices:</strong> Emphasizes robust input validation, modularity, and defensive programming to ensure data integrity and a smooth user experience.
                   </li>
                 </ul>
 
                 <!-- Conclusion -->
                 <p>
-                  In summary, the Plane Seat Management System exemplifies advanced full-stack development by seamlessly integrating an Angular-based frontend with a Java-based Spring Boot backend. The system's scalable architecture, modular design, and thorough API testing with Postman ensure a reliable and efficient solution for managing airplane seat reservations.
+                  Overall, this project effectively showcases key programming principles such as modularity, input validation, and user-friendly graphical representation, making it an exemplary solution for managing student progression outcomes.
                 </p>
                 <br />
                 <a href="index.html#projects" class="btn">Back to Projects</a>
@@ -252,8 +213,8 @@
       // Function to start scrolling
       function startScrolling(direction) {
         scrollInterval = setInterval(() => {
-          imageGallery.scrollLeft += direction * 150; // Adjust scroll speed (5px per interval)
-        }, 20); // Adjust interval (20ms for smooth scrolling)
+          imageGallery.scrollLeft += direction * 150;
+        }, 20);
       }
 
       // Function to stop scrolling
@@ -271,7 +232,7 @@
       scrollRightBtn.addEventListener('mouseup', stopScrolling);
       scrollRightBtn.addEventListener('mouseleave', stopScrolling);
 
-      // Also stop scrolling when mouse is released anywhere in the document
+      // Stop scrolling when mouse is released anywhere in the document
       document.addEventListener('mouseup', stopScrolling);
     </script>
   </body>
