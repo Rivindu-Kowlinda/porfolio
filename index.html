@@ -5,16 +5,53 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Portfolio - Rivindu Kowlinda</title>
   <link rel="icon" type="image/png" href="logo.png">
-
+  
   <!-- External CSS Libraries -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
   <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
   <link rel="stylesheet" href="styles2.css">
   
-  <!-- Inline style adjustments for the form fields glow -->
+  <!-- Inline styles including mobile slider and hamburger animation -->
   <style>
-    /* The form fields already transition box-shadow in your CSS,
-       GSAP will animate the glow effect on top of that. */
+    /* Mobile Navigation Slider Styles */
+    @media (max-width: 768px) {
+      /* Position the nav-menu off-canvas */
+      #nav-menu {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 250px;
+        height: 100%;
+        background-color: #212121; /* Adjust as needed */
+        transform: translateX(-100%);
+        z-index: 1000;
+        padding: 20px;
+      }
+    }
+    /* Ensure hamburger stays on top */
+    #hamburger {
+      z-index: 1100;
+      cursor: pointer;
+    }
+    /* Hamburger default style */
+    #hamburger span {
+      display: block;
+      width: 25px;
+      height: 3px;
+      background: #fff;
+      margin: 5px 0;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+    /* Transform hamburger into a cross when active */
+    #hamburger.active span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+    #hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+    #hamburger.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(7px, -6px);
+    }
   </style>
 </head>
 <body>
@@ -76,7 +113,7 @@
               <!-- Facebook -->
               <a href="https://www.facebook.com/share/1CD857PFUY/" class="social-btn" target="_blank" title="Facebook">
                 <svg class="social-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white">
-                  <path d="M22.675 0H1.325C.593 0 0 .593 0 1.326v21.348C0 23.407.593 24 1.325 24H12.82v-9.294H9.692v-3.622h3.128V8.413c0-3.1 1.893-4.788 4.658-4.788 1.325 0 2.466.099 2.797.143v3.24l-1.918.001c-1.504 0-1.795.716-1.795 1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116C23.407 24 24 23.407 24 22.674V1.326C24 .593 23.207 0 22.675 0z"/>
+                  <path d="M22.675 0H1.325C.593 0 0 .593 0 1.326v21.348C0 23.407.593 24 1.325 24H12.82v-9.294H9.692v-3.622h3.128V8.413c0-3.1 1.893-4.788 4.658-4.788 1.325 0 2.466.099 2.797.143v3.24l-1.918.001c-1.504 0-1.795.716-1.795 1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116C23.407 24 24 23.407 24 22.674V1.326C24 .593 23.407 0 22.675 0z"/>
                 </svg>
               </a>
             </div>
@@ -96,7 +133,7 @@
           <div class="card about-card">
             <h2>About Me</h2>
             <p>
-              Rivindu Kowlinda is a driven and accomplished software engineering undergraduate at IIT, recognized for his impressive technical expertise and leadership qualities. Throughout his academic journey, he has built a strong foundation in a wide array of programming languages, including HTML, JavaScript, Java, Python, Dart, Kotlin and TypeScript. His practical experience is further enriched by his work with modern frameworks such as Spring Boot and Angular and SDKs such as FLutter, enabling him to design and develop innovative solutions that effectively bridge theory with real-world application.
+              Rivindu Kowlinda is a driven and accomplished software engineering undergraduate at IIT, recognized for his impressive technical expertise and leadership qualities. Throughout his academic journey, he has built a strong foundation in a wide array of programming languages, including HTML, JavaScript, Java, Python, Dart, Kotlin and TypeScript. His practical experience is further enriched by his work with modern frameworks such as Spring Boot and Angular and SDKs such as Flutter, enabling him to design and develop innovative solutions that effectively bridge theory with real-world application.
               <br /><br />
               With a natural aptitude for leadership and communication, Rivindu excels in collaborative environments. His fluency in English allows him to articulate complex technical concepts clearly, making him an asset in team projects and professional settings alike. His ability to motivate and guide peers has been demonstrated in various group initiatives, where he has consistently contributed to achieving shared objectives with creativity and precision.
               <br /><br />
@@ -209,7 +246,7 @@
   <!-- Combined JavaScript -->
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-      // Reveal sections on scroll
+      // Reveal sections on scroll using IntersectionObserver
       const sections = document.querySelectorAll(".section");
       const observerOptions = { threshold: 0.3 };
       const observer = new IntersectionObserver((entries, obs) => {
@@ -221,7 +258,7 @@
         });
       }, observerOptions);
       sections.forEach(section => observer.observe(section));
-    
+
       // Navbar glass effect on scroll
       const navbar = document.querySelector(".navbar");
       window.addEventListener("scroll", () => {
@@ -231,27 +268,41 @@
           navbar.classList.remove("scrolled");
         }
       });
-    
-      // Mobile Hamburger Menu toggle with fade in/out effect
+
+      // Mobile Hamburger Menu toggle with slider animation and cross transformation
       const hamburger = document.getElementById("hamburger");
       const navMenu = document.getElementById("nav-menu");
+      
       hamburger.addEventListener("click", () => {
+        // Toggle active state for hamburger to trigger cross animation
+        hamburger.classList.toggle("active");
         if (navMenu.classList.contains("active")) {
-          gsap.to(navMenu, { opacity: 0, y: -20, duration: 0.5, onComplete: () => {
+          // Slide out to the left
+          gsap.to(navMenu, { x: "-100%", duration: 0.5, ease: "power2.in", onComplete: () => {
             navMenu.classList.remove("active");
-            hamburger.classList.remove("active");
-            gsap.set(navMenu, { y: 0 });
           }});
         } else {
           navMenu.classList.add("active");
-          hamburger.classList.add("active");
-          gsap.fromTo(navMenu, {opacity: 0, y: -20}, {opacity: 1, y: 0, duration: 0.5});
+          gsap.fromTo(navMenu, { x: "-100%" }, { x: "0%", duration: 0.5, ease: "power2.out" });
         }
       });
-    
+      
+      // Close the slider when a quicklink is clicked (mobile only)
+      const navLinks = document.querySelectorAll("#nav-menu a");
+      navLinks.forEach(link => {
+        link.addEventListener("click", () => {
+          if (window.innerWidth <= 768 && navMenu.classList.contains("active")) {
+            gsap.to(navMenu, { x: "-100%", duration: 0.5, ease: "power2.in", onComplete: () => {
+              navMenu.classList.remove("active");
+              hamburger.classList.remove("active");
+            }});
+          }
+        });
+      });
+
       // Initialize AOS
       AOS.init({ duration: 1000, once: true });
-    
+
       // Typed.js for hero title
       new Typed('#typed', {
         strings: ["Hello, I'm Rivindu Kowlinda"],
@@ -260,8 +311,8 @@
         showCursor: false,
         loop: false
       });
-    
-      // Initialize Particles.js (static background)
+
+      // Initialize Particles.js
       particlesJS('particles-js', {
         "particles": {
           "number": { "value": 80, "density": { "enable": true, "value_area": 800 } },
@@ -278,10 +329,11 @@
         },
         "retina_detect": true
       });
-    
+
       gsap.from(".hero-left", { duration: 1, opacity: 0, y: 50, ease: "power2.out" });
       gsap.from(".hero-right", { duration: 1, opacity: 0, y: 50, ease: "power2.out", delay: 0.3 });
-    
+
+      // Carousel functionality for project cards (if applicable)
       const carousel = document.querySelector('.cards-carousel');
       const cards = document.querySelectorAll('.cards-carousel .card');
       const leftBtn = document.querySelector('.left-btn');
@@ -334,11 +386,8 @@
           body: formData,
           headers: { 'Accept': 'application/json' }
         }).then(response => {
-          // Select all form fields (inputs and textarea)
           const fields = document.querySelectorAll('#contactForm input, #contactForm textarea');
-          
           if (response.ok) {
-            // Animate a neon green glow for success with a quicker fade-out (1 second delay)
             fields.forEach(field => {
               gsap.fromTo(field, 
                 { boxShadow: "0 0 0px 0px rgba(0,255,0,0)" },
@@ -348,7 +397,6 @@
             });
             contactForm.reset();
           } else {
-            // Animate a neon red glow for failure with a quicker fade-out
             fields.forEach(field => {
               gsap.fromTo(field, 
                 { boxShadow: "0 0 0px 0px rgba(255,0,0,0)" },
@@ -358,7 +406,6 @@
             });
           }
         }).catch(error => {
-          // On network error, animate red glow as well with a quicker fade-out
           const fields = document.querySelectorAll('#contactForm input, #contactForm textarea');
           fields.forEach(field => {
             gsap.fromTo(field, 
