@@ -39,6 +39,7 @@
       .image-gallery img {
         max-height: 500px;
         width: auto;
+        max-width: 100%;
         border-radius: 10px;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
         transition: transform 0.4s ease, box-shadow 0.4s ease;
@@ -48,7 +49,7 @@
         box-shadow: 0 12px 24px rgba(0, 0, 0, 0.6);
       }
 
-      /* Hide default scrollbar if desired */
+      /* Hide default scrollbar */
       .image-gallery {
         scrollbar-width: none; /* Firefox */
         -ms-overflow-style: none;  /* IE 10+ */
@@ -70,6 +71,7 @@
         height: 40px;
         cursor: pointer;
         z-index: 10;
+        transition: background 0.3s ease, transform 0.1s ease, box-shadow 0.3s ease;
       }
       .scroll-btn.left {
         left: 10px;
@@ -77,31 +79,22 @@
       .scroll-btn.right {
         right: 10px;
       }
-      .scroll-btn {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: rgba(0, 0, 0, 0.5);
-      color: #fff;
-      border: none;
-      border-radius: 50%;
-      width: 40px;
-      height: 40px;
-      cursor: pointer;
-      z-index: 10;
-      transition: background 0.3s ease, transform 0.1s ease, box-shadow 0.3s ease;
-    }
+      .scroll-btn:hover {
+        background: rgba(255, 94, 0, 0.687);
+        backdrop-filter: blur(5px);
+        box-shadow: 0 0 10px rgba(255, 165, 0, 0.6);
+      }
+      .scroll-btn:active {
+        background: rgba(255, 72, 0, 0.92);
+        transform: translateY(-50%) scale(0.95);
+      }
 
-    .scroll-btn:hover {
-      background: rgba(255, 94, 0, 0.687); /* Orange tint for the glass effect */
-      backdrop-filter: blur(5px); /* Creates a subtle glass-like blur */
-      box-shadow: 0 0 10px rgba(255, 165, 0, 0.6); /* Adds an orange glow */
-    }
-
-    .scroll-btn:active {
-      background: rgba(255, 72, 0, 0.92); /* Darkens the background on click */
-      transform: translateY(-50%) scale(0.95); /* Slight scale down for a click feeling */
-    }
+      /* Hide scroll buttons on small screens (mobile) */
+      @media (max-width: 768px) {
+        .scroll-btn {
+          display: none;
+        }
+      }
     </style>
   </head>
   <body>
@@ -145,7 +138,7 @@
               <div class="image-gallery-container">
                 <button id="scroll-left" class="scroll-btn left">&lt;</button>
                 <div class="image-gallery">
-                  <!-- Four mobile view images -->
+                  <!-- Five mobile view images -->
                   <img src="images/mobile1.jpg" alt="Mobile View 1" />
                   <img src="images/mobile2.jpg" alt="Mobile View 2" />
                   <img src="images/mobile3.jpg" alt="Mobile View 3" />
@@ -259,30 +252,32 @@
       
       let scrollInterval;
 
-      // Function to start scrolling
       function startScrolling(direction) {
         scrollInterval = setInterval(() => {
-          imageGallery.scrollLeft += direction * 150; // Adjust scroll speed (5px per interval)
-        }, 20); // Adjust interval (20ms for smooth scrolling)
+          imageGallery.scrollLeft += direction * 150;
+        }, 20);
       }
 
-      // Function to stop scrolling
       function stopScrolling() {
         clearInterval(scrollInterval);
       }
 
-      // Event listeners for left button
       scrollLeftBtn.addEventListener('mousedown', () => startScrolling(-1));
       scrollLeftBtn.addEventListener('mouseup', stopScrolling);
       scrollLeftBtn.addEventListener('mouseleave', stopScrolling);
 
-      // Event listeners for right button
       scrollRightBtn.addEventListener('mousedown', () => startScrolling(1));
       scrollRightBtn.addEventListener('mouseup', stopScrolling);
       scrollRightBtn.addEventListener('mouseleave', stopScrolling);
 
-      // Also stop scrolling when mouse is released anywhere in the document
       document.addEventListener('mouseup', stopScrolling);
+
+      // Add "visible" class to sections on load to trigger the fade-in animation
+      window.addEventListener('load', function(){
+        document.querySelectorAll('.section').forEach(function(section) {
+          section.classList.add('visible');
+        });
+      });
     </script>
   </body>
 </html>

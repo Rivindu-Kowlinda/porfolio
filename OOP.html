@@ -36,25 +36,25 @@
         padding: 20px;
         scroll-behavior: smooth;
       }
-      .image-gallery img,video {
+      .image-gallery img,
+      .image-gallery video {
         max-height: 500px;
+        max-width: 100%;
         width: auto;
         border-radius: 10px;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
         transition: transform 0.4s ease, box-shadow 0.4s ease;
       }
-      
       .image-gallery img:hover,
       .image-gallery video:hover {
         transform: translateY(-5px);
         box-shadow: 0 12px 24px rgba(0, 0, 0, 0.6);
       }
 
-
       /* Hide default scrollbar if desired */
       .image-gallery {
         scrollbar-width: none; /* Firefox */
-        -ms-overflow-style: none;  /* IE 10+ */
+        -ms-overflow-style: none; /* IE 10+ */
       }
       .image-gallery::-webkit-scrollbar {
         display: none; /* Safari and Chrome */
@@ -73,6 +73,7 @@
         height: 40px;
         cursor: pointer;
         z-index: 10;
+        transition: background 0.3s ease, transform 0.1s ease, box-shadow 0.3s ease;
       }
       .scroll-btn.left {
         left: 10px;
@@ -80,31 +81,22 @@
       .scroll-btn.right {
         right: 10px;
       }
-      .scroll-btn {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: rgba(0, 0, 0, 0.5);
-      color: #fff;
-      border: none;
-      border-radius: 50%;
-      width: 40px;
-      height: 40px;
-      cursor: pointer;
-      z-index: 10;
-      transition: background 0.3s ease, transform 0.1s ease, box-shadow 0.3s ease;
-    }
+      .scroll-btn:hover {
+        background: rgba(255, 94, 0, 0.687); /* Orange tint for the glass effect */
+        backdrop-filter: blur(5px); /* Creates a subtle glass-like blur */
+        box-shadow: 0 0 10px rgba(255, 165, 0, 0.6); /* Adds an orange glow */
+      }
+      .scroll-btn:active {
+        background: rgba(255, 72, 0, 0.92); /* Darkens the background on click */
+        transform: translateY(-50%) scale(0.95); /* Slight scale down for a click feeling */
+      }
 
-    .scroll-btn:hover {
-      background: rgba(255, 94, 0, 0.687); /* Orange tint for the glass effect */
-      backdrop-filter: blur(5px); /* Creates a subtle glass-like blur */
-      box-shadow: 0 0 10px rgba(255, 165, 0, 0.6); /* Adds an orange glow */
-    }
-
-    .scroll-btn:active {
-      background: rgba(255, 72, 0, 0.92); /* Darkens the background on click */
-      transform: translateY(-50%) scale(0.95); /* Slight scale down for a click feeling */
-    }
+      /* Hide scroll buttons on mobile devices */
+      @media (max-width: 768px) {
+        .scroll-btn {
+          display: none;
+        }
+      }
     </style>
   </head>
   <body>
@@ -142,15 +134,15 @@
           <div class="container">
             <div class="card project-detail-card">
               <h1>Plane Seat Management System</h1>
-              <p class="project-meta">2024 | Full-Stack Application (Spring Boot & Angular)</p>
+              <p class="project-meta">2024 | Full-Stack Application (Spring Boot &amp; Angular)</p>
               
               <!-- Image Gallery with Left and Right Scroll Buttons -->
               <div class="image-gallery-container">
                 <button id="scroll-left" class="scroll-btn left">&lt;</button>
                 <div class="image-gallery">
-                  <!-- Four mobile view images -->
+                  <!-- Video and images showcasing the project -->
                   <video controls>
-                    <source src="videos/video2.mp4" type="video/mp4">
+                    <source src="videos/video2.mp4" type="video/mp4" />
                   </video>
                   <img src="images/OOP_Backend.jpg" alt="Code Screenshot" />
                   <img src="images/OOP_Frontend.jpg" alt="Code Screenshot" />
@@ -181,7 +173,7 @@
                     </ul>
                   </li>
                   <li>
-                    <strong>API Testing & Integration:</strong>
+                    <strong>API Testing &amp; Integration:</strong>
                     <ul>
                       <li>RESTful endpoints are rigorously tested using Postman to ensure proper functionality and error handling.</li>
                       <li>Ensures smooth communication between the Angular frontend and the Spring Boot backend.</li>
@@ -191,7 +183,7 @@
 
                 <!-- Technical Details -->
                 <p>
-                  <strong>Technical Details & Architecture:</strong>
+                  <strong>Technical Details &amp; Architecture:</strong>
                 </p>
                 <ul>
                   <li>
@@ -249,30 +241,32 @@
       
       let scrollInterval;
 
-      // Function to start scrolling
       function startScrolling(direction) {
         scrollInterval = setInterval(() => {
-          imageGallery.scrollLeft += direction * 150; // Adjust scroll speed (5px per interval)
-        }, 20); // Adjust interval (20ms for smooth scrolling)
+          imageGallery.scrollLeft += direction * 150;
+        }, 20);
       }
 
-      // Function to stop scrolling
       function stopScrolling() {
         clearInterval(scrollInterval);
       }
 
-      // Event listeners for left button
       scrollLeftBtn.addEventListener('mousedown', () => startScrolling(-1));
       scrollLeftBtn.addEventListener('mouseup', stopScrolling);
       scrollLeftBtn.addEventListener('mouseleave', stopScrolling);
 
-      // Event listeners for right button
       scrollRightBtn.addEventListener('mousedown', () => startScrolling(1));
       scrollRightBtn.addEventListener('mouseup', stopScrolling);
       scrollRightBtn.addEventListener('mouseleave', stopScrolling);
 
-      // Also stop scrolling when mouse is released anywhere in the document
       document.addEventListener('mouseup', stopScrolling);
+
+      // Ensure sections become visible on load (useful if using fade-in effects)
+      window.addEventListener('load', function () {
+        document.querySelectorAll('.section').forEach(function (section) {
+          section.classList.add('visible');
+        });
+      });
     </script>
   </body>
 </html>

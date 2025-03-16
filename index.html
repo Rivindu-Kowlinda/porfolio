@@ -10,9 +10,12 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
   <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
   <link rel="stylesheet" href="styles2.css">
-
-  <!-- Combined Stock & Enhanced CSS -->
- 
+  
+  <!-- Inline style adjustments for the form fields glow -->
+  <style>
+    /* The form fields already transition box-shadow in your CSS,
+       GSAP will animate the glow effect on top of that. */
+  </style>
 </head>
 <body>
   <!-- Particles Background -->
@@ -73,7 +76,7 @@
               <!-- Facebook -->
               <a href="https://www.facebook.com/share/1CD857PFUY/" class="social-btn" target="_blank" title="Facebook">
                 <svg class="social-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white">
-                  <path d="M22.675 0H1.325C.593 0 0 .593 0 1.326v21.348C0 23.407.593 24 1.325 24H12.82v-9.294H9.692v-3.622h3.128V8.413c0-3.1 1.893-4.788 4.658-4.788 1.325 0 2.466.099 2.797.143v3.24l-1.918.001c-1.504 0-1.795.716-1.795 1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116C23.407 24 24 23.407 24 22.674V1.326C24 .593 23.407 0 22.675 0z"/>
+                  <path d="M22.675 0H1.325C.593 0 0 .593 0 1.326v21.348C0 23.407.593 24 1.325 24H12.82v-9.294H9.692v-3.622h3.128V8.413c0-3.1 1.893-4.788 4.658-4.788 1.325 0 2.466.099 2.797.143v3.24l-1.918.001c-1.504 0-1.795.716-1.795 1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116C23.407 24 24 23.407 24 22.674V1.326C24 .593 23.207 0 22.675 0z"/>
                 </svg>
               </a>
             </div>
@@ -168,7 +171,7 @@
         <div class="container">
           <div class="card contact-card">
             <h2>Contact Me</h2>
-            <form class="contact-form" action="https://formspree.io/f/yourformid" method="POST">
+            <form id="contactForm" class="contact-form" action="https://formspree.io/f/xqapaqne" method="POST">
               <div class="form-group">
                 <label for="name">Name</label>
                 <input type="text" id="name" name="name" placeholder="Your Name" required />
@@ -319,6 +322,54 @@
             gsap.set(card, { opacity: 1 });
           });
       }
+      
+      // Contact Form Submission with GSAP neon glow effect on fields.
+      const contactForm = document.getElementById('contactForm');
+      contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const formData = new FormData(contactForm);
+        
+        fetch(contactForm.action, {
+          method: 'POST',
+          body: formData,
+          headers: { 'Accept': 'application/json' }
+        }).then(response => {
+          // Select all form fields (inputs and textarea)
+          const fields = document.querySelectorAll('#contactForm input, #contactForm textarea');
+          
+          if (response.ok) {
+            // Animate a neon green glow for success with a quicker fade-out (1 second delay)
+            fields.forEach(field => {
+              gsap.fromTo(field, 
+                { boxShadow: "0 0 0px 0px rgba(0,255,0,0)" },
+                { boxShadow: "0 0 10px 5px rgba(0,255,0,1)", duration: 0.5, ease: "power2.out" }
+              );
+              gsap.to(field, { boxShadow: "0 0 0px 0px rgba(0,255,0,0)", duration: 0.5, ease: "power2.in", delay: 1 });
+            });
+            contactForm.reset();
+          } else {
+            // Animate a neon red glow for failure with a quicker fade-out
+            fields.forEach(field => {
+              gsap.fromTo(field, 
+                { boxShadow: "0 0 0px 0px rgba(255,0,0,0)" },
+                { boxShadow: "0 0 10px 5px rgba(255,0,0,1)", duration: 0.5, ease: "power2.out" }
+              );
+              gsap.to(field, { boxShadow: "0 0 0px 0px rgba(255,0,0,0)", duration: 0.5, ease: "power2.in", delay: 1 });
+            });
+          }
+        }).catch(error => {
+          // On network error, animate red glow as well with a quicker fade-out
+          const fields = document.querySelectorAll('#contactForm input, #contactForm textarea');
+          fields.forEach(field => {
+            gsap.fromTo(field, 
+              { boxShadow: "0 0 0px 0px rgba(255,0,0,0)" },
+              { boxShadow: "0 0 10px 5px rgba(255,0,0,1)", duration: 0.5, ease: "power2.out" }
+            );
+            gsap.to(field, { boxShadow: "0 0 0px 0px rgba(255,0,0,0)", duration: 0.5, ease: "power2.in", delay: 1 });
+          });
+        });
+      });
+      
     });
   </script>
 </body>

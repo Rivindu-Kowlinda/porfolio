@@ -38,6 +38,7 @@
       }
       .image-gallery img {
         max-height: 500px;
+        max-width: 100%;
         width: auto;
         border-radius: 10px;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
@@ -87,6 +88,13 @@
         background: rgba(255, 72, 0, 0.92);
         transform: translateY(-50%) scale(0.95);
       }
+
+      /* Hide scroll buttons on mobile devices */
+      @media (max-width: 768px) {
+        .scroll-btn {
+          display: none;
+        }
+      }
     </style>
   </head>
   <body>
@@ -124,7 +132,7 @@
           <div class="container">
             <div class="card project-detail-card">
               <h1>Student Progression Outcomes App</h1>
-              <p class="project-meta">2023 | Python Console & Graphics Application</p>
+              <p class="project-meta">2023 | Python Console &amp; Graphics Application</p>
               
               <!-- Image Gallery with Left and Right Scroll Buttons -->
               <div class="image-gallery-container">
@@ -148,7 +156,7 @@
                     <strong>Functionality:</strong> Determines progression status using specific credit rules — "Progress" for 120 pass credits, "Trailer" for 100 pass credits, "Exclude" when fail credits are 80 or above, and "Retriever" for all other valid combinations.
                   </li>
                   <li>
-                    <strong>User Modes:</strong>  
+                    <strong>User Modes:</strong>
                     <ul>
                       <li><em>Staff Mode:</em> Supports multiple entries, aggregates outcomes, and records data for later review.</li>
                       <li><em>Student Mode:</em> Allows a single entry and immediately displays the outcome.</li>
@@ -161,7 +169,7 @@
 
                 <!-- Technical Details -->
                 <p>
-                  <strong>Technical Details & Architecture:</strong>
+                  <strong>Technical Details &amp; Architecture:</strong>
                 </p>
                 <ul>
                   <li>
@@ -210,29 +218,24 @@
       
       let scrollInterval;
 
-      // Function to start scrolling
       function startScrolling(direction) {
         scrollInterval = setInterval(() => {
           imageGallery.scrollLeft += direction * 150;
         }, 20);
       }
 
-      // Function to stop scrolling
       function stopScrolling() {
         clearInterval(scrollInterval);
       }
 
-      // Event listeners for left button
       scrollLeftBtn.addEventListener('mousedown', () => startScrolling(-1));
       scrollLeftBtn.addEventListener('mouseup', stopScrolling);
       scrollLeftBtn.addEventListener('mouseleave', stopScrolling);
 
-      // Event listeners for right button
       scrollRightBtn.addEventListener('mousedown', () => startScrolling(1));
       scrollRightBtn.addEventListener('mouseup', stopScrolling);
       scrollRightBtn.addEventListener('mouseleave', stopScrolling);
 
-      // Stop scrolling when mouse is released anywhere in the document
       document.addEventListener('mouseup', stopScrolling);
     </script>
   </body>
