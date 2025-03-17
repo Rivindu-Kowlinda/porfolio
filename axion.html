@@ -1,283 +1,327 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Project Details - Medical Reports Management App</title>
-    <link rel="stylesheet" href="styles.css" />
-    <style>
-      /* Inline styles for improved flow and spacing */
-      ul {
-        margin: 1em 0;
-        padding-left: 1.5em;
-      }
-      li {
-        margin-bottom: 0.5em;
-      }
-      p {
-        margin-bottom: 1em;
-      }
-      .card-content {
-        line-height: 1.6;
-      }
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Axion - Medical Reports Management App</title>
+  
+  <!-- AOS CSS for fade-in animations -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css"/>
 
-      /* Gallery Container to hold images and buttons */
-      .image-gallery-container {
-        position: relative;
-        margin: 20px 0;
-      }
+  <!-- Main CSS matching your main portfolio style (including the nav) -->
+  <link rel="stylesheet" href="styles2.css"/>
 
-      /* Horizontal scrollable image gallery */
-      .image-gallery {
-        display: flex;
-        flex-wrap: nowrap;
-        overflow-x: auto;
-        gap: 20px;
-        padding: 20px;
-        scroll-behavior: smooth;
+  <!-- Inline (page-specific) styles for the gallery, etc. -->
+  <style>
+    /* --- TOP SPACING SO NAVBAR DOESN'T COVER CONTENT --- */
+    /* This ensures there's enough space beneath the fixed navbar. */
+    .page-wrapper {
+      margin-top: 80px; /* Adjust as desired to match your navbar height */
+    }
+
+    /* ---- IMAGE GALLERY & SCROLL BUTTONS ---- */
+    .image-gallery-container {
+      position: relative;
+      margin: 20px 0;
+    }
+    .image-gallery {
+      display: flex;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      gap: 20px;
+      padding: 20px;
+      scroll-behavior: smooth;
+      scrollbar-width: none; /* Firefox */
+      -ms-overflow-style: none; /* IE 10+ */
+    }
+    .image-gallery::-webkit-scrollbar {
+      display: none; /* Safari/Chrome */
+    }
+    .image-gallery img {
+      max-height: 500px;
+      width: auto;
+      max-width: 100%;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+    .image-gallery img:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.6);
+    }
+    .scroll-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0,0,0,0.5);
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      z-index: 10;
+      transition: background 0.3s ease, transform 0.1s ease, box-shadow 0.3s ease;
+    }
+    .scroll-btn.left { left: 10px; }
+    .scroll-btn.right { right: 10px; }
+    .scroll-btn:hover {
+      background: rgba(255,94,0,0.7);
+      backdrop-filter: blur(5px);
+      box-shadow: 0 0 10px rgba(255,165,0,0.6);
+    }
+    .scroll-btn:active {
+      background: rgba(255,72,0,0.92);
+      transform: translateY(-50%) scale(0.95);
+    }
+    @media (max-width: 768px) {
+      .scroll-btn {
+        display: none;
       }
       .image-gallery img {
-        max-height: 500px;
-        width: auto;
-        max-width: 100%;
-        border-radius: 10px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-        transition: transform 0.4s ease, box-shadow 0.4s ease;
+        max-height: 400px; /* Slightly smaller on mobile */
       }
-      .image-gallery img:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.6);
-      }
+    }
 
-      /* Hide default scrollbar */
-      .image-gallery {
-        scrollbar-width: none; /* Firefox */
-        -ms-overflow-style: none;  /* IE 10+ */
-      }
-      .image-gallery::-webkit-scrollbar {
-        display: none; /* Safari and Chrome */
-      }
+    /* Extra spacing for lists and paragraphs */
+    ul {
+      margin: 1em 0;
+      padding-left: 1.5em;
+    }
+    li {
+      margin-bottom: 0.5em;
+    }
+    p {
+      margin-bottom: 1em;
+    }
+  </style>
+</head>
+<body>
+  <!-- MOBILE SIDEBAR NAV -->
+  <aside class="mobile-nav" id="mobileNav">
+    <div class="mobile-nav-logo">
+      <img src="logo.png" alt="Logo"/>
+    </div>
+    <ul>
+      <li><a href="index.html#hero">Home</a></li>
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#projects">Projects</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+  </aside>
 
-      /* Scroll Buttons */
-      .scroll-btn {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        background: rgba(0, 0, 0, 0.5);
-        color: #fff;
-        border: none;
-        border-radius: 50%;
-        width: 40px;
-        height: 40px;
-        cursor: pointer;
-        z-index: 10;
-        transition: background 0.3s ease, transform 0.1s ease, box-shadow 0.3s ease;
-      }
-      .scroll-btn.left {
-        left: 10px;
-      }
-      .scroll-btn.right {
-        right: 10px;
-      }
-      .scroll-btn:hover {
-        background: rgba(255, 94, 0, 0.687);
-        backdrop-filter: blur(5px);
-        box-shadow: 0 0 10px rgba(255, 165, 0, 0.6);
-      }
-      .scroll-btn:active {
-        background: rgba(255, 72, 0, 0.92);
-        transform: translateY(-50%) scale(0.95);
-      }
-
-      /* Hide scroll buttons on small screens (mobile) */
-      @media (max-width: 768px) {
-        .scroll-btn {
-          display: none;
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <!-- Navbar -->
-    <header class="navbar">
-      <div class="container nav-container">
-        <div class="logo">
-          <a href="index.html">
-            <img src="logo.png" alt="[Your Profile Image]" id="logo" />
-          </a>
-        </div>
-        <div class="hamburger" id="hamburger">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-        <nav class="nav-menu" id="nav-menu">
-          <ul class="nav-links">
-            <li><a href="index.html#hero">Home</a></li>
-            <li><a href="index.html#about">About</a></li>
-            <li><a href="index.html#projects">Projects</a></li>
-            <li><a href="index.html#contact">Contact</a></li>
-          </ul>
-        </nav>
+  <!-- DESKTOP NAVBAR -->
+  <header class="navbar">
+    <div class="nav-container">
+      <!-- Logo -->
+      <div class="logo">
+        <a href="index.html#hero">
+          <img src="logo.png" alt="Logo" id="logo"/>
+        </a>
       </div>
-    </header>
 
-    <!-- Page Wrapper for sticky footer -->
-    <br />
-    <br />
-    <div class="page-wrapper">
-      <!-- Main Content -->
-      <main class="content">
-        <section id="project-details" class="section project-details">
-          <div class="container">
-            <div class="card project-detail-card">
-              <h1>Axion - Medical Reports Management App</h1>
-              <p class="project-meta">2025 | Mobile Application (Flutter)</p>
-              
-              <!-- Image Gallery with Left and Right Scroll Buttons -->
-              <div class="image-gallery-container">
-                <button id="scroll-left" class="scroll-btn left">&lt;</button>
-                <div class="image-gallery">
-                  <!-- Five mobile view images -->
-                  <img src="images/mobile1.jpg" alt="Mobile View 1" />
-                  <img src="images/mobile2.jpg" alt="Mobile View 2" />
-                  <img src="images/mobile3.jpg" alt="Mobile View 3" />
-                  <img src="images/mobile4.jpg" alt="Mobile View 4" />
-                  <img src="images/mobile5.jpg" alt="Mobile View 5" />
-                </div>
-                <button id="scroll-right" class="scroll-btn right">&gt;</button>
+      <!-- Desktop Nav Links -->
+      <nav class="desktop-links">
+        <ul>
+          <li><a href="index.html#hero">Home</a></li>
+          <li><a href="index.html#about">About</a></li>
+          <li><a href="index.html#projects">Projects</a></li>
+          <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+      </nav>
+
+      <!-- Hamburger (Mobile Only) -->
+      <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </header>
+
+  <!-- PAGE WRAPPER -->
+  <div class="page-wrapper">
+    <!-- MAIN CONTENT -->
+    <main class="content">
+      <!-- Fade in from AOS (data-aos) + your normal .section styles -->
+      <section 
+        id="project-details" 
+        class="section project-details" 
+        data-aos="fade-up"
+      >
+        <div class="container">
+          <div class="card project-detail-card">
+            <h1>Axion - Medical Reports Management App</h1>
+            <p class="project-meta">2025 | Mobile Application (Flutter)</p>
+
+            <!-- Image Gallery -->
+            <div class="image-gallery-container">
+              <button id="scroll-left" class="scroll-btn left">&lt;</button>
+              <div class="image-gallery">
+                <!-- Example images; update paths as needed -->
+                <img src="images/mobile1.jpg" alt="Mobile View 1"/>
+                <img src="images/mobile2.jpg" alt="Mobile View 2"/>
+                <img src="images/mobile3.jpg" alt="Mobile View 3"/>
+                <img src="images/mobile4.jpg" alt="Mobile View 4"/>
+                <img src="images/mobile5.jpg" alt="Mobile View 5"/>
               </div>
-              
-              <div class="card-content">
-                <!-- Overview -->
-                <p>
-                  The Medical Reports Management App is a comprehensive solution
-                  built to streamline the management and display of various health
-                  reports. It is a mobile application developed using Flutter,
-                  ensuring a seamless experience across both iOS and Android devices.
-                </p>
-                <ul>
-                  <li>
-                    <strong>Functionality:</strong> Displays a wide range of medical
-                    data including CBC, lipid profiles, liver function tests, thyroid
-                    function tests, and more.
-                  </li>
-                  <li>
-                    <strong>User Interaction:</strong> Provides intuitive navigation
-                    and secure login, ensuring each user can access personalized health
-                    data.
-                  </li>
-                  <li>
-                    <strong>Global Reach:</strong> Features internationalization with
-                    multiple language support via ARB files.
-                  </li>
-                </ul>
+              <button id="scroll-right" class="scroll-btn right">&gt;</button>
+            </div>
 
-                <!-- Technical Details -->
-                <p>
-                  <strong>Technical Details & Architecture:</strong>
-                </p>
-                <ul>
-                  <li>
-                    <strong>Developed with Flutter:</strong> Utilizes Flutter and Dart
-                    to build a high-performance mobile application with a single codebase
-                    for iOS and Android.
-                  </li>
-                  <li>
-                    <strong>Modular Codebase:</strong> Organized into directories such as
-                    <code>models/</code>, <code>pages/</code>, <code>services/</code>, and
-                    <code>widgets/</code> for maintainability and scalability.
-                  </li>
-                  <li>
-                    <strong>Data Models & Serialization:</strong> Uses Dart models to
-                    represent various medical tests (e.g., <code>cbc_report</code>,
-                    <code>crp_report</code>, <code>thyroid_function_test_report</code>).
-                    Code generation via <code>.g.dart</code> files streamlines JSON
-                    serialization with <code>json_serializable</code>.
-                  </li>
-                  <li>
-                    <strong>API & GraphQL Integration:</strong> Dedicated services such as
-                    <code>api_service.dart</code> and <code>graphql_config.dart</code>
-                    ensure real-time data synchronization and efficient data querying.
-                  </li>
-                  <li>
-                    <strong>User Authentication & Secure Storage:</strong> Implements
-                    secure login and session management using models (e.g.,
-                    <code>auth.dart</code>, <code>user.dart</code>) and services like
-                    <code>auth_service.dart</code> and <code>session_service.dart</code>,
-                    with sensitive data protected via secure storage.
-                  </li>
-                  <li>
-                    <strong>Custom UI Components:</strong> Reusable widgets such as
-                    <code>report_card.dart</code> and a custom floating navigation bar
-                    ensure a consistent and polished user experience.
-                  </li>
-                  <li>
-                    <strong>Login & Signup Flow:</strong> Enhanced with dedicated screens
-                    and components in the <code>loginSide/</code> directory, featuring
-                    custom buttons, text fields, and progress indicators for a smooth
-                    onboarding process.
-                  </li>
-                </ul>
+            <div class="card-content">
+              <p>
+                The Medical Reports Management App is a comprehensive solution built to streamline the management and
+                display of various health reports. It is a mobile application developed using Flutter, ensuring a
+                seamless experience across both iOS and Android.
+              </p>
+              <ul>
+                <li><strong>Functionality:</strong> Displays CBC, lipid profiles, and more.</li>
+                <li><strong>User Interaction:</strong> Secure login, personalized data, intuitive UI.</li>
+                <li><strong>Global Reach:</strong> Multiple language support via ARB files.</li>
+              </ul>
 
-                <!-- Conclusion -->
-                <p>
-                  Overall, this project not only demonstrates advanced mobile development
-                  skills using Flutter but also emphasizes a robust technical architecture.
-                  The blend of comprehensive functionality, secure data handling, and modern
-                  integration techniques makes this application an outstanding portfolio piece.
-                </p>
-                <br />
-                <a href="index.html#projects" class="btn">Back to Projects</a>
-              </div>
+              <p><strong>Technical Details & Architecture:</strong></p>
+              <ul>
+                <li><strong>Flutter & Dart:</strong> Single codebase for iOS & Android.</li>
+                <li><strong>Modular Structure:</strong> Organized into <code>models/</code>, <code>services/</code>, etc.</li>
+                <li><strong>Data Models & Serialization:</strong> JSON serialization with <code>json_serializable</code>.</li>
+                <li><strong>API & GraphQL Integration:</strong> Real-time sync via <code>api_service.dart</code>, <code>graphql_config.dart</code>.</li>
+                <li><strong>Secure Storage:</strong> Sensitive data protected via session management.</li>
+                <li><strong>Custom UI Components:</strong> <code>report_card.dart</code>, floating nav bar, etc.</li>
+                <li><strong>Login Flow:</strong> <code>loginSide/</code> with custom buttons, forms, indicators.</li>
+              </ul>
+
+              <p>
+                This project highlights advanced mobile dev with Flutter plus a robust architecture. The blend of
+                comprehensive functionality, secure data handling, and modern integration makes it an impressive portfolio piece.
+              </p>
+              <br/>
+              <a href="index.html#projects" class="btn">Back to Projects</a>
             </div>
           </div>
-        </section>
-      </main>
-
-      <!-- Sticky Footer -->
-      <footer class="footer">
-        <div class="container">
-          <p>&copy; 2025. All rights reserved.</p>
         </div>
-      </footer>
-    </div>
+      </section>
+    </main>
 
-    <script src="script.js"></script>
-    <script>
-      // Scroll functionality for the image gallery buttons
-      const scrollLeftBtn = document.getElementById('scroll-left');
-      const scrollRightBtn = document.getElementById('scroll-right');
-      const imageGallery = document.querySelector('.image-gallery');
-      
-      let scrollInterval;
+    <!-- STICKY FOOTER -->
+    <footer class="footer">
+      <div class="container">
+        <p>&copy; 2025. All rights reserved.</p>
+      </div>
+    </footer>
+  </div>
 
-      function startScrolling(direction) {
-        scrollInterval = setInterval(() => {
-          imageGallery.scrollLeft += direction * 150;
-        }, 20);
-      }
+  <!-- AOS (Animate On Scroll) JS -->
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
 
-      function stopScrolling() {
-        clearInterval(scrollInterval);
-      }
+  <!-- GSAP (for the sidebar animations) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
 
-      scrollLeftBtn.addEventListener('mousedown', () => startScrolling(-1));
-      scrollLeftBtn.addEventListener('mouseup', stopScrolling);
-      scrollLeftBtn.addEventListener('mouseleave', stopScrolling);
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      /* 1) AOS Init for Fade-In Animations */
+      AOS.init({
+        duration: 1000, 
+        once: true
+      });
 
-      scrollRightBtn.addEventListener('mousedown', () => startScrolling(1));
-      scrollRightBtn.addEventListener('mouseup', stopScrolling);
-      scrollRightBtn.addEventListener('mouseleave', stopScrolling);
+      /* 2) Glass/Glossy Nav on Scroll */
+      const navbar = document.querySelector(".navbar");
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 50) {
+          navbar.classList.add("scrolled");
+        } else {
+          navbar.classList.remove("scrolled");
+        }
+      });
 
-      document.addEventListener('mouseup', stopScrolling);
+      /* 3) MOBILE NAV / SIDEBAR ANIMATION */
+      const hamburger = document.getElementById("hamburger");
+      const mobileNav = document.getElementById("mobileNav");
+      const mobileLinks = mobileNav.querySelectorAll("li");
 
-      // Add "visible" class to sections on load to trigger the fade-in animation
-      window.addEventListener('load', function(){
-        document.querySelectorAll('.section').forEach(function(section) {
-          section.classList.add('visible');
+      // Start sidebar off-screen; links invisible (for a quick fade/stagger in)
+      gsap.set(mobileNav, { x: "-100%" });
+      gsap.set(mobileLinks, { x: -30, opacity: 0 });
+
+      hamburger.addEventListener("click", () => {
+        if (!hamburger.classList.contains("active")) {
+          // OPEN nav
+          hamburger.classList.add("active");
+          const tl = gsap.timeline();
+          tl.to(mobileNav, {
+              x: 0,
+              duration: 0.5,
+              ease: "power2.out"
+            })
+            .fromTo(
+              mobileLinks,
+              { x: -30, opacity: 0 },
+              { x: 0, opacity: 1, stagger: 0.1, duration: 0.3 },
+              "<"
+            );
+        } else {
+          // CLOSE nav
+          hamburger.classList.remove("active");
+          const tl = gsap.timeline();
+          tl.to(mobileLinks, {
+              x: -30,
+              opacity: 0,
+              stagger: 0.05,
+              duration: 0.2
+            })
+            .to(mobileNav, {
+              x: "-100%",
+              duration: 0.5,
+              ease: "power2.in"
+            });
+        }
+      });
+
+      // Close sidebar if user clicks any link
+      mobileLinks.forEach(link => {
+        link.addEventListener("click", () => {
+          hamburger.classList.remove("active");
+          const tl = gsap.timeline();
+          tl.to(mobileLinks, {
+              x: -30,
+              opacity: 0,
+              stagger: 0.05,
+              duration: 0.2
+            })
+            .to(mobileNav, {
+              x: "-100%",
+              duration: 0.5,
+              ease: "power2.in"
+            });
         });
       });
-    </script>
-  </body>
+    });
+
+    /* 4) SCROLL BUTTONS for the GALLERY */
+    const scrollLeftBtn = document.getElementById('scroll-left');
+    const scrollRightBtn = document.getElementById('scroll-right');
+    const imageGallery = document.querySelector('.image-gallery');
+
+    let scrollInterval;
+    function startScrolling(direction) {
+      scrollInterval = setInterval(() => {
+        imageGallery.scrollLeft += direction * 150;
+      }, 20);
+    }
+    function stopScrolling() {
+      clearInterval(scrollInterval);
+    }
+
+    scrollLeftBtn.addEventListener('mousedown', () => startScrolling(-1));
+    scrollLeftBtn.addEventListener('mouseup', stopScrolling);
+    scrollLeftBtn.addEventListener('mouseleave', stopScrolling);
+
+    scrollRightBtn.addEventListener('mousedown', () => startScrolling(1));
+    scrollRightBtn.addEventListener('mouseup', stopScrolling);
+    scrollRightBtn.addEventListener('mouseleave', stopScrolling);
+
+    document.addEventListener('mouseup', stopScrolling);
+  </script>
+</body>
 </html>

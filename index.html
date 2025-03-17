@@ -48,11 +48,12 @@
 
   <!-- MOBILE SIDEBAR NAV -->
   <aside class="mobile-nav" id="mobileNav">
-    <!-- Same logo as the navbar, not round, same width -->
+    <!-- Add a profile/logo image at the top of the sidebar -->
     <div class="mobile-nav-logo">
-      <img src="logo.png" alt="Logo" />
+      <img src="logo.png" alt="Profile Logo" />
     </div>
 
+    <!-- Quicklinks list -->
     <ul>
       <li><a href="#hero">Home</a></li>
       <li><a href="#about">About</a></li>
@@ -563,7 +564,7 @@
           // OPEN NAV
           hamburger.classList.add("active");
 
-          // Animate sidebar + links together
+          // Use a GSAP timeline so both sidebar & links animate together
           const tl = gsap.timeline();
           tl.to(mobileNav, {
               x: 0,
@@ -574,7 +575,7 @@
               mobileLinks,
               { x: -30, opacity: 0 },
               { x: 0, opacity: 1, stagger: 0.1, duration: 0.3 },
-              "<"
+              "<" // Start link animation together with the sidebar
             );
         } else {
           // CLOSE NAV

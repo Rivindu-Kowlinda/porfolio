@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Project Details - Plane Seat Management System</title>
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="styles2.css" />
     <style>
       /* Inline styles for improved flow and spacing */
       ul {
@@ -20,13 +20,11 @@
       .card-content {
         line-height: 1.6;
       }
-
       /* Gallery Container to hold images and buttons */
       .image-gallery-container {
         position: relative;
         margin: 20px 0;
       }
-
       /* Horizontal scrollable image gallery */
       .image-gallery {
         display: flex;
@@ -35,6 +33,11 @@
         gap: 20px;
         padding: 20px;
         scroll-behavior: smooth;
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none; /* IE 10+ */
+      }
+      .image-gallery::-webkit-scrollbar {
+        display: none; /* Safari and Chrome */
       }
       .image-gallery img,
       .image-gallery video {
@@ -50,16 +53,6 @@
         transform: translateY(-5px);
         box-shadow: 0 12px 24px rgba(0, 0, 0, 0.6);
       }
-
-      /* Hide default scrollbar if desired */
-      .image-gallery {
-        scrollbar-width: none; /* Firefox */
-        -ms-overflow-style: none; /* IE 10+ */
-      }
-      .image-gallery::-webkit-scrollbar {
-        display: none; /* Safari and Chrome */
-      }
-
       /* Scroll Buttons */
       .scroll-btn {
         position: absolute;
@@ -82,51 +75,144 @@
         right: 10px;
       }
       .scroll-btn:hover {
-        background: rgba(255, 94, 0, 0.687); /* Orange tint for the glass effect */
-        backdrop-filter: blur(5px); /* Creates a subtle glass-like blur */
-        box-shadow: 0 0 10px rgba(255, 165, 0, 0.6); /* Adds an orange glow */
+        background: rgba(255, 94, 0, 0.687);
+        backdrop-filter: blur(5px);
+        box-shadow: 0 0 10px rgba(255, 165, 0, 0.6);
       }
       .scroll-btn:active {
-        background: rgba(255, 72, 0, 0.92); /* Darkens the background on click */
-        transform: translateY(-50%) scale(0.95); /* Slight scale down for a click feeling */
+        background: rgba(255, 72, 0, 0.92);
+        transform: translateY(-50%) scale(0.95);
       }
-
       /* Hide scroll buttons on mobile devices */
       @media (max-width: 768px) {
         .scroll-btn {
           display: none;
         }
       }
+      
+      /* Additional styling for the new nav system */
+      .mobile-nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 250px;
+        height: 100%;
+        background: #fff;
+        box-shadow: 2px 0 12px rgba(0, 0, 0, 0.1);
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+        z-index: 1000;
+      }
+      .mobile-nav-logo {
+        padding: 20px;
+        text-align: center;
+      }
+      .mobile-nav ul {
+        list-style: none;
+        padding: 0 20px;
+      }
+      .mobile-nav ul li {
+        margin: 15px 0;
+      }
+      .mobile-nav ul li a {
+        text-decoration: none;
+        color: #333;
+      }
+      .navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background: #fff;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        z-index: 1001;
+      }
+      .nav-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 10px 20px;
+      }
+      .desktop-links ul {
+        display: flex;
+        gap: 20px;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+      .desktop-links ul li a {
+        text-decoration: none;
+        color: #333;
+      }
+      .hamburger {
+        display: none;
+        cursor: pointer;
+        flex-direction: column;
+        gap: 5px;
+      }
+      .hamburger span {
+        width: 25px;
+        height: 3px;
+        background: #333;
+      }
+      @media (max-width: 768px) {
+        .desktop-links {
+          display: none;
+        }
+        .hamburger {
+          display: flex;
+        }
+      }
+      /* Page Wrapper to push content below nav */
+      .page-wrapper {
+        margin-top: 80px;
+      }
     </style>
   </head>
   <body>
-    <!-- Navbar -->
+    <!-- MOBILE SIDEBAR NAV -->
+    <aside class="mobile-nav" id="mobileNav">
+      <div class="mobile-nav-logo">
+        <img src="logo.png" alt="Logo" />
+      </div>
+      <ul>
+        <li><a href="index.html#hero">Home</a></li>
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="index.html#projects">Projects</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+    </aside>
+
+    <!-- DESKTOP NAVBAR -->
     <header class="navbar">
-      <div class="container nav-container">
+      <div class="nav-container">
+        <!-- Logo -->
         <div class="logo">
-          <a href="index.html">
-            <img src="logo.png" alt="[Your Profile Image]" id="logo" />
+          <a href="index.html#hero">
+            <img src="logo.png" alt="Logo" id="logo" />
           </a>
         </div>
-        <div class="hamburger" id="hamburger">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-        <nav class="nav-menu" id="nav-menu">
-          <ul class="nav-links">
+        <!-- Desktop Nav Links -->
+        <nav class="desktop-links">
+          <ul>
             <li><a href="index.html#hero">Home</a></li>
             <li><a href="index.html#about">About</a></li>
             <li><a href="index.html#projects">Projects</a></li>
             <li><a href="index.html#contact">Contact</a></li>
           </ul>
         </nav>
+        <!-- Hamburger (Mobile Only) -->
+        <div class="hamburger" id="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
       </div>
     </header>
 
     <!-- Page Wrapper for sticky footer -->
-    <br />
-    <br />
     <div class="page-wrapper">
       <!-- Main Content -->
       <main class="content">
@@ -232,36 +318,104 @@
       </footer>
     </div>
 
-    <script src="script.js"></script>
+    <!-- Include GSAP for the mobile sidebar animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
     <script>
+      // Glass/Glossy Nav on Scroll effect
+      const navbar = document.querySelector(".navbar");
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 50) {
+          navbar.classList.add("scrolled");
+        } else {
+          navbar.classList.remove("scrolled");
+        }
+      });
+
+      // MOBILE NAV / SIDEBAR ANIMATION
+      const hamburger = document.getElementById("hamburger");
+      const mobileNav = document.getElementById("mobileNav");
+      const mobileLinks = mobileNav.querySelectorAll("li");
+
+      // Start sidebar off-screen; links invisible for quick fade/stagger in
+      gsap.set(mobileNav, { x: "-100%" });
+      gsap.set(mobileLinks, { x: -30, opacity: 0 });
+
+      hamburger.addEventListener("click", () => {
+        if (!hamburger.classList.contains("active")) {
+          // OPEN nav
+          hamburger.classList.add("active");
+          const tl = gsap.timeline();
+          tl.to(mobileNav, {
+              x: 0,
+              duration: 0.5,
+              ease: "power2.out"
+            })
+            .fromTo(
+              mobileLinks,
+              { x: -30, opacity: 0 },
+              { x: 0, opacity: 1, stagger: 0.1, duration: 0.3 },
+              "<"
+            );
+        } else {
+          // CLOSE nav
+          hamburger.classList.remove("active");
+          const tl = gsap.timeline();
+          tl.to(mobileLinks, {
+              x: -30,
+              opacity: 0,
+              stagger: 0.05,
+              duration: 0.2
+            })
+            .to(mobileNav, {
+              x: "-100%",
+              duration: 0.5,
+              ease: "power2.in"
+            });
+        }
+      });
+
+      // Close sidebar if a link is clicked
+      mobileLinks.forEach(link => {
+        link.addEventListener("click", () => {
+          hamburger.classList.remove("active");
+          const tl = gsap.timeline();
+          tl.to(mobileLinks, {
+              x: -30,
+              opacity: 0,
+              stagger: 0.05,
+              duration: 0.2
+            })
+            .to(mobileNav, {
+              x: "-100%",
+              duration: 0.5,
+              ease: "power2.in"
+            });
+        });
+      });
+
       // Scroll functionality for the image gallery buttons
       const scrollLeftBtn = document.getElementById('scroll-left');
       const scrollRightBtn = document.getElementById('scroll-right');
       const imageGallery = document.querySelector('.image-gallery');
-      
-      let scrollInterval;
 
+      let scrollInterval;
       function startScrolling(direction) {
         scrollInterval = setInterval(() => {
           imageGallery.scrollLeft += direction * 150;
         }, 20);
       }
-
       function stopScrolling() {
         clearInterval(scrollInterval);
       }
-
       scrollLeftBtn.addEventListener('mousedown', () => startScrolling(-1));
       scrollLeftBtn.addEventListener('mouseup', stopScrolling);
       scrollLeftBtn.addEventListener('mouseleave', stopScrolling);
-
       scrollRightBtn.addEventListener('mousedown', () => startScrolling(1));
       scrollRightBtn.addEventListener('mouseup', stopScrolling);
       scrollRightBtn.addEventListener('mouseleave', stopScrolling);
-
       document.addEventListener('mouseup', stopScrolling);
 
-      // Ensure sections become visible on load (useful if using fade-in effects)
+      // Ensure sections become visible on load (if using fade-in effects)
       window.addEventListener('load', function () {
         document.querySelectorAll('.section').forEach(function (section) {
           section.classList.add('visible');
