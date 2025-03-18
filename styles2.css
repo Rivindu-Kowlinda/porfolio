@@ -490,34 +490,48 @@ body {
     width: 1000px; 
   }
 }
-/* Custom Capsule-Shaped Scrollbar Styling for WebKit Browsers (Chrome, Safari, Opera) */
-/* Custom Capsule-Shaped Scrollbar Styling for WebKit Browsers (Chrome, Safari, Opera) */
+/* 1) The overall scrollbar area */
+/* 1) The overall scrollbar area */
 ::-webkit-scrollbar {
-  width: 12px;
+  width: 12px; /* Adjust as needed */
+  background: transparent; /* Let the track show through */
 }
 
+/* 2) The background track of the scrollbar */
 ::-webkit-scrollbar-track {
-  background: var(--card-bg);
-  border-radius: 9999px; /* Ensures a fully rounded track */
+  background: var(--card-bg); /* Use your card BG */
+  border-radius: 9999px;      /* Fully rounded track */
+  margin: 2px;                /* Adds spacing */
 }
 
+/* 3) The draggable "thumb" of the scrollbar */
 ::-webkit-scrollbar-thumb {
-  background: var(--accent);
-  border-radius: 9999px; /* Fully rounded corners */
-  min-height: 30px;      /* Prevents the thumb from being too short */
-  border: 4px solid transparent; /* Create spacing to emphasize roundness */
-  background-clip: padding-box; /* Ensures the background is clipped to the rounded border */
+  background: var(--accent);  /* Your accent color */
+  border-radius: 9999px;      /* Fully rounded for a capsule shape */
+  min-height: 30px;           /* Ensures the thumb isn’t too short */
+  -webkit-appearance: none;   /* Remove default styling (if needed) */
+  
+  /* Use an inset box-shadow to simulate a border in the track’s color */
+  box-shadow: inset 0 0 0 3px var(--card-bg);
 }
 
+/* 4) Hover effect on the thumb */
 ::-webkit-scrollbar-thumb:hover {
-  background: #e65c00; /* Slightly darker orange on hover */
+  background: #e65c00; /* Slightly darker on hover */
 }
 
-/* Custom Scrollbar Styling for Firefox */
+/* 5) Hide the arrow buttons (if your browser shows them) */
+::-webkit-scrollbar-button {
+  display: none;
+}
+
+/* Firefox: limited styling */
 html {
   scrollbar-width: thin;
   scrollbar-color: var(--accent) var(--card-bg);
 }
+
+
 
 
 
