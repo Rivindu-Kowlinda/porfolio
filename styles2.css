@@ -271,6 +271,9 @@ body {
   transform: translateY(-3px);
   box-shadow: 0 8px 20px rgba(0,0,0,0.5);
 }
+.white-icon {
+  filter: brightness(0) invert(1);
+}
 
 /* SOCIAL BUTTONS */
 .social-buttons {
@@ -599,6 +602,7 @@ body {
   .carousel-btn {
     display: none;
   }
+  
 }
 
 /* TABLET (768px - 1199px) */
