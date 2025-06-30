@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Snake Battle – AI Pathfinding Snake Game</title>
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css"/>
+  <link rel="stylesheet" href="styles2.css"/>
+  <style>
+    ul { margin: 1em 0; padding-left: 1.5em; }
+    li { margin-bottom: 0.5em; }
+    p { margin-bottom: 1em; }
+    .card-content { line-height: 1.6; }
+    .page-wrapper { margin-top: 80px; }
+    .image-gallery-container { position: relative; margin: 20px 0; }
+    .image-gallery { display: flex; flex-wrap: nowrap; overflow-x: auto; gap: 20px; padding: 20px; scroll-behavior: smooth; scrollbar-width: none; -ms-overflow-style: none; }
+    .image-gallery::-webkit-scrollbar { display: none; }
+    .image-gallery img, .image-gallery video { max-height: 500px; max-width: 100%; width: auto; border-radius: 10px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5); transition: transform 0.4s ease, box-shadow 0.4s ease; }
+    .image-gallery img:hover, .image-gallery video:hover { transform: translateY(-5px); box-shadow: 0 12px 24px rgba(0, 0, 0, 0.6); }
+    .scroll-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0, 0, 0, 0.5); color: #fff; border: none; border-radius: 50%; width: 40px; height: 40px; cursor: pointer; z-index: 10; transition: background 0.3s ease, transform 0.1s ease, box-shadow 0.3s ease; }
+    .scroll-btn.left { left: 10px; }
+    .scroll-btn.right { right: 10px; }
+    .scroll-btn:hover { background: rgba(255, 94, 0, 0.687); backdrop-filter: blur(5px); box-shadow: 0 0 10px rgba(255, 165, 0, 0.6); }
+    .scroll-btn:active { background: rgba(255, 72, 0, 0.92); transform: translateY(-50%) scale(0.95); }
+    @media (max-width: 768px) { .scroll-btn { display: none; } }
+  </style>
+</head>
+<body>
+  <aside class="mobile-nav" id="mobileNav">
+    <div class="mobile-nav-logo"><img src="logo.png" alt="Logo"/></div>
+    <ul>
+      <li><a href="index.html#hero">Home</a></li>
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#projects">Projects</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+  </aside>
+  <header class="navbar">
+    <div class="nav-container">
+      <div class="logo"><a href="index.html#hero"><img src="logo.png" alt="Logo" id="logo"/></a></div>
+      <nav class="desktop-links">
+        <ul>
+          <li><a href="index.html#hero">Home</a></li>
+          <li><a href="index.html#about">About</a></li>
+          <li><a href="index.html#projects">Projects</a></li>
+          <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+    </div>
+  </header>
+  <div class="page-wrapper">
+    <main class="content">
+      <section id="project-details" class="section project-details" data-aos="fade-up">
+        <div class="container">
+          <div class="card project-detail-card">
+            <h1>Snake Battle – AI Pathfinding Snake Game</h1>
+            <p class="project-meta">2025 | Java Desktop Game (Swing GUI)</p>
+            <div class="image-gallery-container">
+              <button id="scroll-left" class="scroll-btn left">&lt;</button>
+              <div class="image-gallery">
+                <video controls><source src="videos/video3.mp4" type="video/mp4" /></video>
+                <img src="images/snakeGameCode.png" alt="Snake Game Screenshot 2"/>
+              </div>
+              <button id="scroll-right" class="scroll-btn right">&gt;</button>
+            </div>
+            <div class="card-content">
+              <p>Snake Battle is a desktop game inspired by the classic Nokia snake but reimagined with artificial intelligence. Developed in Java using Swing, it features two autonomous snakes that compete to reach 20 glowing food pellets first, intelligently navigating the board while avoiding collisions with walls, themselves, and each other.</p>
+              <ul>
+                <li><strong>Functionality:</strong> Two AI-controlled snakes race to eat 10 balls. Game-over triggers upon winning or fatal collisions. Dynamic, flickering target ball with a retro-style glint.</li>
+                <li><strong>Visual & UX:</strong> Clean 30x30 grid board, rounded snake body with eyes, flickering glowing food pellet, live score tracking.</li>
+              </ul>
+              <p><strong>Technical Details & Architecture:</strong></p>
+              <ul>
+                <li><strong>Java + Swing:</strong> Built as a fully native desktop GUI application.</li>
+                <li><strong>AI Logic:</strong> Real-time decision-making using BFS (Breadth-First Search) pathfinding.</li>
+                <li><strong>Path Safety:</strong> Snakes avoid walls, bodies, and opposing snake heads via predictive logic.</li>
+                <li><strong>Game Loop:</strong> Timer-based system running at 150ms intervals.</li>
+                <li><strong>Randomization:</strong> Snake spawn and ball placement avoid collisions and overlap.</li>
+                <li><strong>Modular OOP Structure:</strong> Cleanly separated into Snake.java, Ball.java, GameController.java, PathFinder.java.</li>
+              </ul>
+              <p>This project showcases OOP, intelligent pathfinding, and real-time UI rendering. With nostalgic design and smart behavior, it stands out as a portfolio piece that demonstrates algorithmic thinking and GUI development in Java.</p>
+              <br/>
+              <a href="index.html#projects" class="btn">Back to Projects</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="footer">
+      <div class="container"><p>&copy; 2025. All rights reserved.</p></div>
+    </footer>
+  </div>
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      AOS.init({ duration: 1000, once: true });
+      const navbar = document.querySelector(".navbar");
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 50) {
+          navbar.classList.add("scrolled");
+        } else {
+          navbar.classList.remove("scrolled");
+        }
+      });
+      const hamburger = document.getElementById("hamburger");
+      const mobileNav = document.getElementById("mobileNav");
+      const mobileLinks = mobileNav.querySelectorAll("li");
+      gsap.set(mobileNav, { x: "-100%" });
+      gsap.set(mobileLinks, { x: -30, opacity: 0 });
+      hamburger.addEventListener("click", () => {
+        if (!hamburger.classList.contains("active")) {
+          hamburger.classList.add("active");
+          const tl = gsap.timeline();
+          tl.to(mobileNav, { x: 0, duration: 0.5, ease: "power2.out" })
+            .fromTo(mobileLinks, { x: -30, opacity: 0 }, { x: 0, opacity: 1, stagger: 0.1, duration: 0.3 }, "<");
+        } else {
+          hamburger.classList.remove("active");
+          const tl = gsap.timeline();
+          tl.to(mobileLinks, { x: -30, opacity: 0, stagger: 0.05, duration: 0.2 })
+            .to(mobileNav, { x: "-100%", duration: 0.5, ease: "power2.in" });
+        }
+      });
+      mobileLinks.forEach(link => {
+        link.addEventListener("click", () => {
+          hamburger.classList.remove("active");
+          const tl = gsap.timeline();
+          tl.to(mobileLinks, { x: -30, opacity: 0, stagger: 0.05, duration: 0.2 })
+            .to(mobileNav, { x: "-100%", duration: 0.5, ease: "power2.in" });
+        });
+      });
+      const scrollLeftBtn = document.getElementById('scroll-left');
+      const scrollRightBtn = document.getElementById('scroll-right');
+      const imageGallery = document.querySelector('.image-gallery');
+      let scrollInterval;
+      function startScrolling(direction) {
+        scrollInterval = setInterval(() => {
+          imageGallery.scrollLeft += direction * 150;
+        }, 20);
+      }
+      function stopScrolling() {
+        clearInterval(scrollInterval);
+      }
+      scrollLeftBtn.addEventListener('mousedown', () => startScrolling(-1));
+      scrollLeftBtn.addEventListener('mouseup', stopScrolling);
+      scrollLeftBtn.addEventListener('mouseleave', stopScrolling);
+      scrollRightBtn.addEventListener('mousedown', () => startScrolling(1));
+      scrollRightBtn.addEventListener('mouseup', stopScrolling);
+      scrollRightBtn.addEventListener('mouseleave', stopScrolling);
+      document.addEventListener('mouseup', stopScrolling);
+    });
+  </script>
+</body>
+</html>
