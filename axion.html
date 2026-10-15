@@ -1,327 +1,279 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Axion - Medical Reports Management App</title>
-  
-  <!-- AOS CSS for fade-in animations -->
-  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css"/>
-
-  <!-- Main CSS matching your main portfolio style (including the nav) -->
-  <link rel="stylesheet" href="styles2.css"/>
-
-  <!-- Inline (page-specific) styles for the gallery, etc. -->
-  <style>
-    /* --- TOP SPACING SO NAVBAR DOESN'T COVER CONTENT --- */
-    /* This ensures there's enough space beneath the fixed navbar. */
-    .page-wrapper {
-      margin-top: 80px; /* Adjust as desired to match your navbar height */
-    }
-
-    /* ---- IMAGE GALLERY & SCROLL BUTTONS ---- */
-    .image-gallery-container {
-      position: relative;
-      margin: 20px 0;
-    }
-    .image-gallery {
-      display: flex;
-      flex-wrap: nowrap;
-      overflow-x: auto;
-      gap: 20px;
-      padding: 20px;
-      scroll-behavior: smooth;
-      scrollbar-width: none; /* Firefox */
-      -ms-overflow-style: none; /* IE 10+ */
-    }
-    .image-gallery::-webkit-scrollbar {
-      display: none; /* Safari/Chrome */
-    }
-    .image-gallery img {
-      max-height: 500px;
-      width: auto;
-      max-width: 100%;
-      border-radius: 10px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
-      transition: transform 0.4s ease, box-shadow 0.4s ease;
-    }
-    .image-gallery img:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 12px 24px rgba(0,0,0,0.6);
-    }
-    .scroll-btn {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: rgba(0,0,0,0.5);
-      color: #fff;
-      border: none;
-      border-radius: 50%;
-      width: 40px;
-      height: 40px;
-      cursor: pointer;
-      z-index: 10;
-      transition: background 0.3s ease, transform 0.1s ease, box-shadow 0.3s ease;
-    }
-    .scroll-btn.left { left: 10px; }
-    .scroll-btn.right { right: 10px; }
-    .scroll-btn:hover {
-      background: rgba(255,94,0,0.7);
-      backdrop-filter: blur(5px);
-      box-shadow: 0 0 10px rgba(255,165,0,0.6);
-    }
-    .scroll-btn:active {
-      background: rgba(255,72,0,0.92);
-      transform: translateY(-50%) scale(0.95);
-    }
-    @media (max-width: 768px) {
-      .scroll-btn {
-        display: none;
-      }
-      .image-gallery img {
-        max-height: 400px; /* Slightly smaller on mobile */
-      }
-    }
-
-    /* Extra spacing for lists and paragraphs */
-    ul {
-      margin: 1em 0;
-      padding-left: 1.5em;
-    }
-    li {
-      margin-bottom: 0.5em;
-    }
-    p {
-      margin-bottom: 1em;
-    }
-  </style>
-</head>
-<body>
-  <!-- MOBILE SIDEBAR NAV -->
-  <aside class="mobile-nav" id="mobileNav">
-    <div class="mobile-nav-logo">
-      <img src="logo.png" alt="Logo"/>
-    </div>
-    <ul>
-      <li><a href="index.html#hero">Home</a></li>
-      <li><a href="index.html#about">About</a></li>
-      <li><a href="index.html#projects">Projects</a></li>
-      <li><a href="index.html#contact">Contact</a></li>
-    </ul>
-  </aside>
-
-  <!-- DESKTOP NAVBAR -->
-  <header class="navbar">
-    <div class="nav-container">
-      <!-- Logo -->
-      <div class="logo">
-        <a href="index.html#hero">
-          <img src="logo.png" alt="Logo" id="logo"/>
-        </a>
-      </div>
-
-      <!-- Desktop Nav Links -->
-      <nav class="desktop-links">
-        <ul>
-          <li><a href="index.html#hero">Home</a></li>
-          <li><a href="index.html#about">About</a></li>
-          <li><a href="index.html#projects">Projects</a></li>
-          <li><a href="index.html#contact">Contact</a></li>
-        </ul>
-      </nav>
-
-      <!-- Hamburger (Mobile Only) -->
-      <div class="hamburger" id="hamburger">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-    </div>
-  </header>
-
-  <!-- PAGE WRAPPER -->
-  <div class="page-wrapper">
-    <!-- MAIN CONTENT -->
-    <main class="content">
-      <!-- Fade in from AOS (data-aos) + your normal .section styles -->
-      <section 
-        id="project-details" 
-        class="section project-details" 
-        data-aos="fade-up"
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f0f0ea" />
+    <meta
+      name="description"
+      content="Making medical records easier to understand. A cross-platform app that brings health reports and doctor connections into one considered experience."
+    />
+    <meta property="og:title" content="Axion — Rivindu Kowlinda" />
+    <meta
+      property="og:description"
+      content="Making medical records easier to understand. A cross-platform app that brings health reports and doctor connections into one considered experience."
+    />
+    <meta property="og:type" content="website" />
+    <title>Axion — Rivindu Kowlinda</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body data-project="axion">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div id="world" aria-hidden="true"></div>
+    <header class="site-header">
+      <a class="brand" href="index.html" aria-label="Rivindu Kowlinda home"
+        ><svg viewBox="0 0 64 48" aria-hidden="true">
+          <path
+            d="M5 43V5h19c17 0 18 22 2 23l15 15M39 5v38m2-19L59 5M41 24l18 19"
+          /></svg
+        ><span>RIVINDU<br />KOWLINDA</span></a
       >
-        <div class="container">
-          <div class="card project-detail-card">
-            <h1>Axion - Medical Reports Management App</h1>
-            <p class="project-meta">2025 | Mobile Application (Flutter)</p>
-
-            <!-- Image Gallery -->
-            <div class="image-gallery-container">
-              <button id="scroll-left" class="scroll-btn left">&lt;</button>
-              <div class="image-gallery">
-                <!-- Example images; update paths as needed -->
-                <img src="images/mobile1.jpg" alt="Mobile View 1"/>
-                <img src="images/mobile2.jpg" alt="Mobile View 2"/>
-                <img src="images/mobile3.jpg" alt="Mobile View 3"/>
-                <img src="images/mobile4.jpg" alt="Mobile View 4"/>
-                <img src="images/mobile5.jpg" alt="Mobile View 5"/>
-              </div>
-              <button id="scroll-right" class="scroll-btn right">&gt;</button>
-            </div>
-
-            <div class="card-content">
+      <nav class="header-links" aria-label="Primary">
+        <a href="index.html#projects">Selected work <sup>06</sup></a
+        ><a href="index.html#about">About</a>
+      </nav>
+      <div class="header-actions">
+        <button
+          id="motion-toggle"
+          class="motion-toggle"
+          aria-pressed="false"
+          aria-label="Reduce motion"
+        >
+          Ⅱ</button
+        ><button
+          class="menu-toggle"
+          aria-expanded="false"
+          aria-controls="site-menu"
+        >
+          <span>Menu</span><i></i>
+        </button>
+      </div>
+    </header>
+    <dialog id="site-menu" aria-label="Site navigation">
+      <div class="menu-art" aria-hidden="true">
+        MAKE<br />IT<br /><em>MOVE.</em>
+      </div>
+      <nav aria-label="Expanded">
+        <a href="index.html#projects"
+          ><small>01</small>Projects<span>↗</span></a
+        ><a href="index.html#about"><small>02</small>About<span>↗</span></a
+        ><a href="index.html#journey"
+          ><small>03</small>Experience<span>↗</span></a
+        ><a href="index.html#skills"><small>04</small>Skills<span>↗</span></a
+        ><a href="index.html#contact"
+          ><small>05</small>Contact<span>↗</span></a
+        >
+      </nav>
+      <div class="menu-bottom mono">
+        <a
+          href="https://github.com/Rivindu-Kowlinda"
+          target="_blank"
+          rel="noreferrer"
+          >GITHUB ↗</a
+        ><a
+          href="https://www.linkedin.com/in/rivindu-kowlinda-52929527b"
+          target="_blank"
+          rel="noreferrer"
+          >LINKEDIN ↗</a
+        ><a href="CV.pdf" download>DOWNLOAD CV ↓</a>
+      </div>
+      <button class="menu-close" aria-label="Close menu">Close ×</button>
+    </dialog>
+    <main id="main" class="case-main" tabindex="-1" data-case="axion">
+      <section class="case-hero project-axion">
+        <div class="case-heading">
+          <a class="back-link mono" href="index.html#projects">↖ ALL WORK</a>
+          <div class="eyebrow">
+            <span>PROJECT 01 / Mobile development</span><span>2025</span>
+          </div>
+          <h1>Axion</h1>
+          <div class="case-intro">
+            <p>A little clarity. A lot of care.</p>
+            <div>
               <p>
-                The Medical Reports Management App is a comprehensive solution built to streamline the management and
-                display of various health reports. It is a mobile application developed using Flutter, ensuring a
-                seamless experience across both iOS and Android.
+                Making medical records easier to understand. A cross-platform
+                app that brings health reports and doctor connections into one
+                considered experience.
               </p>
-              <ul>
-                <li><strong>Functionality:</strong> Displays CBC, lipid profiles, and more.</li>
-                <li><strong>User Interaction:</strong> Secure login, personalized data, intuitive UI.</li>
-                <li><strong>Global Reach:</strong> Multiple language support via ARB files.</li>
-              </ul>
-
-              <p><strong>Technical Details & Architecture:</strong></p>
-              <ul>
-                <li><strong>Flutter & Dart:</strong> Single codebase for iOS & Android.</li>
-                <li><strong>Modular Structure:</strong> Organized into <code>models/</code>, <code>services/</code>, etc.</li>
-                <li><strong>Data Models & Serialization:</strong> JSON serialization with <code>json_serializable</code>.</li>
-                <li><strong>API & GraphQL Integration:</strong> Real-time sync via <code>api_service.dart</code>, <code>graphql_config.dart</code>.</li>
-                <li><strong>Secure Storage:</strong> Sensitive data protected via session management.</li>
-                <li><strong>Custom UI Components:</strong> <code>report_card.dart</code>, floating nav bar, etc.</li>
-                <li><strong>Login Flow:</strong> <code>loginSide/</code> with custom buttons, forms, indicators.</li>
-              </ul>
-
-              <p>
-                This project highlights advanced mobile dev with Flutter plus a robust architecture. The blend of
-                comprehensive functionality, secure data handling, and modern integration makes it an impressive portfolio piece.
-              </p>
-              <br/>
-              <a href="index.html#projects" class="btn">Back to Projects</a>
+              <span class="mono">Frontend developer · SDGP group project</span>
             </div>
           </div>
         </div>
+        <div class="case-main-visual">
+          <div class="phone-composition">
+            <div class="orbital-label mono">AXION / HEALTH, IN FOCUS</div>
+            <div class="phone phone-back">
+              <img
+                src="images/mobile3.jpg"
+                width="1440"
+                height="2983"
+                alt="Axion medical report screen"
+                loading="eager"
+              />
+            </div>
+            <div class="phone phone-front">
+              <img
+                data-shared="axion"
+                src="images/mobile2.jpg"
+                width="1440"
+                height="2983"
+                alt="Axion personalised dashboard"
+                loading="eager"
+              />
+            </div>
+            <span class="visual-word" aria-hidden="true">Care.</span>
+          </div>
+        </div>
       </section>
+      <section class="case-story section-pad">
+        <div class="case-facts">
+          <span class="mono">THE BUILD</span>
+          <p>Frontend developer · SDGP group project</p>
+          <div class="tags">
+            <span>Flutter</span><span>Dart</span><span>GraphQL</span>
+          </div>
+          <span class="mono">2025 / Mobile development</span>
+        </div>
+        <div class="case-copy">
+          <span class="eyebrow">01 / THE QUESTION</span>
+          <h2>The challenge.</h2>
+          <p>
+            Health reports contain complex information. The interface needed to
+            make different report types approachable while supporting
+            personalised data and multiple languages.
+          </p>
+          <span class="eyebrow">02 / THE RESPONSE</span>
+          <h2>Inside the build.</h2>
+          <p>
+            I developed the Flutter frontend for the group project, with
+            reusable report cards, a structured login flow, and a modular
+            interface for CBC and lipid reports. The app integrates APIs and
+            GraphQL, with ARB files for localisation.
+          </p>
+          <div class="architecture" aria-label="Project architecture">
+            <div>
+              <span class="mono">01</span>
+              <h3>Flutter interface</h3>
+            </div>
+            <div>
+              <span class="mono">02</span>
+              <h3>API / GraphQL services</h3>
+            </div>
+            <div>
+              <span class="mono">03</span>
+              <h3>Report data models</h3>
+            </div>
+          </div>
+          <ul class="feature-list">
+            <li>Reusable UI components and report cards</li>
+            <li>JSON serialisation with json_serializable</li>
+            <li>Session handling and personalised report views</li>
+            <li>ARB-based localisation for multiple languages</li>
+          </ul>
+        </div>
+      </section>
+      <section
+        class="case-gallery section-pad"
+        aria-label="Original project media"
+      >
+        <div class="eyebrow">03 / EVIDENCE IN THE DETAILS</div>
+        <h2>The original work.</h2>
+        <div class="gallery-grid gallery-phones">
+          <figure>
+            <img
+              src="images/mobile2.jpg"
+              width="1440"
+              height="2968"
+              alt="Axion original project capture 1"
+              loading="lazy"
+            />
+            <figcaption class="mono">Axion / CAPTURE 01</figcaption>
+          </figure>
+          <figure>
+            <img
+              src="images/mobile3.jpg"
+              width="1440"
+              height="2988"
+              alt="Axion original project capture 2"
+              loading="lazy"
+            />
+            <figcaption class="mono">Axion / CAPTURE 02</figcaption>
+          </figure>
+          <figure>
+            <img
+              src="images/mobile1.jpg"
+              width="1440"
+              height="2983"
+              alt="Axion original project capture 3"
+              loading="lazy"
+            />
+            <figcaption class="mono">Axion / CAPTURE 03</figcaption>
+          </figure>
+          <figure>
+            <img
+              src="images/mobile4.jpg"
+              width="1440"
+              height="2962"
+              alt="Axion original project capture 4"
+              loading="lazy"
+            />
+            <figcaption class="mono">Axion / CAPTURE 04</figcaption>
+          </figure>
+          <figure>
+            <img
+              src="images/mobile5.jpg"
+              width="1440"
+              height="2954"
+              alt="Axion original project capture 5"
+              loading="lazy"
+            />
+            <figcaption class="mono">Axion / CAPTURE 05</figcaption>
+          </figure>
+        </div>
+      </section>
+      <a class="next-project" href="OOP.html"
+        ><span class="eyebrow">KEEP EXPLORING / 02</span
+        ><span>Ticket Manager</span><b aria-hidden="true">↗</b></a
+      >
     </main>
-
-    <!-- STICKY FOOTER -->
-    <footer class="footer">
-      <div class="container">
-        <p>&copy; 2025. All rights reserved.</p>
-      </div>
+    <footer class="site-footer">
+      <a href="index.html" class="footer-mark" aria-label="Home"
+        ><svg viewBox="0 0 64 48" aria-hidden="true">
+          <path
+            d="M5 43V5h19c17 0 18 22 2 23l15 15M39 5v38m2-19L59 5M41 24l18 19"
+          /></svg></a
+      ><span class="mono">RIVINDU KOWLINDA / BUILT WITH CURIOSITY</span
+      ><a href="index.html#hero" class="mono">BACK TO TOP ↑</a>
     </footer>
-  </div>
-
-  <!-- AOS (Animate On Scroll) JS -->
-  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-
-  <!-- GSAP (for the sidebar animations) -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
-
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      /* 1) AOS Init for Fade-In Animations */
-      AOS.init({
-        duration: 1000, 
-        once: true
-      });
-
-      /* 2) Glass/Glossy Nav on Scroll */
-      const navbar = document.querySelector(".navbar");
-      window.addEventListener("scroll", () => {
-        if (window.scrollY > 50) {
-          navbar.classList.add("scrolled");
-        } else {
-          navbar.classList.remove("scrolled");
-        }
-      });
-
-      /* 3) MOBILE NAV / SIDEBAR ANIMATION */
-      const hamburger = document.getElementById("hamburger");
-      const mobileNav = document.getElementById("mobileNav");
-      const mobileLinks = mobileNav.querySelectorAll("li");
-
-      // Start sidebar off-screen; links invisible (for a quick fade/stagger in)
-      gsap.set(mobileNav, { x: "-100%" });
-      gsap.set(mobileLinks, { x: -30, opacity: 0 });
-
-      hamburger.addEventListener("click", () => {
-        if (!hamburger.classList.contains("active")) {
-          // OPEN nav
-          hamburger.classList.add("active");
-          const tl = gsap.timeline();
-          tl.to(mobileNav, {
-              x: 0,
-              duration: 0.5,
-              ease: "power2.out"
-            })
-            .fromTo(
-              mobileLinks,
-              { x: -30, opacity: 0 },
-              { x: 0, opacity: 1, stagger: 0.1, duration: 0.3 },
-              "<"
-            );
-        } else {
-          // CLOSE nav
-          hamburger.classList.remove("active");
-          const tl = gsap.timeline();
-          tl.to(mobileLinks, {
-              x: -30,
-              opacity: 0,
-              stagger: 0.05,
-              duration: 0.2
-            })
-            .to(mobileNav, {
-              x: "-100%",
-              duration: 0.5,
-              ease: "power2.in"
-            });
-        }
-      });
-
-      // Close sidebar if user clicks any link
-      mobileLinks.forEach(link => {
-        link.addEventListener("click", () => {
-          hamburger.classList.remove("active");
-          const tl = gsap.timeline();
-          tl.to(mobileLinks, {
-              x: -30,
-              opacity: 0,
-              stagger: 0.05,
-              duration: 0.2
-            })
-            .to(mobileNav, {
-              x: "-100%",
-              duration: 0.5,
-              ease: "power2.in"
-            });
-        });
-      });
-    });
-
-    /* 4) SCROLL BUTTONS for the GALLERY */
-    const scrollLeftBtn = document.getElementById('scroll-left');
-    const scrollRightBtn = document.getElementById('scroll-right');
-    const imageGallery = document.querySelector('.image-gallery');
-
-    let scrollInterval;
-    function startScrolling(direction) {
-      scrollInterval = setInterval(() => {
-        imageGallery.scrollLeft += direction * 150;
-      }, 20);
-    }
-    function stopScrolling() {
-      clearInterval(scrollInterval);
-    }
-
-    scrollLeftBtn.addEventListener('mousedown', () => startScrolling(-1));
-    scrollLeftBtn.addEventListener('mouseup', stopScrolling);
-    scrollLeftBtn.addEventListener('mouseleave', stopScrolling);
-
-    scrollRightBtn.addEventListener('mousedown', () => startScrolling(1));
-    scrollRightBtn.addEventListener('mouseup', stopScrolling);
-    scrollRightBtn.addEventListener('mouseleave', stopScrolling);
-
-    document.addEventListener('mouseup', stopScrolling);
-  </script>
-</body>
+    <dialog id="message-dialog" aria-labelledby="message-title">
+      <button class="dialog-close" aria-label="Close message form">×</button
+      ><span class="eyebrow">LET'S MAKE A CONNECTION</span>
+      <h2 id="message-title">Hello, there.</h2>
+      <form
+        action="https://formspree.io/f/xqapaqne"
+        method="POST"
+        id="contact-form"
+      >
+        <label
+          >Your name<input name="name" autocomplete="name" required /></label
+        ><label
+          >Email address<input
+            name="_replyto"
+            type="email"
+            autocomplete="email"
+            required /></label
+        ><label
+          >What are you thinking?<textarea
+            name="message"
+            rows="4"
+            required
+          ></textarea></label
+        ><button class="button cobalt" type="submit">Send message ↗</button>
+        <p class="form-status" role="status"></p>
+      </form>
+    </dialog>
+    <div id="toast" role="status"></div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
 </html>

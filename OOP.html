@@ -1,362 +1,270 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Project Details - Plane Seat Management System</title>
-    <link rel="stylesheet" href="styles2.css" />
-    <style>
-      /* Inline styles for improved flow and spacing */
-      ul {
-        margin: 1em 0;
-        padding-left: 1.5em;
-      }
-      li {
-        margin-bottom: 0.5em;
-      }
-      p {
-        margin-bottom: 1em;
-      }
-      .card-content {
-        line-height: 1.6;
-      }
-      /* Gallery Container to hold images and buttons */
-      .image-gallery-container {
-        position: relative;
-        margin: 20px 0;
-      }
-      /* Horizontal scrollable image gallery */
-      .image-gallery {
-        display: flex;
-        flex-wrap: nowrap;
-        overflow-x: auto;
-        gap: 20px;
-        padding: 20px;
-        scroll-behavior: smooth;
-      }
-      .image-gallery img,
-      .image-gallery video {
-        max-height: 500px;
-        max-width: 100%;
-        width: auto;
-        border-radius: 10px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-        transition: transform 0.4s ease, box-shadow 0.4s ease;
-      }
-      .image-gallery img:hover,
-      .image-gallery video:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.6);
-      }
-      /* Hide default scrollbar if desired */
-      .image-gallery {
-        scrollbar-width: none; /* Firefox */
-        -ms-overflow-style: none; /* IE 10+ */
-      }
-      .image-gallery::-webkit-scrollbar {
-        display: none; /* Safari and Chrome */
-      }
-      /* Scroll Buttons */
-      .scroll-btn {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        background: rgba(0, 0, 0, 0.5);
-        color: #fff;
-        border: none;
-        border-radius: 50%;
-        width: 40px;
-        height: 40px;
-        cursor: pointer;
-        z-index: 10;
-        transition: background 0.3s ease, transform 0.1s ease, box-shadow 0.3s ease;
-      }
-      .scroll-btn.left {
-        left: 10px;
-      }
-      .scroll-btn.right {
-        right: 10px;
-      }
-      .scroll-btn:hover {
-        background: rgba(255, 94, 0, 0.687);
-        backdrop-filter: blur(5px);
-        box-shadow: 0 0 10px rgba(255, 165, 0, 0.6);
-      }
-      .scroll-btn:active {
-        background: rgba(255, 72, 0, 0.92);
-        transform: translateY(-50%) scale(0.95);
-      }
-      /* Hide scroll buttons on mobile devices */
-      @media (max-width: 768px) {
-        .scroll-btn {
-          display: none;
-        }
-      }
-      
-      /* Additional styling for the new nav system */
-      
-      @media (max-width: 768px) {
-        .desktop-links {
-          display: none;
-        }
-        .hamburger {
-          display: flex;
-        }
-      }
-      /* Page Wrapper to push content below nav */
-      .page-wrapper {
-        margin-top: 80px;
-      }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f0f0ea" />
+    <meta
+      name="description"
+      content="A ticket management application connecting an Angular interface to a Java and Spring Boot backend, with object-oriented design and multithreading."
+    />
+    <meta property="og:title" content="Ticket Manager — Rivindu Kowlinda" />
+    <meta
+      property="og:description"
+      content="A ticket management application connecting an Angular interface to a Java and Spring Boot backend, with object-oriented design and multithreading."
+    />
+    <meta property="og:type" content="website" />
+    <title>Ticket Manager — Rivindu Kowlinda</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="stylesheet" href="/src/style.css" />
   </head>
-  <body>
-    <!-- MOBILE SIDEBAR NAV -->
-    <aside class="mobile-nav" id="mobileNav">
-      <div class="mobile-nav-logo">
-        <img src="logo.png" alt="Logo" />
-      </div>
-      <ul>
-        <li><a href="index.html#hero">Home</a></li>
-        <li><a href="index.html#about">About</a></li>
-        <li><a href="index.html#projects">Projects</a></li>
-        <li><a href="index.html#contact">Contact</a></li>
-      </ul>
-    </aside>
-
-    <!-- DESKTOP NAVBAR -->
-    <header class="navbar">
-      <div class="nav-container">
-        <!-- Logo -->
-        <div class="logo">
-          <a href="index.html#hero">
-            <img src="logo.png" alt="Logo" id="logo" />
-          </a>
-        </div>
-        <!-- Desktop Nav Links -->
-        <nav class="desktop-links">
-          <ul>
-            <li><a href="index.html#hero">Home</a></li>
-            <li><a href="index.html#about">About</a></li>
-            <li><a href="index.html#projects">Projects</a></li>
-            <li><a href="index.html#contact">Contact</a></li>
-          </ul>
-        </nav>
-        <!-- Hamburger (Mobile Only) -->
-        <div class="hamburger" id="hamburger">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
+  <body data-project="ticket">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div id="world" aria-hidden="true"></div>
+    <header class="site-header">
+      <a class="brand" href="index.html" aria-label="Rivindu Kowlinda home"
+        ><svg viewBox="0 0 64 48" aria-hidden="true">
+          <path
+            d="M5 43V5h19c17 0 18 22 2 23l15 15M39 5v38m2-19L59 5M41 24l18 19"
+          /></svg
+        ><span>RIVINDU<br />KOWLINDA</span></a
+      >
+      <nav class="header-links" aria-label="Primary">
+        <a href="index.html#projects">Selected work <sup>06</sup></a
+        ><a href="index.html#about">About</a>
+      </nav>
+      <div class="header-actions">
+        <button
+          id="motion-toggle"
+          class="motion-toggle"
+          aria-pressed="false"
+          aria-label="Reduce motion"
+        >
+          Ⅱ</button
+        ><button
+          class="menu-toggle"
+          aria-expanded="false"
+          aria-controls="site-menu"
+        >
+          <span>Menu</span><i></i>
+        </button>
       </div>
     </header>
-
-    <!-- Page Wrapper for sticky footer -->
-    <div class="page-wrapper">
-      <!-- Main Content -->
-      <main class="content">
-        <section id="project-details" class="section project-details">
-          <div class="container">
-            <div class="card project-detail-card">
-              <h1>Plane Seat Management System</h1>
-              <p class="project-meta">2024 | Full-Stack Application (Spring Boot &amp; Angular)</p>
-              
-              <!-- Image Gallery with Left and Right Scroll Buttons -->
-              <div class="image-gallery-container">
-                <button id="scroll-left" class="scroll-btn left">&lt;</button>
-                <div class="image-gallery">
-                  <!-- Video and images showcasing the project -->
-                  <video controls>
-                    <source src="videos/video2.mp4" type="video/mp4" />
-                  </video>
-                  <img src="images/OOP_Backend.jpg" alt="Code Screenshot" />
-                  <img src="images/OOP_Frontend.jpg" alt="Code Screenshot" />
-                </div>
-                <button id="scroll-right" class="scroll-btn right">&gt;</button>
-              </div>
-              
-              <div class="card-content">
-                <!-- Overview -->
-                <p>
-                  The Plane Seat Management System is a robust full-stack solution designed to manage airplane seat reservations. It integrates a dynamic, responsive Angular frontend with a powerful Java-based backend built using Spring Boot.
-                </p>
-                <ul>
-                  <li>
-                    <strong>Frontend (Angular):</strong>
-                    <ul>
-                      <li>Developed with Angular, featuring a modular, component-based architecture.</li>
-                      <li>Provides a responsive design ensuring a seamless experience across mobile, tablet, and desktop devices.</li>
-                      <li>Utilizes services to interact with RESTful APIs for dynamic data binding and smooth navigation.</li>
-                    </ul>
-                  </li>
-                  <li>
-                    <strong>Backend (Spring Boot with Java):</strong>
-                    <ul>
-                      <li>Implemented in Java using Spring Boot, which leverages Spring MVC for RESTful API development.</li>
-                      <li>Handles core business logic for seat management, dynamic pricing, and file-based persistence of ticket records.</li>
-                      <li>Incorporates robust error handling and exception management to ensure reliable operation.</li>
-                    </ul>
-                  </li>
-                  <li>
-                    <strong>API Testing &amp; Integration:</strong>
-                    <ul>
-                      <li>RESTful endpoints are rigorously tested using Postman to ensure proper functionality and error handling.</li>
-                      <li>Ensures smooth communication between the Angular frontend and the Spring Boot backend.</li>
-                    </ul>
-                  </li>
-                </ul>
-
-                <!-- Technical Details -->
-                <p>
-                  <strong>Technical Details &amp; Architecture:</strong>
-                </p>
-                <ul>
-                  <li>
-                    <strong>Angular Frontend:</strong>
-                    <ul>
-                      <li>Component-based design for clear separation of concerns.</li>
-                      <li>Service integration for API communication and data management.</li>
-                      <li>Responsive UI design with modern CSS and JavaScript enhancements.</li>
-                    </ul>
-                  </li>
-                  <li>
-                    <strong>Spring Boot Backend (Java):</strong>
-                    <ul>
-                      <li>RESTful API development using Spring MVC and dependency injection for modularity.</li>
-                      <li>Business logic encapsulates seat reservation, cancellation, and dynamic pricing algorithms.</li>
-                      <li>File I/O operations using <code>java.io.File</code> and <code>java.io.FileWriter</code> to persist ticket data.</li>
-                    </ul>
-                  </li>
-                  <li>
-                    <strong>Overall System Architecture:</strong>
-                    <ul>
-                      <li>Clear separation between frontend and backend promotes scalability and maintainability.</li>
-                      <li>Modular code structure across both layers simplifies debugging, testing, and future enhancements.</li>
-                      <li>Comprehensive API testing using Postman ensures robust endpoint performance under various scenarios.</li>
-                    </ul>
-                  </li>
-                </ul>
-
-                <!-- Conclusion -->
-                <p>
-                  In summary, the Plane Seat Management System exemplifies advanced full-stack development by seamlessly integrating an Angular-based frontend with a Java-based Spring Boot backend. The system's scalable architecture, modular design, and thorough API testing with Postman ensure a reliable and efficient solution for managing airplane seat reservations.
-                </p>
-                <br />
-                <a href="index.html#projects" class="btn">Back to Projects</a>
-              </div>
+    <dialog id="site-menu" aria-label="Site navigation">
+      <div class="menu-art" aria-hidden="true">
+        MAKE<br />IT<br /><em>MOVE.</em>
+      </div>
+      <nav aria-label="Expanded">
+        <a href="index.html#projects"
+          ><small>01</small>Projects<span>↗</span></a
+        ><a href="index.html#about"><small>02</small>About<span>↗</span></a
+        ><a href="index.html#journey"
+          ><small>03</small>Experience<span>↗</span></a
+        ><a href="index.html#skills"><small>04</small>Skills<span>↗</span></a
+        ><a href="index.html#contact"
+          ><small>05</small>Contact<span>↗</span></a
+        >
+      </nav>
+      <div class="menu-bottom mono">
+        <a
+          href="https://github.com/Rivindu-Kowlinda"
+          target="_blank"
+          rel="noreferrer"
+          >GITHUB ↗</a
+        ><a
+          href="https://www.linkedin.com/in/rivindu-kowlinda-52929527b"
+          target="_blank"
+          rel="noreferrer"
+          >LINKEDIN ↗</a
+        ><a href="CV.pdf" download>DOWNLOAD CV ↓</a>
+      </div>
+      <button class="menu-close" aria-label="Close menu">Close ×</button>
+    </dialog>
+    <main id="main" class="case-main" tabindex="-1" data-case="ticket">
+      <section class="case-hero project-ticket">
+        <div class="case-heading">
+          <a class="back-link mono" href="index.html#projects">↖ ALL WORK</a>
+          <div class="eyebrow">
+            <span>PROJECT 02 / Full-stack engineering</span><span>2024</span>
+          </div>
+          <h1>Ticket Manager</h1>
+          <div class="case-intro">
+            <p>Connected from interface to API.</p>
+            <div>
+              <p>
+                A ticket management application connecting an Angular interface
+                to a Java and Spring Boot backend, with object-oriented design
+                and multithreading.
+              </p>
+              <span class="mono">Full-stack project</span>
             </div>
           </div>
-        </section>
-      </main>
-
-      <!-- Sticky Footer -->
-      <footer class="footer">
-        <div class="container">
-          <p>&copy; 2025. All rights reserved.</p>
         </div>
-      </footer>
-    </div>
-
-    <!-- Include GSAP for the mobile sidebar animations -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
-    <script>
-      // MOBILE NAV / SIDEBAR ANIMATION
-      const hamburger = document.getElementById("hamburger");
-      const mobileNav = document.getElementById("mobileNav");
-      const mobileLinks = mobileNav.querySelectorAll("li");
-
-      // Start sidebar off-screen; links invisible for quick fade/stagger in
-      gsap.set(mobileNav, { x: "-100%" });
-      gsap.set(mobileLinks, { x: -30, opacity: 0 });
-      const navbar = document.querySelector(".navbar");
-      window.addEventListener("scroll", () => {
-        if (window.scrollY > 50) {
-          navbar.classList.add("scrolled");
-        } else {
-          navbar.classList.remove("scrolled");
-        }
-      });
-      
-      hamburger.addEventListener("click", () => {
-        if (!hamburger.classList.contains("active")) {
-          // OPEN nav
-          hamburger.classList.add("active");
-          const tl = gsap.timeline();
-          tl.to(mobileNav, {
-              x: 0,
-              duration: 0.5,
-              ease: "power2.out"
-            })
-            .fromTo(
-              mobileLinks,
-              { x: -30, opacity: 0 },
-              { x: 0, opacity: 1, stagger: 0.1, duration: 0.3 },
-              "<"
-            );
-        } else {
-          // CLOSE nav
-          hamburger.classList.remove("active");
-          const tl = gsap.timeline();
-          tl.to(mobileLinks, {
-              x: -30,
-              opacity: 0,
-              stagger: 0.05,
-              duration: 0.2
-            })
-            .to(mobileNav, {
-              x: "-100%",
-              duration: 0.5,
-              ease: "power2.in"
-            });
-        }
-      });
-
-      // Close sidebar if a link is clicked
-      mobileLinks.forEach(link => {
-        link.addEventListener("click", () => {
-          hamburger.classList.remove("active");
-          const tl = gsap.timeline();
-          tl.to(mobileLinks, {
-              x: -30,
-              opacity: 0,
-              stagger: 0.05,
-              duration: 0.2
-            })
-            .to(mobileNav, {
-              x: "-100%",
-              duration: 0.5,
-              ease: "power2.in"
-            });
-        });
-      });
-
-      // Scroll functionality for the image gallery buttons remains the same
-      const scrollLeftBtn = document.getElementById('scroll-left');
-      const scrollRightBtn = document.getElementById('scroll-right');
-      const imageGallery = document.querySelector('.image-gallery');
-
-      let scrollInterval;
-      function startScrolling(direction) {
-        scrollInterval = setInterval(() => {
-          imageGallery.scrollLeft += direction * 150;
-        }, 20);
-      }
-      function stopScrolling() {
-        clearInterval(scrollInterval);
-      }
-      scrollLeftBtn.addEventListener('mousedown', () => startScrolling(-1));
-      scrollLeftBtn.addEventListener('mouseup', stopScrolling);
-      scrollLeftBtn.addEventListener('mouseleave', stopScrolling);
-      scrollRightBtn.addEventListener('mousedown', () => startScrolling(1));
-      scrollRightBtn.addEventListener('mouseup', stopScrolling);
-      scrollRightBtn.addEventListener('mouseleave', stopScrolling);
-      document.addEventListener('mouseup', stopScrolling);
-
-      // Ensure sections become visible on load (if using fade-in effects)
-      window.addEventListener('load', function () {
-        document.querySelectorAll('.section').forEach(function (section) {
-          section.classList.add('visible');
-        });
-      });
-    </script>
+        <div class="case-main-visual">
+          <div class="screen-composition screen-ticket">
+            <span class="screen-watermark" aria-hidden="true"
+              >REQUEST / RESPONSE</span
+            >
+            <div class="screen-shell">
+              <div class="window-label mono">
+                <span>ANGULAR → SPRING BOOT</span><i></i>
+              </div>
+              <img
+                data-shared="ticket"
+                src="images/ticket-preview.jpg"
+                alt="Ticket Manager original application interface"
+                loading="eager"
+                width="1600"
+                height="950"
+              />
+            </div>
+            <span class="media-caption"
+              >Frame from the original running application</span
+            >
+          </div>
+        </div>
+      </section>
+      <section class="case-story section-pad">
+        <div class="case-facts">
+          <span class="mono">THE BUILD</span>
+          <p>Full-stack project</p>
+          <div class="tags">
+            <span>Angular</span><span>Spring Boot</span><span>Java</span
+            ><span>TypeScript</span>
+          </div>
+          <span class="mono">2024 / Full-stack engineering</span>
+        </div>
+        <div class="case-copy">
+          <span class="eyebrow">01 / THE QUESTION</span>
+          <h2>The challenge.</h2>
+          <p>
+            Coordinate ticket operations and live interface state while
+            concurrent work runs in the Java backend.
+          </p>
+          <span class="eyebrow">02 / THE RESPONSE</span>
+          <h2>Inside the build.</h2>
+          <p>
+            The project combines a component-based Angular frontend with Java
+            and Spring Boot services. Object-oriented design and multithreading
+            structure the backend. The interface exposes system controls, ticket
+            operations, customer and vendor counts, and live logs; REST
+            endpoints connect the two layers.
+          </p>
+          <div class="architecture" aria-label="Project architecture">
+            <div>
+              <span class="mono">01</span>
+              <h3>Angular components</h3>
+            </div>
+            <div>
+              <span class="mono">02</span>
+              <h3>Spring MVC REST API</h3>
+            </div>
+            <div>
+              <span class="mono">03</span>
+              <h3>Java ticket logic</h3>
+            </div>
+          </div>
+          <ul class="feature-list">
+            <li>Angular interface with ticket operations and live logs</li>
+            <li>Java backend using multithreading and OOP</li>
+            <li>Modular Spring Boot services</li>
+            <li>API integration verified with Postman</li>
+          </ul>
+        </div>
+      </section>
+      <section
+        class="case-gallery section-pad"
+        aria-label="Original project media"
+      >
+        <div class="eyebrow">03 / EVIDENCE IN THE DETAILS</div>
+        <h2>The original work.</h2>
+        <div class="gallery-grid">
+          <figure>
+            <img
+              src="images/ticket-preview.jpg"
+              width="2416"
+              height="1440"
+              alt="Ticket Manager original project capture 1"
+              loading="lazy"
+            />
+            <figcaption class="mono">Ticket Manager / CAPTURE 01</figcaption>
+          </figure>
+          <figure>
+            <img
+              src="images/OOP_Frontend.jpg"
+              width="2559"
+              height="1495"
+              alt="Ticket Manager original project capture 2"
+              loading="lazy"
+            />
+            <figcaption class="mono">Ticket Manager / CAPTURE 02</figcaption>
+          </figure>
+          <figure>
+            <img
+              src="images/OOP_Backend.jpg"
+              width="2559"
+              height="1528"
+              alt="Ticket Manager original project capture 3"
+              loading="lazy"
+            />
+            <figcaption class="mono">Ticket Manager / CAPTURE 03</figcaption>
+          </figure>
+        </div>
+        <div class="case-recording">
+          <span class="eyebrow">PROJECT RECORDING</span
+          ><video
+            controls
+            preload="none"
+            playsinline
+            poster="images/ticket-preview.jpg"
+          >
+            <source src="videos/video2.mp4" type="video/mp4" />
+            Your browser cannot play this MP4 recording.
+          </video>
+        </div>
+      </section>
+      <a class="next-project" href="snake.html"
+        ><span class="eyebrow">KEEP EXPLORING / 03</span
+        ><span>Snake Battle</span><b aria-hidden="true">↗</b></a
+      >
+    </main>
+    <footer class="site-footer">
+      <a href="index.html" class="footer-mark" aria-label="Home"
+        ><svg viewBox="0 0 64 48" aria-hidden="true">
+          <path
+            d="M5 43V5h19c17 0 18 22 2 23l15 15M39 5v38m2-19L59 5M41 24l18 19"
+          /></svg></a
+      ><span class="mono">RIVINDU KOWLINDA / BUILT WITH CURIOSITY</span
+      ><a href="index.html#hero" class="mono">BACK TO TOP ↑</a>
+    </footer>
+    <dialog id="message-dialog" aria-labelledby="message-title">
+      <button class="dialog-close" aria-label="Close message form">×</button
+      ><span class="eyebrow">LET'S MAKE A CONNECTION</span>
+      <h2 id="message-title">Hello, there.</h2>
+      <form
+        action="https://formspree.io/f/xqapaqne"
+        method="POST"
+        id="contact-form"
+      >
+        <label
+          >Your name<input name="name" autocomplete="name" required /></label
+        ><label
+          >Email address<input
+            name="_replyto"
+            type="email"
+            autocomplete="email"
+            required /></label
+        ><label
+          >What are you thinking?<textarea
+            name="message"
+            rows="4"
+            required
+          ></textarea></label
+        ><button class="button cobalt" type="submit">Send message ↗</button>
+        <p class="form-status" role="status"></p>
+      </form>
+    </dialog>
+    <div id="toast" role="status"></div>
+    <script type="module" src="/src/main.js"></script>
   </body>
 </html>

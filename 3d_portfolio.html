@@ -1,350 +1,252 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Project Details - Interactive 3D Tree Navigation Project</title>
-    <link rel="stylesheet" href="styles2.css" />
-    <style>
-      /* Page-specific inline styles (for gallery and content) */
-      ul {
-        margin: 1em 0;
-        padding-left: 1.5em;
-      }
-      li {
-        margin-bottom: 0.5em;
-      }
-      p {
-        margin-bottom: 1em;
-      }
-      .card-content {
-        line-height: 1.6;
-      }
-      /* IMAGE GALLERY STYLES */
-      .image-gallery-container {
-        position: relative;
-        margin: 20px 0;
-      }
-      .image-gallery {
-        display: flex;
-        flex-wrap: nowrap;
-        overflow-x: auto;
-        gap: 20px;
-        padding: 20px;
-        scroll-behavior: smooth;
-        scrollbar-width: none; /* Firefox */
-        -ms-overflow-style: none; /* IE 10+ */
-      }
-      .image-gallery::-webkit-scrollbar {
-        display: none; /* Chrome, Safari */
-      }
-      .image-gallery img,
-      .image-gallery video {
-        max-height: 500px;
-        max-width: 100%;
-        width: auto;
-        border-radius: 10px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-        transition: transform 0.4s ease, box-shadow 0.4s ease;
-      }
-      .image-gallery img:hover,
-      .image-gallery video:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.6);
-      }
-      /* SCROLL BUTTONS */
-      .scroll-btn {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        background: rgba(0, 0, 0, 0.5);
-        color: #fff;
-        border: none;
-        border-radius: 50%;
-        width: 40px;
-        height: 40px;
-        cursor: pointer;
-        z-index: 10;
-        transition: background 0.3s ease, transform 0.1s ease, box-shadow 0.3s ease;
-      }
-      .scroll-btn.left {
-        left: 10px;
-      }
-      .scroll-btn.right {
-        right: 10px;
-      }
-      .scroll-btn:hover {
-        background: rgba(255, 94, 0, 0.687);
-        backdrop-filter: blur(5px);
-        box-shadow: 0 0 10px rgba(255, 165, 0, 0.6);
-      }
-      .scroll-btn:active {
-        background: rgba(255, 72, 0, 0.92);
-        transform: translateY(-50%) scale(0.95);
-      }
-      @media (max-width: 768px) {
-        .scroll-btn {
-          display: none;
-        }
-      }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f0f0ea" />
+    <meta
+      name="description"
+      content="A procedurally generated tree turns portfolio navigation into a spatial experience, with interactive fruit nodes and smoothly focused content."
+    />
+    <meta property="og:title" content="3D Tree Portfolio — Rivindu Kowlinda" />
+    <meta
+      property="og:description"
+      content="A procedurally generated tree turns portfolio navigation into a spatial experience, with interactive fruit nodes and smoothly focused content."
+    />
+    <meta property="og:type" content="website" />
+    <title>3D Tree Portfolio — Rivindu Kowlinda</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="stylesheet" href="/src/style.css" />
   </head>
-  <body>
-    <!-- MOBILE SIDEBAR NAV (using same markup as the first code) -->
-    <aside class="mobile-nav" id="mobileNav">
-      <div class="mobile-nav-logo">
-        <img src="logo.png" alt="Logo" />
-      </div>
-      <ul>
-        <li><a href="index.html#hero">Home</a></li>
-        <li><a href="index.html#about">About</a></li>
-        <li><a href="index.html#projects">Projects</a></li>
-        <li><a href="index.html#contact">Contact</a></li>
-      </ul>
-    </aside>
-
-    <!-- DESKTOP NAVBAR (same as first code) -->
-    <header class="navbar">
-      <div class="nav-container">
-        <!-- Logo -->
-        <div class="logo">
-          <a href="index.html#hero">
-            <img src="logo.png" alt="Logo" id="logo" />
-          </a>
-        </div>
-        <!-- Desktop Nav Links -->
-        <nav class="desktop-links">
-          <ul>
-            <li><a href="index.html#hero">Home</a></li>
-            <li><a href="index.html#about">About</a></li>
-            <li><a href="index.html#projects">Projects</a></li>
-            <li><a href="index.html#contact">Contact</a></li>
-          </ul>
-        </nav>
-        <!-- Hamburger (Mobile Only) -->
-        <div class="hamburger" id="hamburger">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
+  <body data-project="tree">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div id="world" aria-hidden="true"></div>
+    <header class="site-header">
+      <a class="brand" href="index.html" aria-label="Rivindu Kowlinda home"
+        ><svg viewBox="0 0 64 48" aria-hidden="true">
+          <path
+            d="M5 43V5h19c17 0 18 22 2 23l15 15M39 5v38m2-19L59 5M41 24l18 19"
+          /></svg
+        ><span>RIVINDU<br />KOWLINDA</span></a
+      >
+      <nav class="header-links" aria-label="Primary">
+        <a href="index.html#projects">Selected work <sup>06</sup></a
+        ><a href="index.html#about">About</a>
+      </nav>
+      <div class="header-actions">
+        <button
+          id="motion-toggle"
+          class="motion-toggle"
+          aria-pressed="false"
+          aria-label="Reduce motion"
+        >
+          Ⅱ</button
+        ><button
+          class="menu-toggle"
+          aria-expanded="false"
+          aria-controls="site-menu"
+        >
+          <span>Menu</span><i></i>
+        </button>
       </div>
     </header>
-
-    <!-- Page Wrapper (to avoid navbar overlap) -->
-    <div class="page-wrapper">
-      <br><br>
-      <!-- Main Content -->
-      <main class="content">
-        <section id="project-details" class="section project-details">
-          <div class="container">
-            <div class="card project-detail-card">
-              <h1>Interactive 3D Tree Navigation Project</h1>
-              <div class="image-gallery-container">
-                <button id="scroll-left" class="scroll-btn left">&lt;</button>
-                <div class="image-gallery">
-                  <video controls>
-                    <source src="videos/video1.mp4" type="video/mp4" />
-                  </video>
-                  <img src="images/3dPortfolioCode.png" alt="Code" />
-                </div>
-                <button id="scroll-right" class="scroll-btn right">&gt;</button>
-              </div>
-              <div class="card-content">
-                <p>
-                  This project is an interactive 3D visualization that uses Three.js to create a natural, tree-like navigation interface for a portfolio. It seamlessly blends creative design with advanced technical implementations. Here’s an in-depth look at its key aspects:
-                </p>
-
-                <h2>Overview and Concept</h2>
-                <ul>
-                  <li>
-                    <strong>Interactive Tree Navigation:</strong> The core concept revolves around a procedurally generated tree where each “fruit” on the tree represents a portfolio section or content item (e.g., About Me, Projects). The tree acts as both an artistic metaphor and a functional user interface.
-                  </li>
-                  <li>
-                    <strong>User Engagement:</strong> Visitors can explore the tree by clicking on fruits or using a quicklinks menu. Clicking a fruit triggers a smooth zoom-in animation that centers the camera on the selected fruit and reveals additional content via an info card.
-                  </li>
-                </ul>
-
-                <h2>Technical Breakdown</h2>
-                <ul>
-                  <li>
-                    <strong>Three.js Scene Setup:</strong> The project initializes a Three.js scene with a perspective camera and WebGL renderer. It employs OrbitControls to enable intuitive camera manipulation and provides a dynamic view of the 3D scene.
-                  </li>
-                  <li>
-                    <strong>Lighting and Environment:</strong> The scene is lit with both ambient and directional lights to create realistic shadows and highlights. An infinite grid (using GridHelper) forms the ground, adding context and depth to the environment.
-                  </li>
-                  <li>
-                    <strong>Procedural Tree Generation:</strong>
-                    <ul>
-                      <li>
-                        <strong>Trunk and Branches:</strong> The tree’s trunk is modeled as a cylinder. Branches are generated recursively using a function that creates smooth curves (via THREE.CatmullRomCurve3) and introduces randomness in angles and offsets. This results in a natural, organic look.
-                      </li>
-                      <li>
-                        <strong>Leaves:</strong> At the end of smaller branches, leaves are added using custom shapes, enhancing the tree’s visual appeal with subtle transparency and realistic rotations.
-                      </li>
-                    </ul>
-                  </li>
-                  <li>
-                    <strong>Interactive Fruits as Content Nodes:</strong>
-                    <ul>
-                      <li>
-                        <strong>Creation and Placement:</strong> Fruits are represented by colored spheres attached to the branches. Each fruit’s color and associated content are defined in a data array. Their placement leverages the branch’s curve to determine natural positions.
-                      </li>
-                      <li>
-                        <strong>User Interaction with Raycasting:</strong> A raycaster is used to detect mouse clicks on the fruits. When a fruit is selected, the camera animates smoothly toward it using interpolation, creating a dynamic zoom effect.
-                      </li>
-                    </ul>
-                  </li>
-                  <li>
-                    <strong>UI Elements and Animations:</strong>
-                    <ul>
-                      <li>
-                        <strong>Menu &amp; Quicklinks:</strong> A stylish menu button reveals a quicklinks panel, dynamically generated based on the fruits. This allows users to navigate directly to different sections.
-                      </li>
-                      <li>
-                        <strong>Info Card &amp; Back Button:</strong> Upon zooming into a fruit, an info card appears with detailed content, and a back button is provided to return the camera to its default state. These UI elements use CSS transitions for smooth appearance and disappearance.
-                      </li>
-                      <li>
-                        <strong>Intro and Ongoing Animations:</strong> The experience begins with an introductory camera animation that transitions from a distant bird’s-eye view into an orbit around the tree. Afterwards, subtle rotations and positional tweaks are applied to both the tree and fruits, ensuring the scene feels alive.
-                      </li>
-                    </ul>
-                  </li>
-                </ul>
-
-                <h2>Creative and Practical Considerations</h2>
-                <ul>
-                  <li>
-                    <strong>Visual Aesthetics:</strong> The design marries a modern, minimalistic UI with an organic, nature-inspired 3D model. The use of gradients, soft shadows, and smooth animations contribute to an engaging and immersive experience.
-                  </li>
-                  <li>
-                    <strong>User Experience:</strong> The blend of 3D interaction and traditional UI elements (like quicklinks and content cards) provides a novel way for users to explore information. The animations are thoughtfully designed to guide attention and maintain a coherent navigational flow.
-                  </li>
-                  <li>
-                    <strong>Technical Mastery:</strong> This project showcases proficiency in advanced WebGL concepts, procedural geometry, and dynamic UI integration. It leverages linear interpolation for smooth camera transitions, recursive functions for natural structures, and DOM manipulation for interactive overlays.
-                  </li>
-                </ul>
-              </div>
-              <a href="index.html#projects" class="btn">Back to Projects</a>
+    <dialog id="site-menu" aria-label="Site navigation">
+      <div class="menu-art" aria-hidden="true">
+        MAKE<br />IT<br /><em>MOVE.</em>
+      </div>
+      <nav aria-label="Expanded">
+        <a href="index.html#projects"
+          ><small>01</small>Projects<span>↗</span></a
+        ><a href="index.html#about"><small>02</small>About<span>↗</span></a
+        ><a href="index.html#journey"
+          ><small>03</small>Experience<span>↗</span></a
+        ><a href="index.html#skills"><small>04</small>Skills<span>↗</span></a
+        ><a href="index.html#contact"
+          ><small>05</small>Contact<span>↗</span></a
+        >
+      </nav>
+      <div class="menu-bottom mono">
+        <a
+          href="https://github.com/Rivindu-Kowlinda"
+          target="_blank"
+          rel="noreferrer"
+          >GITHUB ↗</a
+        ><a
+          href="https://www.linkedin.com/in/rivindu-kowlinda-52929527b"
+          target="_blank"
+          rel="noreferrer"
+          >LINKEDIN ↗</a
+        ><a href="CV.pdf" download>DOWNLOAD CV ↓</a>
+      </div>
+      <button class="menu-close" aria-label="Close menu">Close ×</button>
+    </dialog>
+    <main id="main" class="case-main" tabindex="-1" data-case="tree">
+      <section class="case-hero project-tree">
+        <div class="case-heading">
+          <a class="back-link mono" href="index.html#projects">↖ ALL WORK</a>
+          <div class="eyebrow">
+            <span>PROJECT 04 / Creative development</span><span>2025</span>
+          </div>
+          <h1>3D Tree Portfolio</h1>
+          <div class="case-intro">
+            <p>An interface that grows branches.</p>
+            <div>
+              <p>
+                A procedurally generated tree turns portfolio navigation into a
+                spatial experience, with interactive fruit nodes and smoothly
+                focused content.
+              </p>
+              <span class="mono">Interactive Three.js project</span>
             </div>
           </div>
-        </section>
-      </main>
-
-      <!-- Sticky Footer -->
-      <footer class="footer">
-        <div class="container">
-          <p>&copy; 2025. All rights reserved.</p>
         </div>
-      </footer>
-    </div>
-
-    <!-- GSAP for mobile sidebar animations -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
-    <script>
-      // Glass/Glossy Nav on Scroll effect
-      const navbar = document.querySelector(".navbar");
-      window.addEventListener("scroll", () => {
-        if (window.scrollY > 50) {
-          navbar.classList.add("scrolled");
-        } else {
-          navbar.classList.remove("scrolled");
-        }
-      });
-
-      // MOBILE NAV / SIDEBAR ANIMATION
-      const hamburger = document.getElementById("hamburger");
-      const mobileNav = document.getElementById("mobileNav");
-      const mobileLinks = mobileNav.querySelectorAll("li");
-
-      // Start sidebar off-screen; links invisible (for a quick fade/stagger in)
-      gsap.set(mobileNav, { x: "-100%" });
-      gsap.set(mobileLinks, { x: -30, opacity: 0 });
-
-      hamburger.addEventListener("click", () => {
-        if (!hamburger.classList.contains("active")) {
-          // OPEN nav
-          hamburger.classList.add("active");
-          const tl = gsap.timeline();
-          tl.to(mobileNav, {
-              x: 0,
-              duration: 0.5,
-              ease: "power2.out"
-            })
-            .fromTo(
-              mobileLinks,
-              { x: -30, opacity: 0 },
-              { x: 0, opacity: 1, stagger: 0.1, duration: 0.3 },
-              "<"
-            );
-        } else {
-          // CLOSE nav
-          hamburger.classList.remove("active");
-          const tl = gsap.timeline();
-          tl.to(mobileLinks, {
-              x: -30,
-              opacity: 0,
-              stagger: 0.05,
-              duration: 0.2
-            })
-            .to(mobileNav, {
-              x: "-100%",
-              duration: 0.5,
-              ease: "power2.in"
-            });
-        }
-      });
-
-      // Close sidebar if a link is clicked
-      mobileLinks.forEach(link => {
-        link.addEventListener("click", () => {
-          hamburger.classList.remove("active");
-          const tl = gsap.timeline();
-          tl.to(mobileLinks, {
-              x: -30,
-              opacity: 0,
-              stagger: 0.05,
-              duration: 0.2
-            })
-            .to(mobileNav, {
-              x: "-100%",
-              duration: 0.5,
-              ease: "power2.in"
-            });
-        });
-      });
-
-      // Scroll functionality for the image gallery buttons
-      const scrollLeftBtn = document.getElementById('scroll-left');
-      const scrollRightBtn = document.getElementById('scroll-right');
-      const imageGallery = document.querySelector('.image-gallery');
-
-      let scrollInterval;
-
-      function startScrolling(direction) {
-        scrollInterval = setInterval(() => {
-          imageGallery.scrollLeft += direction * 150;
-        }, 20);
-      }
-
-      function stopScrolling() {
-        clearInterval(scrollInterval);
-      }
-
-      scrollLeftBtn.addEventListener('mousedown', () => startScrolling(-1));
-      scrollLeftBtn.addEventListener('mouseup', stopScrolling);
-      scrollLeftBtn.addEventListener('mouseleave', stopScrolling);
-
-      scrollRightBtn.addEventListener('mousedown', () => startScrolling(1));
-      scrollRightBtn.addEventListener('mouseup', stopScrolling);
-      scrollRightBtn.addEventListener('mouseleave', stopScrolling);
-
-      document.addEventListener('mouseup', stopScrolling);
-
-      // Ensure sections become visible on load (if using fade-in styles)
-      window.addEventListener('load', function () {
-        document.querySelectorAll('.section').forEach(function (section) {
-          section.classList.add('visible');
-        });
-      });
-    </script>
+        <div class="case-main-visual">
+          <div class="recording-frame">
+            <div class="window-label mono">
+              <span>SPATIAL INTERFACES</span><span>THREE.JS ↗</span>
+            </div>
+            <video
+              data-shared="tree"
+              controls
+              playsinline
+              preload="none"
+              poster="images/tree-preview.jpg"
+            >
+              <source src="videos/video1.mp4" type="video/mp4" /></video
+            ><span class="media-caption"
+              >Play the original 3D tree recording</span
+            >
+          </div>
+        </div>
+      </section>
+      <section class="case-story section-pad">
+        <div class="case-facts">
+          <span class="mono">THE BUILD</span>
+          <p>Interactive Three.js project</p>
+          <div class="tags">
+            <span>Three.js</span><span>JavaScript</span><span>WebGL</span>
+          </div>
+          <span class="mono">2025 / Creative development</span>
+        </div>
+        <div class="case-copy">
+          <span class="eyebrow">01 / THE QUESTION</span>
+          <h2>The challenge.</h2>
+          <p>
+            Connect an organic, procedural 3D scene to usable portfolio
+            navigation without losing the visitor’s sense of place.
+          </p>
+          <span class="eyebrow">02 / THE RESPONSE</span>
+          <h2>Inside the build.</h2>
+          <p>
+            Recursive branches follow Catmull–Rom curves, with leaves and
+            coloured content nodes. Raycasting identifies selected fruit, then
+            interpolated camera motion brings the related content into focus.
+          </p>
+          <div class="architecture" aria-label="Project architecture">
+            <div>
+              <span class="mono">01</span>
+              <h3>Procedural geometry</h3>
+            </div>
+            <div>
+              <span class="mono">02</span>
+              <h3>Raycast interaction</h3>
+            </div>
+            <div>
+              <span class="mono">03</span>
+              <h3>Content / camera state</h3>
+            </div>
+          </div>
+          <ul class="feature-list">
+            <li>Recursive branch generation</li>
+            <li>OrbitControls for spatial navigation</li>
+            <li>Raycast-based content selection</li>
+            <li>Interpolated camera and interface transitions</li>
+          </ul>
+        </div>
+      </section>
+      <section
+        class="case-gallery section-pad"
+        aria-label="Original project media"
+      >
+        <div class="eyebrow">03 / EVIDENCE IN THE DETAILS</div>
+        <h2>The original work.</h2>
+        <div class="gallery-grid">
+          <figure>
+            <img
+              src="images/tree-preview.jpg"
+              width="2416"
+              height="1440"
+              alt="3D Tree Portfolio original project capture 1"
+              loading="lazy"
+            />
+            <figcaption class="mono">3D Tree Portfolio / CAPTURE 01</figcaption>
+          </figure>
+          <figure>
+            <img
+              src="images/3dPortfolioCode.png"
+              width="2559"
+              height="1500"
+              alt="3D Tree Portfolio original project capture 2"
+              loading="lazy"
+            />
+            <figcaption class="mono">3D Tree Portfolio / CAPTURE 02</figcaption>
+          </figure>
+        </div>
+        <div class="case-recording">
+          <span class="eyebrow">PROJECT RECORDING</span
+          ><video
+            controls
+            preload="none"
+            playsinline
+            poster="images/tree-preview.jpg"
+          >
+            <source src="videos/video1.mp4" type="video/mp4" />
+            Your browser cannot play this MP4 recording.
+          </video>
+        </div>
+      </section>
+      <a class="next-project" href="SD2.html"
+        ><span class="eyebrow">KEEP EXPLORING / 05</span
+        ><span>Plane Seat Manager</span><b aria-hidden="true">↗</b></a
+      >
+    </main>
+    <footer class="site-footer">
+      <a href="index.html" class="footer-mark" aria-label="Home"
+        ><svg viewBox="0 0 64 48" aria-hidden="true">
+          <path
+            d="M5 43V5h19c17 0 18 22 2 23l15 15M39 5v38m2-19L59 5M41 24l18 19"
+          /></svg></a
+      ><span class="mono">RIVINDU KOWLINDA / BUILT WITH CURIOSITY</span
+      ><a href="index.html#hero" class="mono">BACK TO TOP ↑</a>
+    </footer>
+    <dialog id="message-dialog" aria-labelledby="message-title">
+      <button class="dialog-close" aria-label="Close message form">×</button
+      ><span class="eyebrow">LET'S MAKE A CONNECTION</span>
+      <h2 id="message-title">Hello, there.</h2>
+      <form
+        action="https://formspree.io/f/xqapaqne"
+        method="POST"
+        id="contact-form"
+      >
+        <label
+          >Your name<input name="name" autocomplete="name" required /></label
+        ><label
+          >Email address<input
+            name="_replyto"
+            type="email"
+            autocomplete="email"
+            required /></label
+        ><label
+          >What are you thinking?<textarea
+            name="message"
+            rows="4"
+            required
+          ></textarea></label
+        ><button class="button cobalt" type="submit">Send message ↗</button>
+        <p class="form-status" role="status"></p>
+      </form>
+    </dialog>
+    <div id="toast" role="status"></div>
+    <script type="module" src="/src/main.js"></script>
   </body>
 </html>

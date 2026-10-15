@@ -1,337 +1,252 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Project Details - Student Progression Outcomes App</title>
-    <link rel="stylesheet" href="styles2.css" />
-    <style>
-      /* Inline styles for improved flow and spacing */
-      ul {
-        margin: 1em 0;
-        padding-left: 1.5em;
-      }
-      li {
-        margin-bottom: 0.5em;
-      }
-      p {
-        margin-bottom: 1em;
-      }
-      .card-content {
-        line-height: 1.6;
-      }
-
-      /* Gallery Container to hold images and buttons */
-      .image-gallery-container {
-        position: relative;
-        margin: 20px 0;
-      }
-
-      /* Horizontal scrollable image gallery */
-      .image-gallery {
-        display: flex;
-        flex-wrap: nowrap;
-        overflow-x: auto;
-        gap: 20px;
-        padding: 20px;
-        scroll-behavior: smooth;
-      }
-      .image-gallery img {
-        max-height: 500px;
-        max-width: 100%;
-        width: auto;
-        border-radius: 10px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-        transition: transform 0.4s ease, box-shadow 0.4s ease;
-      }
-      .image-gallery img:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.6);
-      }
-
-      /* Hide default scrollbar if desired */
-      .image-gallery {
-        scrollbar-width: none; /* Firefox */
-        -ms-overflow-style: none;  /* IE 10+ */
-      }
-      .image-gallery::-webkit-scrollbar {
-        display: none; /* Safari and Chrome */
-      }
-
-      /* Scroll Buttons */
-      .scroll-btn {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        background: rgba(0, 0, 0, 0.5);
-        color: #fff;
-        border: none;
-        border-radius: 50%;
-        width: 40px;
-        height: 40px;
-        cursor: pointer;
-        z-index: 10;
-        transition: background 0.3s ease, transform 0.1s ease, box-shadow 0.3s ease;
-      }
-      .scroll-btn.left {
-        left: 10px;
-      }
-      .scroll-btn.right {
-        right: 10px;
-      }
-      .scroll-btn:hover {
-        background: rgba(255, 94, 0, 0.687);
-        backdrop-filter: blur(5px);
-        box-shadow: 0 0 10px rgba(255, 165, 0, 0.6);
-      }
-      .scroll-btn:active {
-        background: rgba(255, 72, 0, 0.92);
-        transform: translateY(-50%) scale(0.95);
-      }
-      /* Hide scroll buttons on mobile devices */
-      @media (max-width: 768px) {
-        .scroll-btn {
-          display: none;
-        }
-      }
-
-      /* New Navigation System Styles */
-     
-      @media (max-width: 768px) {
-        .desktop-links {
-          display: none;
-        }
-        .hamburger {
-          display: flex;
-        }
-      }
-      /* Page Wrapper to push content below nav */
-      .page-wrapper {
-        margin-top: 80px;
-      }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f0f0ea" />
+    <meta
+      name="description"
+      content="A Python application that validates academic credits, calculates progression outcomes, and visualises the results in a histogram."
+    />
+    <meta property="og:title" content="Student Progress — Rivindu Kowlinda" />
+    <meta
+      property="og:description"
+      content="A Python application that validates academic credits, calculates progression outcomes, and visualises the results in a histogram."
+    />
+    <meta property="og:type" content="website" />
+    <title>Student Progress — Rivindu Kowlinda</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="stylesheet" href="/src/style.css" />
   </head>
-  <body>
-    <!-- MOBILE SIDEBAR NAV -->
-    <aside class="mobile-nav" id="mobileNav">
-      <div class="mobile-nav-logo">
-        <img src="logo.png" alt="Logo" />
-      </div>
-      <ul>
-        <li><a href="index.html#hero">Home</a></li>
-        <li><a href="index.html#about">About</a></li>
-        <li><a href="index.html#projects">Projects</a></li>
-        <li><a href="index.html#contact">Contact</a></li>
-      </ul>
-    </aside>
-
-    <!-- DESKTOP NAVBAR -->
-    <header class="navbar">
-      <div class="nav-container">
-        <!-- Logo -->
-        <div class="logo">
-          <a href="index.html#hero">
-            <img src="logo.png" alt="Logo" id="logo" />
-          </a>
-        </div>
-        <!-- Desktop Nav Links -->
-        <nav class="desktop-links">
-          <ul>
-            <li><a href="index.html#hero">Home</a></li>
-            <li><a href="index.html#about">About</a></li>
-            <li><a href="index.html#projects">Projects</a></li>
-            <li><a href="index.html#contact">Contact</a></li>
-          </ul>
-        </nav>
-        <!-- Hamburger (Mobile Only) -->
-        <div class="hamburger" id="hamburger">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
+  <body data-project="progress">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div id="world" aria-hidden="true"></div>
+    <header class="site-header">
+      <a class="brand" href="index.html" aria-label="Rivindu Kowlinda home"
+        ><svg viewBox="0 0 64 48" aria-hidden="true">
+          <path
+            d="M5 43V5h19c17 0 18 22 2 23l15 15M39 5v38m2-19L59 5M41 24l18 19"
+          /></svg
+        ><span>RIVINDU<br />KOWLINDA</span></a
+      >
+      <nav class="header-links" aria-label="Primary">
+        <a href="index.html#projects">Selected work <sup>06</sup></a
+        ><a href="index.html#about">About</a>
+      </nav>
+      <div class="header-actions">
+        <button
+          id="motion-toggle"
+          class="motion-toggle"
+          aria-pressed="false"
+          aria-label="Reduce motion"
+        >
+          Ⅱ</button
+        ><button
+          class="menu-toggle"
+          aria-expanded="false"
+          aria-controls="site-menu"
+        >
+          <span>Menu</span><i></i>
+        </button>
       </div>
     </header>
-
-    <!-- Page Wrapper for sticky footer -->
-    <div class="page-wrapper">
-      <!-- Main Content -->
-      <main class="content">
-        <section id="project-details" class="section project-details">
-          <div class="container">
-            <div class="card project-detail-card">
-              <h1>Student Progress Calculator</h1>
-              <p class="project-meta">2023 | Python Console &amp; Graphics Application</p>
-              
-              <!-- Image Gallery with Left and Right Scroll Buttons -->
-              <div class="image-gallery-container">
-                <button id="scroll-left" class="scroll-btn left">&lt;</button>
-                <div class="image-gallery">
-                  <!-- Representative images (if available) -->
-                  <img src="images/SD1_CLI.jpg" alt="Screenshot 1" />
-                  <img src="images/SD1_Histogram.jpg" alt="Screenshot 2" />
-                  <img src="images/SD2_Code.jpg" alt="Screenshot 3" />
-                </div>
-                <button id="scroll-right" class="scroll-btn right">&gt;</button>
-              </div>
-              
-              <div class="card-content">
-                <!-- Overview -->
-                <p>
-                  The Student Progression Outcomes App is a comprehensive Python solution for calculating and visualizing student progression based on credit inputs. It caters to both staff and student users by providing tailored interactions.
-                </p>
-                <ul>
-                  <li>
-                    <strong>Functionality:</strong> Determines progression status using specific credit rules — "Progress" for 120 pass credits, "Trailer" for 100 pass credits, "Exclude" when fail credits are 80 or above, and "Retriever" for all other valid combinations.
-                  </li>
-                  <li>
-                    <strong>User Modes:</strong>
-                    <ul>
-                      <li><em>Staff Mode:</em> Supports multiple entries, aggregates outcomes, and records data for later review.</li>
-                      <li><em>Student Mode:</em> Allows a single entry and immediately displays the outcome.</li>
-                    </ul>
-                  </li>
-                  <li>
-                    <strong>Input Validation:</strong> Implements robust checks to ensure that only valid credits (0, 20, 40, 60, 80, 100, 120) are accepted and that the total always equals 120, with graceful error handling.
-                  </li>
-                </ul>
-
-                <!-- Technical Details -->
-                <p>
-                  <strong>Technical Details &amp; Architecture:</strong>
-                </p>
-                <ul>
-                  <li>
-                    <strong>Python-Based:</strong> Developed entirely in Python, utilizing console input for data collection and a simple graphics library (such as Zelle’s Graphics) for rendering a histogram.
-                  </li>
-                  <li>
-                    <strong>Modular Design:</strong> Uses dedicated functions like <code>progression_outcome</code>, <code>create_bar</code>, and <code>window</code> for clear separation of concerns and reusability.
-                  </li>
-                  <li>
-                    <strong>File I/O:</strong> Persists outcomes by writing to and reading from a text file, ensuring data is logged for future reference.
-                  </li>
-                  <li>
-                    <strong>Graphical Visualization:</strong> Generates a dynamically scaled histogram to visually represent counts of each progression outcome.
-                  </li>
-                  <li>
-                    <strong>Best Practices:</strong> Emphasizes robust input validation, modularity, and defensive programming to ensure data integrity and a smooth user experience.
-                  </li>
-                </ul>
-
-                <!-- Conclusion -->
-                <p>
-                  Overall, this project effectively showcases key programming principles such as modularity, input validation, and user-friendly graphical representation, making it an exemplary solution for managing student progression outcomes.
-                </p>
-                <br />
-                <a href="index.html#projects" class="btn">Back to Projects</a>
-              </div>
+    <dialog id="site-menu" aria-label="Site navigation">
+      <div class="menu-art" aria-hidden="true">
+        MAKE<br />IT<br /><em>MOVE.</em>
+      </div>
+      <nav aria-label="Expanded">
+        <a href="index.html#projects"
+          ><small>01</small>Projects<span>↗</span></a
+        ><a href="index.html#about"><small>02</small>About<span>↗</span></a
+        ><a href="index.html#journey"
+          ><small>03</small>Experience<span>↗</span></a
+        ><a href="index.html#skills"><small>04</small>Skills<span>↗</span></a
+        ><a href="index.html#contact"
+          ><small>05</small>Contact<span>↗</span></a
+        >
+      </nav>
+      <div class="menu-bottom mono">
+        <a
+          href="https://github.com/Rivindu-Kowlinda"
+          target="_blank"
+          rel="noreferrer"
+          >GITHUB ↗</a
+        ><a
+          href="https://www.linkedin.com/in/rivindu-kowlinda-52929527b"
+          target="_blank"
+          rel="noreferrer"
+          >LINKEDIN ↗</a
+        ><a href="CV.pdf" download>DOWNLOAD CV ↓</a>
+      </div>
+      <button class="menu-close" aria-label="Close menu">Close ×</button>
+    </dialog>
+    <main id="main" class="case-main" tabindex="-1" data-case="progress">
+      <section class="case-hero project-progress">
+        <div class="case-heading">
+          <a class="back-link mono" href="index.html#projects">↖ ALL WORK</a>
+          <div class="eyebrow">
+            <span>PROJECT 06 / Data & visualisation</span><span>2023</span>
+          </div>
+          <h1>Student Progress</h1>
+          <div class="case-intro">
+            <p>From credits to a clearer picture.</p>
+            <div>
+              <p>
+                A Python application that validates academic credits, calculates
+                progression outcomes, and visualises the results in a histogram.
+              </p>
+              <span class="mono">Python console & graphics project</span>
             </div>
           </div>
-        </section>
-      </main>
-
-      <!-- Sticky Footer -->
-      <footer class="footer">
-        <div class="container">
-          <p>&copy; 2025. All rights reserved.</p>
         </div>
-      </footer>
-    </div>
-
-    <!-- Include GSAP for mobile sidebar animations -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
-    <script src="script.js"></script>
-    <script>
-      // MOBILE NAV / SIDEBAR ANIMATION
-      const hamburger = document.getElementById("hamburger");
-      const mobileNav = document.getElementById("mobileNav");
-      const mobileLinks = mobileNav.querySelectorAll("li");
-
-      const navbar = document.querySelector(".navbar");
-      window.addEventListener("scroll", () => {
-        if (window.scrollY > 50) {
-          navbar.classList.add("scrolled");
-        } else {
-          navbar.classList.remove("scrolled");
-        }
-      });
-      // Start sidebar off-screen; links invisible for quick fade/stagger in
-      gsap.set(mobileNav, { x: "-100%" });
-      gsap.set(mobileLinks, { x: -30, opacity: 0 });
-
-      hamburger.addEventListener("click", () => {
-        if (!hamburger.classList.contains("active")) {
-          // OPEN nav
-          hamburger.classList.add("active");
-          const tl = gsap.timeline();
-          tl.to(mobileNav, {
-              x: 0,
-              duration: 0.5,
-              ease: "power2.out"
-            })
-            .fromTo(
-              mobileLinks,
-              { x: -30, opacity: 0 },
-              { x: 0, opacity: 1, stagger: 0.1, duration: 0.3 },
-              "<"
-            );
-        } else {
-          // CLOSE nav
-          hamburger.classList.remove("active");
-          const tl = gsap.timeline();
-          tl.to(mobileLinks, {
-              x: -30,
-              opacity: 0,
-              stagger: 0.05,
-              duration: 0.2
-            })
-            .to(mobileNav, {
-              x: "-100%",
-              duration: 0.5,
-              ease: "power2.in"
-            });
-        }
-      });
-
-      // Close sidebar if a link is clicked
-      mobileLinks.forEach(link => {
-        link.addEventListener("click", () => {
-          hamburger.classList.remove("active");
-          const tl = gsap.timeline();
-          tl.to(mobileLinks, {
-              x: -30,
-              opacity: 0,
-              stagger: 0.05,
-              duration: 0.2
-            })
-            .to(mobileNav, {
-              x: "-100%",
-              duration: 0.5,
-              ease: "power2.in"
-            });
-        });
-      });
-
-      // Scroll functionality for the image gallery buttons
-      const scrollLeftBtn = document.getElementById('scroll-left');
-      const scrollRightBtn = document.getElementById('scroll-right');
-      const imageGallery = document.querySelector('.image-gallery');
-      
-      let scrollInterval;
-      function startScrolling(direction) {
-        scrollInterval = setInterval(() => {
-          imageGallery.scrollLeft += direction * 150;
-        }, 20);
-      }
-      function stopScrolling() {
-        clearInterval(scrollInterval);
-      }
-      scrollLeftBtn.addEventListener('mousedown', () => startScrolling(-1));
-      scrollLeftBtn.addEventListener('mouseup', stopScrolling);
-      scrollLeftBtn.addEventListener('mouseleave', stopScrolling);
-      scrollRightBtn.addEventListener('mousedown', () => startScrolling(1));
-      scrollRightBtn.addEventListener('mouseup', stopScrolling);
-      scrollRightBtn.addEventListener('mouseleave', stopScrolling);
-      document.addEventListener('mouseup', stopScrolling);
-    </script>
+        <div class="case-main-visual">
+          <div class="screen-composition screen-progress">
+            <span class="screen-watermark" aria-hidden="true"
+              >MAKE IT COUNT</span
+            >
+            <div class="screen-shell">
+              <div class="window-label mono">
+                <span>PROGRESSION OUTCOMES / PYTHON</span><i></i>
+              </div>
+              <img
+                data-shared="progress"
+                src="images/SD1_Histogram.jpg"
+                alt="Student Progress original histogram"
+                loading="eager"
+                width="1600"
+                height="950"
+              />
+            </div>
+            <span class="media-caption">Original outcome histogram</span>
+          </div>
+        </div>
+      </section>
+      <section class="case-story section-pad">
+        <div class="case-facts">
+          <span class="mono">THE BUILD</span>
+          <p>Python console & graphics project</p>
+          <div class="tags">
+            <span>Python</span><span>Data validation</span><span>Graphics</span>
+          </div>
+          <span class="mono">2023 / Data & visualisation</span>
+        </div>
+        <div class="case-copy">
+          <span class="eyebrow">01 / THE QUESTION</span>
+          <h2>The challenge.</h2>
+          <p>
+            Turn credit rules into reliable outcomes for both individual
+            students and staff processing multiple entries.
+          </p>
+          <span class="eyebrow">02 / THE RESPONSE</span>
+          <h2>Inside the build.</h2>
+          <p>
+            Dedicated functions validate allowed credit values and a total of
+            120, calculate progression status, and draw a scaled histogram.
+            Staff can aggregate outcomes and save records to a text file.
+          </p>
+          <div class="architecture" aria-label="Project architecture">
+            <div>
+              <span class="mono">01</span>
+              <h3>Credit input validation</h3>
+            </div>
+            <div>
+              <span class="mono">02</span>
+              <h3>Progression rules</h3>
+            </div>
+            <div>
+              <span class="mono">03</span>
+              <h3>Histogram / text records</h3>
+            </div>
+          </div>
+          <ul class="feature-list">
+            <li>Separate student and staff modes</li>
+            <li>Validated credit totals and values</li>
+            <li>Scaled outcome histogram</li>
+            <li>File-based results logging</li>
+          </ul>
+        </div>
+      </section>
+      <section
+        class="case-gallery section-pad"
+        aria-label="Original project media"
+      >
+        <div class="eyebrow">03 / EVIDENCE IN THE DETAILS</div>
+        <h2>The original work.</h2>
+        <div class="gallery-grid">
+          <figure>
+            <img
+              src="images/SD1_Histogram.jpg"
+              width="2559"
+              height="1489"
+              alt="Student Progress original project capture 1"
+              loading="lazy"
+            />
+            <figcaption class="mono">Student Progress / CAPTURE 01</figcaption>
+          </figure>
+          <figure>
+            <img
+              src="images/SD1_CLI.jpg"
+              width="2074"
+              height="1275"
+              alt="Student Progress original project capture 2"
+              loading="lazy"
+            />
+            <figcaption class="mono">Student Progress / CAPTURE 02</figcaption>
+          </figure>
+          <figure>
+            <img
+              src="images/SD1_Code.jpg"
+              width="2559"
+              height="1530"
+              alt="Student Progress original project capture 3"
+              loading="lazy"
+            />
+            <figcaption class="mono">Student Progress / CAPTURE 03</figcaption>
+          </figure>
+        </div>
+      </section>
+      <a class="next-project" href="axion.html"
+        ><span class="eyebrow">KEEP EXPLORING / 01</span><span>Axion</span
+        ><b aria-hidden="true">↗</b></a
+      >
+    </main>
+    <footer class="site-footer">
+      <a href="index.html" class="footer-mark" aria-label="Home"
+        ><svg viewBox="0 0 64 48" aria-hidden="true">
+          <path
+            d="M5 43V5h19c17 0 18 22 2 23l15 15M39 5v38m2-19L59 5M41 24l18 19"
+          /></svg></a
+      ><span class="mono">RIVINDU KOWLINDA / BUILT WITH CURIOSITY</span
+      ><a href="index.html#hero" class="mono">BACK TO TOP ↑</a>
+    </footer>
+    <dialog id="message-dialog" aria-labelledby="message-title">
+      <button class="dialog-close" aria-label="Close message form">×</button
+      ><span class="eyebrow">LET'S MAKE A CONNECTION</span>
+      <h2 id="message-title">Hello, there.</h2>
+      <form
+        action="https://formspree.io/f/xqapaqne"
+        method="POST"
+        id="contact-form"
+      >
+        <label
+          >Your name<input name="name" autocomplete="name" required /></label
+        ><label
+          >Email address<input
+            name="_replyto"
+            type="email"
+            autocomplete="email"
+            required /></label
+        ><label
+          >What are you thinking?<textarea
+            name="message"
+            rows="4"
+            required
+          ></textarea></label
+        ><button class="button cobalt" type="submit">Send message ↗</button>
+        <p class="form-status" role="status"></p>
+      </form>
+    </dialog>
+    <div id="toast" role="status"></div>
+    <script type="module" src="/src/main.js"></script>
   </body>
 </html>

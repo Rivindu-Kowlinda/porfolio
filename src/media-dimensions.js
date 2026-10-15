@@ -1,0 +1,20 @@
+// Intrinsic dimensions reserve gallery space before lazy images decode.
+export const mediaDimensions = {
+  "images/mobile2.jpg": [1440, 2968],
+  "images/mobile3.jpg": [1440, 2988],
+  "images/mobile1.jpg": [1440, 2983],
+  "images/mobile4.jpg": [1440, 2962],
+  "images/mobile5.jpg": [1440, 2954],
+  "images/ticket-preview.jpg": [2416, 1440],
+  "images/OOP_Frontend.jpg": [2559, 1495],
+  "images/OOP_Backend.jpg": [2559, 1528],
+  "images/snake-preview.jpg": [1920, 1080],
+  "images/snakeGameCode.png": [2559, 1528],
+  "images/tree-preview.jpg": [2416, 1440],
+  "images/3dPortfolioCode.png": [2559, 1500],
+  "images/SD2_CLI.jpg": [2377, 1252],
+  "images/SD2_Code.jpg": [2559, 1486],
+  "images/SD1_Histogram.jpg": [2559, 1489],
+  "images/SD1_CLI.jpg": [2074, 1275],
+  "images/SD1_Code.jpg": [2559, 1530],
+};
