@@ -1,6 +1,7 @@
 import { gsap } from "gsap";
 import { motion, clampScroll } from "./motion.js";
 import { carryVisual } from "./shared-visual.js";
+import { prepareShowcase, showcaseDestination } from "./showcase.js";
 
 const routes = new Set([
   "index.html",
@@ -134,6 +135,8 @@ export function createRouter({ system, mount, unmount, reduced, closeMenu }) {
       });
       return;
     }
+    // Finish any index-driven native scroll at the chosen project's pose.
+    window.scrollTo({ top: scrollY, behavior: "instant" });
     busy = true;
     navigatingTo = url.href;
     preparing = new AbortController();
@@ -146,6 +149,7 @@ export function createRouter({ system, mount, unmount, reduced, closeMenu }) {
     try {
       const doc = await waitForPreparation(fetchPage(url), signal);
       const incoming = doc.querySelector("main").cloneNode(true);
+      prepareShowcase(incoming, reduced());
       preparation = document.createElement("div");
       preparation.className = "route-preparation";
       preparation.inert = true;
@@ -192,8 +196,9 @@ export function createRouter({ system, mount, unmount, reduced, closeMenu }) {
       const oldScroll = scrollY;
       // A fixed outgoing wrapper has no document scroll. Preserve the visible
       // sticky chapter offset before changing its containing block.
-      const sticky = oldMain.querySelector(".engine-sticky");
-      const stickyRect = sticky?.getBoundingClientRect();
+      const stickies = [
+        ...oldMain.querySelectorAll(".engine-sticky, .reel-ready .reel-sticky"),
+      ].map((element) => ({ element, rect: element.getBoundingClientRect() }));
       const sharedId = incoming.dataset.case || oldMain.dataset.case;
       if (!oldMain.dataset.case && sharedId) {
         const stageRect = findStage(oldMain, sharedId)?.getBoundingClientRect();
@@ -202,6 +207,8 @@ export function createRouter({ system, mount, unmount, reduced, closeMenu }) {
           width: innerWidth,
           height: innerHeight,
           reduced: reduced(),
+          showcasePosition:
+            oldMain.querySelector(".reel-ready")?.dataset.position,
           // Preserve the visual's viewport position when responsive reflow
           // makes the old absolute scroll offset point at a different section.
           stageTop:
@@ -220,10 +227,19 @@ export function createRouter({ system, mount, unmount, reduced, closeMenu }) {
             saved.reduced !== reduced());
         if (reflowed) {
           const stage = findStage(incoming, sharedId);
-          if (stage)
+          const reelTarget = showcaseDestination(
+            incoming,
+            sharedId,
+            saved.showcasePosition == null
+              ? undefined
+              : Number(saved.showcasePosition),
+          );
+          if (reelTarget != null) targetY = reelTarget;
+          else if (stage)
             targetY =
               stage.getBoundingClientRect().top - saved.stageTop * innerHeight;
         } else if (targetY == null) targetY = saved?.scroll;
+        if (targetY == null) targetY = showcaseDestination(incoming, sharedId);
       }
       if (targetY == null) {
         const anchor =
@@ -274,12 +290,12 @@ export function createRouter({ system, mount, unmount, reduced, closeMenu }) {
       oldMain.style.transform = `translateY(${-oldScroll}px)`;
       outgoing.append(oldMain);
       document.body.append(outgoing);
-      if (sticky && stickyRect) {
-        sticky.style.position = "relative";
-        sticky.style.top = "0px";
-        const natural = sticky.getBoundingClientRect();
-        sticky.style.top = `${stickyRect.top - natural.top}px`;
-      }
+      stickies.forEach(({ element, rect }) => {
+        element.style.position = "relative";
+        element.style.top = "0px";
+        const natural = element.getBoundingClientRect();
+        element.style.top = `${rect.top - natural.top}px`;
+      });
       const dest = sharedId && findStage(incoming, sharedId);
       const duration = reduced() ? 0 : motion.route;
       const timeline = gsap.timeline({

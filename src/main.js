@@ -1,4 +1,5 @@
 import { gsap } from "gsap";
+import { mountShowcase } from "./showcase.js";
 import { mountChapters } from "./chapter-motion.js";
 import { mountPlayground } from "./pathfinder.js";
 import { createRouter } from "./router.js";
@@ -100,7 +101,11 @@ function mount() {
   const cleanups = [...main.querySelectorAll("[data-playground]")].map((r) =>
     mountPlayground(r, reduced),
   );
-  cleanups.push(mountAccordions(main, reduced), mountChapters(main, reduced));
+  cleanups.push(
+    mountAccordions(main, reduced),
+    mountChapters(main, reduced),
+    mountShowcase(main, reduced),
+  );
   // Prepare native controls before the demo enters view, without fetching its
   // media during the initial homepage hero. Playback remains user initiated.
   const mediaObserver = new IntersectionObserver(
@@ -116,7 +121,9 @@ function mount() {
   );
   main
     .querySelectorAll('video[data-shared="chess"][preload="none"]')
-    .forEach((video) => mediaObserver.observe(video));
+    .forEach((video) => {
+      if (!video.closest("[data-project-reel]")) mediaObserver.observe(video);
+    });
   cleanups.push(() => mediaObserver.disconnect());
   const abort = new AbortController(),
     opt = { signal: abort.signal };
@@ -201,7 +208,9 @@ function mount() {
     () => messageMotion.open(),
     opt,
   );
-  const stages = [...main.querySelectorAll(".project-stage")],
+  const stages = [...main.querySelectorAll(".project-stage")].filter(
+      (stage) => !stage.closest("[data-project-reel]"),
+    ),
     heroName = main.querySelector(".hero-name");
   let metrics = [];
   function measureStages() {

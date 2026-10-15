@@ -180,179 +180,287 @@
           neuro-inspired AI to collaborative mobile engineering.
         </p>
       </section>
-      <article class="project-showcase project-chess" data-showcase="chess">
-        <div class="project-title-row">
-          <span class="project-number">01</span>
-          <div>
-            <span class="eyebrow"
-              >AI / full-stack engineering / 2026 — Present</span
-            >
-            <h2>
-              <a href="bug-brain-chess.html">Bug Brain Chess<span>↗</span></a>
-            </h2>
-          </div>
-        </div>
-        <div class="project-stage">
-          <div class="chess-visual">
-            <div class="chess-grid" aria-hidden="true"></div>
-            <div class="chess-display">
-              <div class="chess-display-bar mono">
-                <span><i></i> BUG BRAIN CHESS</span
-                ><span>GAMEPLAY × NEURAL VISUALISATION</span>
-              </div>
-              <video
-                data-shared="chess"
-                controls
-                playsinline
-                preload="none"
-                poster="images/bug-brain-chess-poster.jpg"
-                aria-label="Play the Bug Brain Chess project demonstration"
-              >
-                <source src="videos/bug-brain-chess.mp4" type="video/mp4" />
-                Your browser cannot play this recording.
-              </video>
-              <div class="chess-display-bottom mono">
-                <span>RECORDED FROM THE REAL APPLICATION</span
-                ><span>00:32 / DEMO</span>
-              </div>
-            </div>
-            <span class="chess-visual-index mono" aria-hidden="true"
-              >MALECNS / 4,096 NODES / 208,165 CONNECTIONS</span
-            >
-          </div>
-        </div>
-        <div class="project-bottom">
-          <p>A tiny brain. A different kind of chess.</p>
-          <div class="project-stack mono">
-            Python / PyTorch / FastAPI / React / TypeScript / Three.js
-          </div>
-          <a class="button" href="bug-brain-chess.html"
-            >Explore project <span>↗</span></a
-          >
-        </div>
-      </article>
-      <article class="project-showcase project-axion" data-showcase="axion">
-        <div class="project-title-row">
-          <span class="project-number">02</span>
-          <div>
-            <span class="eyebrow"
-              >Collaborative mobile engineering / 2024 — 2026</span
-            >
-            <h2>
-              <a href="axion.html">AXION<span>↗</span></a>
-            </h2>
-          </div>
-        </div>
-        <div class="project-stage">
-          <div class="phone-composition">
-            <div class="orbital-label mono">AXION / HEALTH, IN FOCUS</div>
-            <div class="phone phone-back">
-              <img
-                src="images/mobile3.jpg"
-                width="1440"
-                height="2983"
-                alt="Axion medical report screen"
-                loading="lazy"
-              />
-            </div>
-            <div class="phone phone-front">
-              <img
-                data-shared="axion"
-                src="images/mobile2.jpg"
-                width="1440"
-                height="2983"
-                alt="Axion personalised dashboard"
-                loading="lazy"
-              />
-            </div>
-            <span class="visual-word" aria-hidden="true">Care.</span>
-          </div>
-        </div>
-        <div class="project-bottom">
-          <p>A little clarity. A lot of care.</p>
-          <div class="project-stack mono">Flutter / Dart / Firebase</div>
-          <a class="button" href="axion.html"
-            >Explore project <span>↗</span></a
-          >
-        </div>
-      </article>
-      <article
-        class="project-showcase project-tree project-supporting"
-        data-showcase="tree"
+      <section
+        class="project-reel"
+        data-project-reel
+        aria-label="Selected project showcase"
       >
-        <div class="project-title-row">
-          <span class="project-number">03</span>
-          <div>
-            <span class="eyebrow">Creative frontend engineering / 2025</span>
-            <h2>
-              <a href="3d_portfolio.html"
-                >3D Interactive Portfolio<span>↗</span></a
-              >
-            </h2>
-          </div>
-        </div>
-        <div class="project-stage">
-          <div class="recording-frame">
-            <div class="window-label mono">
-              <span>SPATIAL INTERFACES</span><span>THREE.JS ↗</span>
+        <div class="reel-sticky">
+          <div class="reel-toolbar mono">
+            <span>SELECTED WORK / SCROLL TO EXPLORE</span>
+            <div class="reel-count" aria-hidden="true">
+              <span class="reel-current"
+                ><span class="reel-digits"
+                  ><span>01</span><span>02</span><span>03</span
+                  ><span>04</span></span
+                ></span
+              ><span>/ 04</span>
             </div>
-            <video
-              data-shared="tree"
-              controls
-              playsinline
-              preload="none"
-              poster="images/tree-preview.jpg"
+            <a href="#playground">CONTINUE ↓</a>
+          </div>
+          <div class="reel-panels">
+            <article
+              id="project-chess"
+              class="project-showcase project-chess"
+              data-showcase="chess"
+              aria-labelledby="project-title-chess"
             >
-              <source src="videos/video1.mp4" type="video/mp4" /></video
-            ><span class="media-caption"
-              >Play the original 3D portfolio recording</span
+              <div class="project-title-row">
+                <span class="project-number">01</span>
+                <div>
+                  <span class="eyebrow"
+                    >AI / full-stack engineering / 2026 — Present</span
+                  >
+                  <h2 id="project-title-chess">
+                    <a href="bug-brain-chess.html"
+                      >Bug Brain Chess<span aria-hidden="true">↗</span></a
+                    >
+                  </h2>
+                </div>
+              </div>
+              <div class="project-stage">
+                <div class="project-visual">
+                  <div class="chess-visual">
+                    <div class="chess-grid" aria-hidden="true"></div>
+                    <div class="chess-display">
+                      <div class="chess-display-bar mono">
+                        <span><i></i> BUG BRAIN CHESS</span
+                        ><span>GAMEPLAY × NEURAL VISUALISATION</span>
+                      </div>
+                      <video
+                        data-shared="chess"
+                        controls
+                        playsinline
+                        preload="none"
+                        poster="images/bug-brain-chess-poster.jpg"
+                        aria-label="Play the Bug Brain Chess project demonstration"
+                      >
+                        <source
+                          src="videos/bug-brain-chess.mp4"
+                          type="video/mp4"
+                        />
+                        Your browser cannot play this recording.
+                      </video>
+                      <div class="chess-display-bottom mono">
+                        <span>RECORDED FROM THE REAL APPLICATION</span
+                        ><span>00:32 / DEMO</span>
+                      </div>
+                    </div>
+                    <span class="chess-visual-index mono" aria-hidden="true"
+                      >MALECNS / 4,096 NODES / 208,165 CONNECTIONS</span
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="project-bottom">
+                <p>A tiny brain. A different kind of chess.</p>
+                <div class="project-stack mono">
+                  Python / PyTorch / FastAPI / React / TypeScript / Three.js
+                </div>
+                <a
+                  class="button"
+                  href="bug-brain-chess.html"
+                  aria-label="Explore Bug Brain Chess"
+                  >Explore project <span aria-hidden="true">↗</span></a
+                >
+              </div>
+            </article>
+            <article
+              id="project-axion"
+              class="project-showcase project-axion"
+              data-showcase="axion"
+              aria-labelledby="project-title-axion"
             >
+              <div class="project-title-row">
+                <span class="project-number">02</span>
+                <div>
+                  <span class="eyebrow"
+                    >Collaborative mobile engineering / 2024 — 2026</span
+                  >
+                  <h2 id="project-title-axion">
+                    <a href="axion.html"
+                      >AXION<span aria-hidden="true">↗</span></a
+                    >
+                  </h2>
+                </div>
+              </div>
+              <div class="project-stage">
+                <div class="project-visual">
+                  <div class="phone-composition">
+                    <div class="orbital-label mono">
+                      AXION / HEALTH, IN FOCUS
+                    </div>
+                    <div class="phone phone-back">
+                      <img
+                        src="images/mobile3.jpg"
+                        width="1440"
+                        height="2983"
+                        alt="Axion medical report screen"
+                        loading="lazy"
+                      />
+                    </div>
+                    <div class="phone phone-front">
+                      <img
+                        data-shared="axion"
+                        src="images/mobile2.jpg"
+                        width="1440"
+                        height="2983"
+                        alt="Axion personalised dashboard"
+                        loading="lazy"
+                      />
+                    </div>
+                    <span class="visual-word" aria-hidden="true">Care.</span>
+                  </div>
+                </div>
+              </div>
+              <div class="project-bottom">
+                <p>A little clarity. A lot of care.</p>
+                <div class="project-stack mono">Flutter / Dart / Firebase</div>
+                <a class="button" href="axion.html" aria-label="Explore AXION"
+                  >Explore project <span aria-hidden="true">↗</span></a
+                >
+              </div>
+            </article>
+            <article
+              id="project-tree"
+              class="project-showcase project-tree project-supporting"
+              data-showcase="tree"
+              aria-labelledby="project-title-tree"
+            >
+              <div class="project-title-row">
+                <span class="project-number">03</span>
+                <div>
+                  <span class="eyebrow"
+                    >Creative frontend engineering / 2025</span
+                  >
+                  <h2 id="project-title-tree">
+                    <a href="3d_portfolio.html"
+                      >3D Interactive Portfolio<span aria-hidden="true"
+                        >↗</span
+                      ></a
+                    >
+                  </h2>
+                </div>
+              </div>
+              <div class="project-stage">
+                <div class="project-visual">
+                  <div class="recording-frame">
+                    <div class="recording-window">
+                      <div class="window-label mono">
+                        <span>SPATIAL INTERFACES</span><span>THREE.JS ↗</span>
+                      </div>
+                      <div class="video-clip">
+                        <video
+                          data-shared="tree"
+                          controls
+                          playsinline
+                          preload="none"
+                          poster="images/tree-preview.jpg"
+                        >
+                          <source src="videos/video1.mp4" type="video/mp4" />
+                        </video>
+                      </div>
+                    </div>
+                    <span class="media-caption"
+                      >Play the original 3D portfolio recording</span
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="project-bottom">
+                <p>An early exploration of the spatial web.</p>
+                <div class="project-stack mono">
+                  HTML / CSS / JavaScript / Three.js
+                </div>
+                <a
+                  class="button"
+                  href="3d_portfolio.html"
+                  aria-label="Explore 3D Interactive Portfolio"
+                  >Explore project <span aria-hidden="true">↗</span></a
+                >
+              </div>
+            </article>
+            <article
+              id="project-snake"
+              class="project-showcase project-snake project-supporting"
+              data-showcase="snake"
+              aria-labelledby="project-title-snake"
+            >
+              <div class="project-title-row">
+                <span class="project-number">04</span>
+                <div>
+                  <span class="eyebrow">Algorithms & desktop / 2025</span>
+                  <h2 id="project-title-snake">
+                    <a href="snake.html"
+                      >Snake Battle<span aria-hidden="true">↗</span></a
+                    >
+                  </h2>
+                </div>
+              </div>
+              <div class="project-stage">
+                <div class="project-visual">
+                  <div
+                    class="snake-visual"
+                    aria-label="Illustration of a path through a grid"
+                  >
+                    <div class="snake-trail"></div>
+                    <span class="target-dot"></span
+                    ><span class="visual-word">Think<br />ahead.</span>
+                    <div class="mono visual-caption">
+                      BREADTH-FIRST SEARCH / JAVA + SWING
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="project-bottom">
+                <p>Two snakes. One smart little rivalry.</p>
+                <div class="project-stack mono">Java / Swing / BFS</div>
+                <a
+                  class="button"
+                  href="snake.html"
+                  aria-label="Explore Snake Battle"
+                  >Explore project <span aria-hidden="true">↗</span></a
+                >
+              </div>
+            </article>
           </div>
+          <nav class="reel-index" aria-label="Choose a project">
+            <button
+              type="button"
+              data-project-select="0"
+              aria-controls="project-chess"
+              aria-pressed="true"
+            >
+              <span class="mono">01</span><span>Bug Brain Chess</span
+              ><i aria-hidden="true"></i></button
+            ><button
+              type="button"
+              data-project-select="1"
+              aria-controls="project-axion"
+              aria-pressed="false"
+            >
+              <span class="mono">02</span><span>AXION</span
+              ><i aria-hidden="true"></i></button
+            ><button
+              type="button"
+              data-project-select="2"
+              aria-controls="project-tree"
+              aria-pressed="false"
+            >
+              <span class="mono">03</span><span>3D Interactive Portfolio</span
+              ><i aria-hidden="true"></i></button
+            ><button
+              type="button"
+              data-project-select="3"
+              aria-controls="project-snake"
+              aria-pressed="false"
+            >
+              <span class="mono">04</span><span>Snake Battle</span
+              ><i aria-hidden="true"></i>
+            </button>
+          </nav>
         </div>
-        <div class="project-bottom">
-          <p>An early exploration of the spatial web.</p>
-          <div class="project-stack mono">
-            HTML / CSS / JavaScript / Three.js
-          </div>
-          <a class="button" href="3d_portfolio.html"
-            >Explore project <span>↗</span></a
-          >
-        </div>
-      </article>
-      <article
-        class="project-showcase project-snake project-supporting"
-        data-showcase="snake"
-      >
-        <div class="project-title-row">
-          <span class="project-number">04</span>
-          <div>
-            <span class="eyebrow">Algorithms & desktop / 2025</span>
-            <h2>
-              <a href="snake.html">Snake Battle<span>↗</span></a>
-            </h2>
-          </div>
-        </div>
-        <div class="project-stage">
-          <div
-            class="snake-visual"
-            aria-label="Illustration of a path through a grid"
-          >
-            <div class="snake-trail"></div>
-            <span class="target-dot"></span
-            ><span class="visual-word">Think<br />ahead.</span>
-            <div class="mono visual-caption">
-              BREADTH-FIRST SEARCH / JAVA + SWING
-            </div>
-          </div>
-        </div>
-        <div class="project-bottom">
-          <p>Two snakes. One smart little rivalry.</p>
-          <div class="project-stack mono">Java / Swing / BFS</div>
-          <a class="button" href="snake.html"
-            >Explore project <span>↗</span></a
-          >
-        </div>
-      </article>
+      </section>
       <section class="lab section-pad" id="playground">
         <div class="lab-copy">
           <span class="eyebrow">03 / PLAY WITH THE LOGIC</span>

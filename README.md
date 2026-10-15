@@ -33,6 +33,8 @@ Rivindu_Kowlinda_CV.pdf is an exact copy of the supplied latest CV. The previous
 
 ## Media and motion
 
+The homepage projects share one sticky stage. Native scroll position coordinates media, copy, rolling numbering, index progress and background colour. The project index scrolls through the same reversible presentation; reduced motion and short screens expose the four articles in normal flow. Tree's recording is rounded and clipped in the showcase, case hero and gallery. See [SHOWCASE-REPORT.md](SHOWCASE-REPORT.md) for implementation details, history findings and verification.
+
 The supplied chess recording is encoded as a 1920 × 930, 30 fps H.264 MP4, approximately 1.47 MB and 32.67 seconds. It has a real poster frame, native playback controls and inline mobile playback. On the homepage, preload="none" defers media until the demo approaches the viewport; metadata is then requested to prepare the controls. The dedicated case requests metadata immediately. It does not autoplay. The additional graph is explicitly labelled a conceptual illustration; the actual neural visualisation remains in the recording.
 
 The introduction uses the same WebGL scene, camera and ambient clock as the homepage. Its transform is calculated as an offset from the homepage pose, so progress zero is exactly the idle pose. The first render samples the intro state, and the final state is rendered before the intro overlay is removed. See [MOTION-REPORT.md](MOTION-REPORT.md) for the actual defect, repair and measurements.
@@ -50,6 +52,7 @@ The existing engine controls, BFS experiment, contact form, keyboard access, men
 - src/render-project.js: shared case templates and supporting project visuals.
 - src/render-chess.js: chess case study and shared video composition.
 - src/render-experience.js: dedicated industry experience section.
+- src/render-showcase.js and src/showcase.js: shared project stage and deterministic scroll choreography.
 - src/chapter-motion.js: reversible chapter reveals, timeline progress and conceptual graph.
 - src/system.js and src/engine/model.js: persistent WebGL engine and scene choreography.
 - src/main.js: introduction, global controls, page lifecycle and contact behaviour.

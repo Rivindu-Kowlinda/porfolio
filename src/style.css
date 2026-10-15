@@ -2609,6 +2609,7 @@ body.routing .site-header {
 .project-stage,
 .case-main-visual {
   display: flow-root;
+  perspective: 1200px;
 }
 
 /* Current work. Motion values are owned by the chapter controller. */
@@ -3366,5 +3367,426 @@ body.routing .site-header {
     font-size: 6px;
     margin-top: 45px;
     line-height: 1.6;
+  }
+}
+
+/* A single scroll-driven project stage. Linear HTML remains the fallback. */
+.project-visual {
+  width: 100%;
+  height: 100%;
+  display: flow-root;
+  transform-origin: 50% 50%;
+}
+.project-reel {
+  position: relative;
+  z-index: 3;
+  background: #dce5e5;
+}
+.reel-toolbar,
+.reel-index {
+  display: none;
+}
+.reel-mounted .reel-index {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  padding: 18px var(--pad);
+}
+.reel-index button {
+  background: none;
+  color: inherit;
+  border: 0;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+  padding: 16px 0;
+  opacity: 0.45;
+  font-size: 12px;
+  cursor: pointer;
+}
+.reel-index button[aria-pressed="true"] {
+  opacity: 1;
+}
+.reel-index button > .mono {
+  font-size: 8px;
+}
+.reel-index button::after,
+.reel-index button i {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 2px;
+  background: #17252124;
+  content: "";
+}
+.reel-index button i {
+  background: var(--blue);
+  transform: scaleX(var(--index-fill, 0));
+  transform-origin: left;
+}
+.reel-ready .reel-sticky {
+  position: sticky;
+  top: var(--reel-top);
+  height: var(--reel-height);
+  display: flex;
+  flex-direction: column;
+  padding: 18px var(--pad) 8px;
+  overflow: hidden;
+  isolation: isolate;
+}
+.reel-ready .reel-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  font-size: 8px;
+  flex: 0 0 22px;
+}
+.reel-toolbar > span {
+  flex: 1;
+}
+.reel-toolbar > a {
+  margin-left: 24px;
+  font-size: 7px;
+}
+.reel-count {
+  display: flex;
+  gap: 8px;
+}
+.reel-current {
+  display: block;
+  height: 1em;
+  overflow: hidden;
+}
+.reel-digits {
+  display: block;
+  transform: translateY(calc(var(--reel-position, 0) * -1em));
+}
+.reel-digits > span {
+  display: block;
+  height: 1em;
+  line-height: 1;
+}
+.reel-ready .reel-panels {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+}
+.reel-ready .project-showcase {
+  position: absolute;
+  inset: 0;
+  border: 0;
+  padding: 14px 0 10px;
+  display: grid;
+  grid-template-rows: 86px minmax(0, 1fr) 78px;
+  gap: 8px;
+  overflow: visible;
+  background: transparent;
+}
+.reel-ready .project-showcase:not(:first-child) {
+  visibility: hidden;
+}
+.reel-ready .project-number {
+  display: none;
+}
+.reel-ready .project-title-row {
+  min-width: 0;
+}
+.reel-ready .project-title-row .eyebrow {
+  font-size: 8px;
+  margin-bottom: 10px;
+}
+.reel-ready .project-title-row h2 {
+  font-size: clamp(34px, 5.2vw, 76px);
+  line-height: 1;
+}
+.reel-ready .project-title-row h2 a span {
+  font-size: 44px;
+  margin-left: 20px;
+}
+.reel-ready .project-stage {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  margin: 0;
+  container-type: size;
+}
+.reel-ready .project-visual {
+  will-change: transform, opacity;
+}
+.reel-ready .project-bottom {
+  padding-top: 15px;
+  grid-template-columns: 1fr 1fr auto;
+  gap: 22px;
+}
+.reel-ready .project-bottom p {
+  font-size: 15px;
+  max-width: 300px;
+}
+.reel-ready .project-stack {
+  font-size: 8px;
+  max-width: 280px;
+  grid-column: 2;
+  grid-row: 1;
+}
+.reel-ready .project-bottom .button {
+  font-size: 11px;
+  padding: 14px 20px;
+  min-height: 44px;
+  grid-column: 3;
+  grid-row: 1;
+}
+.reel-ready .reel-index {
+  flex: 0 0 58px;
+  padding: 8px 0 0;
+  gap: 24px;
+}
+.reel-ready .chess-visual {
+  padding: 8px 0 24px;
+}
+.reel-ready .chess-display {
+  width: min(92%, calc((100cqh - 82px) * 2.065));
+}
+.reel-ready .chess-display-bar {
+  font-size: 7px;
+  padding: 8px 10px;
+}
+.reel-ready .chess-display-bottom {
+  font-size: 6px;
+  padding: 8px 10px 2px;
+}
+.reel-ready .chess-visual-index {
+  bottom: 2px;
+}
+.reel-ready .phone {
+  height: min(90%, 440px);
+  width: auto;
+  aspect-ratio: 225/475;
+  border-width: 5px;
+  border-radius: 28px;
+}
+.reel-ready .orbital-label {
+  top: 16%;
+}
+.reel-ready .phone-composition .visual-word {
+  font-size: clamp(100px, 17vw, 260px);
+  bottom: 0;
+}
+.reel-ready .snake-visual {
+  height: 85%;
+  width: 85%;
+  top: 6%;
+}
+.reel-ready .snake-visual .visual-word {
+  font-size: clamp(70px, 10vw, 140px);
+}
+
+/* Clip both the element and its composited pixels, including native controls. */
+.video-clip {
+  border-radius: 14px;
+  overflow: hidden;
+  isolation: isolate;
+  clip-path: inset(0 round 14px);
+  transform: translateZ(0);
+  background: #10151c;
+}
+.video-clip video {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  border-radius: inherit;
+}
+.project-tree .project-visual {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.recording-frame {
+  height: auto;
+  flex-shrink: 0;
+  margin-left: 0;
+  margin-right: 0;
+  background: transparent;
+  box-shadow: none;
+}
+.recording-window {
+  border-radius: 16px;
+  overflow: hidden;
+  isolation: isolate;
+  background: #252b25;
+  box-shadow: 20px 35px 45px #4c3e2320;
+  padding-bottom: 8px;
+}
+.recording-window .video-clip {
+  margin: 0 8px;
+  border-radius: 10px;
+  clip-path: inset(0 round 10px);
+  aspect-ratio: 2416/1440;
+}
+.recording-frame video {
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+}
+.recording-frame .media-caption {
+  margin-top: 13px;
+  display: block;
+}
+.reel-ready .recording-frame {
+  width: min(86%, calc((100cqh - 75px) * 1.678));
+  margin: 0;
+  top: 50%;
+  transform: translateY(-50%) rotate(2deg);
+}
+.case-recording > .video-clip {
+  margin-top: 20px;
+}
+.case-recording .video-clip video {
+  max-height: none;
+}
+@media (max-width: 900px) {
+  .reel-ready .project-title-row h2 {
+    font-size: 4.9vw;
+  }
+  .reel-ready .project-bottom {
+    gap: 15px;
+  }
+  .reel-ready .project-bottom p {
+    font-size: 13px;
+  }
+  .reel-ready .reel-index {
+    gap: 14px;
+  }
+  .reel-index button {
+    font-size: 10px;
+    gap: 7px;
+  }
+}
+@media (max-width: 600px) {
+  .reel-ready .reel-sticky {
+    padding: 12px var(--pad) 6px;
+  }
+  .reel-ready .reel-toolbar {
+    font-size: 7px;
+    flex-basis: 20px;
+  }
+  .reel-toolbar > a {
+    font-size: 6px;
+    margin-left: 6px;
+  }
+  .reel-ready .project-showcase {
+    grid-template-rows: 100px minmax(0, 1fr) 116px;
+    gap: 8px;
+    padding-top: 20px;
+  }
+  .reel-ready .project-title-row .eyebrow {
+    font-size: 7px;
+    line-height: 1.5;
+  }
+  .reel-ready .project-title-row h2 {
+    font-size: clamp(32px, 9.6vw, 44px);
+    line-height: 0.98;
+  }
+  .reel-ready .project-title-row h2 a {
+    align-items: end;
+  }
+  .reel-ready .project-title-row h2 a span {
+    font-size: 32px;
+    margin-left: 12px;
+  }
+  .reel-ready .project-bottom {
+    grid-template-columns: 1fr auto;
+    gap: 8px 10px;
+    padding-top: 12px;
+  }
+  .reel-ready .project-bottom p {
+    grid-column: 1/-1;
+    grid-row: 1;
+    max-width: none;
+    font-size: 14px;
+  }
+  .reel-ready .project-stack {
+    font-size: 8px;
+    line-height: 1.6;
+    max-width: 190px;
+    grid-column: 1;
+    grid-row: 2;
+  }
+  .reel-ready .project-bottom .button {
+    font-size: 9px;
+    padding: 11px 13px;
+    gap: 12px;
+    grid-column: 2;
+    grid-row: 2;
+  }
+  .reel-ready .reel-index {
+    gap: 10px;
+    flex-basis: 66px;
+    padding-top: 8px;
+  }
+  .reel-index button {
+    display: block;
+    font-size: 9px;
+    line-height: 1.3;
+    padding: 11px 0 4px;
+  }
+  .reel-index button > span {
+    display: block;
+  }
+  .reel-index button > .mono {
+    font-size: 6px;
+    margin-bottom: 4px;
+  }
+  .reel-ready .chess-display {
+    width: 100%;
+    padding: 5px;
+    border-radius: 10px;
+  }
+  .reel-ready .chess-display-bar {
+    padding: 6px 3px;
+    font-size: 5px;
+  }
+  .reel-ready .chess-display-bottom {
+    font-size: 5px;
+    padding: 6px 2px 2px;
+  }
+  .reel-ready .chess-visual-index {
+    font-size: 5px;
+  }
+  .reel-ready .phone {
+    height: min(89%, 320px);
+    border-width: 4px;
+    border-radius: 22px;
+  }
+  .reel-ready .orbital-label {
+    font-size: 5px;
+    top: 10%;
+  }
+  .reel-ready .recording-frame {
+    width: 92%;
+  }
+  .recording-window {
+    border-radius: 12px;
+    padding-bottom: 5px;
+  }
+  .recording-window .video-clip {
+    margin: 0 5px;
+    border-radius: 8px;
+    clip-path: inset(0 round 8px);
+  }
+  .recording-frame .media-caption {
+    margin-top: 10px;
+  }
+  .reel-ready .snake-visual {
+    width: 95%;
+    height: 80%;
+    top: 8%;
+  }
+  .reel-ready .snake-visual .visual-word {
+    font-size: 76px;
   }
 }

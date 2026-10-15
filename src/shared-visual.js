@@ -23,6 +23,11 @@ const geometry = [
   "lineHeight",
   "letterSpacing",
   "borderRadius",
+  "borderTopWidth",
+  "borderRightWidth",
+  "borderBottomWidth",
+  "borderLeftWidth",
+  "opacity",
 ];
 const tree = (root) => [root, ...root.querySelectorAll("*")];
 function snapshot(root) {
@@ -31,9 +36,11 @@ function snapshot(root) {
     const css = [...computed]
       .map((key) => `${key}:${computed.getPropertyValue(key)};`)
       .join("");
+    const bounds = node.getBoundingClientRect();
     return {
       node,
       css,
+      bounds,
       original: node.getAttribute("style"),
       values: Object.fromEntries(geometry.map((key) => [key, computed[key]])),
     };
@@ -44,14 +51,15 @@ export function carryVisual(source) {
   const rect = source.getBoundingClientRect();
   if (rect.bottom < 0 || rect.top > innerHeight) return null;
   const snapshots = snapshot(source);
-  const initial = tree(source)
-    .slice(1)
-    .map((node) => node.getBoundingClientRect());
+  const initial = snapshots.slice(1).map(({ bounds }) => bounds);
   const placeholder = document.createElement("div");
   placeholder.style.cssText = `height:${source.offsetHeight}px;margin:${getComputedStyle(source).margin};`;
   source.replaceWith(placeholder);
-  snapshots.forEach(({ node, css }) => {
+  snapshots.forEach(({ node, css, values }) => {
     node.style.cssText = css;
+    // Logical/shorthand computed properties can overwrite their physical
+    // counterparts when serialised. Apply resolved geometry last.
+    Object.assign(node.style, values);
   });
   Object.assign(source.style, {
     position: "fixed",
@@ -79,13 +87,14 @@ export function carryVisual(source) {
         );
       }),
   );
-  let destination;
+  let destination, destinationSnapshots;
   return {
     startErrorPx: initialError,
     animate(timeline, dest, duration, ease) {
       destination = dest;
       const end = snapshot(dest),
         r = dest.getBoundingClientRect();
+      destinationSnapshots = end;
       dest.style.visibility = "hidden";
       timeline.to(
         source,
@@ -94,6 +103,7 @@ export function carryVisual(source) {
           top: r.top,
           width: r.width,
           height: r.height,
+          perspectiveOrigin: end[0].values.perspectiveOrigin,
           duration,
           ease,
           autoRound: false,
@@ -123,7 +133,10 @@ export function carryVisual(source) {
           .slice(1)
           .map((node) => node.getBoundingClientRect());
         const visual = source.firstElementChild;
-        snapshots.slice(1).forEach(({ node, original }) => {
+        snapshots.slice(1).forEach(({ node }, i) => {
+          // The incoming showcase may have its own scroll pose. Restore that
+          // pose, not the outgoing page's inline animation styles.
+          const original = destinationSnapshots[i + 1].original;
           if (original === null) node.removeAttribute("style");
           else node.setAttribute("style", original);
           // CSSPlugin must re-read the restored stylesheet on the next tween.
