@@ -2,9 +2,12 @@ import * as T from "three";
 import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
 import { createEngine } from "./engine/model.js";
 import { gsap } from "gsap";
-import { motion } from "./motion.js";
+import { motion, introPose } from "./motion.js";
 const clamp = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
-export async function createSystem(host, { reduced, onLayer }) {
+export async function createSystem(
+  host,
+  { reduced, onLayer, initialIntro = 0 },
+) {
   const renderer = new T.WebGLRenderer({
     alpha: true,
     antialias: true,
@@ -54,7 +57,7 @@ export async function createSystem(host, { reduced, onLayer }) {
   shadow.position.set(0, -2, -1);
   scene.add(shadow);
   const state = {
-    intro: 0,
+    intro: initialIntro,
     route: 1,
     manual: 0,
     override: 0,
@@ -62,6 +65,11 @@ export async function createSystem(host, { reduced, onLayer }) {
     ry: 0,
     selected: -1,
   };
+  const introAudit =
+    initialIntro > 0 && new URLSearchParams(location.search).has("motion-audit")
+      ? []
+      : null;
+  let auditSettled = 0;
   let reducedMotion = reduced(),
     visible = true,
     raf = 0,
@@ -168,12 +176,15 @@ export async function createSystem(host, { reduced, onLayer }) {
         opacity = 1;
         scale = mix(scale, mobile ? 0.65 : 1);
         rim.intensity = 4 + enter * 2;
+        // The scene belongs to this chapter. End its visibility continuously
+        // here, so route compositing cannot resurrect it over later sections.
+        opacity *= clamp(r.bottom / h);
       }
     }
     if (showcases.length) {
       const first = viewportBounds(layout.first);
       if (first.top < h) {
-        opacity = clamp(first.top / h);
+        opacity = Math.min(opacity, clamp(first.top / h));
         const exit = 1 - opacity;
         ry += exit;
         scale = T.MathUtils.lerp(scale, 0.8, exit);
@@ -199,25 +210,21 @@ export async function createSystem(host, { reduced, onLayer }) {
       rz = -0.25;
       expl = state.manual * state.override;
     }
-    if (state.intro > 0) {
-      opacity = 1;
-      px = mobile ? 0 : 1.3 * state.intro;
-      py = 0.2 * state.intro;
-      z += state.intro * 2;
-      ry += state.intro * 2.5;
-      expl = Math.max(expl, state.intro * 3.5);
-    }
-    let pose = {
-      px,
-      py,
-      rz,
-      rx: rx + state.rx + (reducedMotion ? 0 : pointer.y * 0.06),
-      ry: ry + state.ry + (reducedMotion ? 0 : pointer.x * 0.08),
-      z,
-      scale,
-      expl,
-      opacity,
-    };
+    let pose = introPose(
+      {
+        px,
+        py,
+        rz,
+        rx: rx + state.rx + (reducedMotion ? 0 : pointer.y * 0.06),
+        ry: ry + state.ry + (reducedMotion ? 0 : pointer.x * 0.08),
+        z,
+        scale,
+        expl,
+        opacity,
+      },
+      state.intro,
+      mobile,
+    );
     if (routeFrom) {
       pose = Object.fromEntries(
         Object.entries(pose).map(([key, value]) => [
@@ -234,11 +241,28 @@ export async function createSystem(host, { reduced, onLayer }) {
     camera.lookAt(0, 0, 0);
     host.style.opacity = String(pose.opacity);
     engine.update(time, pose.expl, state.selected, reducedMotion);
-    shadow.visible = !!hero && !state.intro;
-    shadowMat.opacity = clamp(1 - expl * 0.6) * 0.55;
+    shadow.visible = !!hero;
+    shadowMat.opacity = clamp(1 - pose.expl * 0.6) * 0.55;
     host.dataset.assembly = pose.expl.toFixed(2);
     host.dataset.rotation = engine.root.rotation.y.toFixed(2);
     host.dataset.motion = reducedMotion ? "reduced" : "full";
+    if (introAudit && auditSettled < 4) {
+      const introducing = document.body.classList.contains("introducing");
+      introAudit.push({
+        at: performance.now(),
+        intro: state.intro,
+        introducing,
+        ...pose,
+        shadow: shadowMat.opacity,
+        aspect: camera.aspect,
+        width: innerWidth,
+        height: innerHeight,
+        ambientTime: time,
+      });
+      if (!introducing && state.intro === 0) auditSettled++;
+      if (auditSettled === 4)
+        host.dataset.introAudit = JSON.stringify(introAudit);
+    }
     return pose.opacity > 0;
   }
   function frame(now) {
@@ -413,6 +437,7 @@ export async function createSystem(host, { reduced, onLayer }) {
   }
   resize();
   bindPage();
+  sample();
   renderer.render(scene, camera);
   raf = requestAnimationFrame(frame);
   renderer.domElement.addEventListener(
@@ -428,6 +453,10 @@ export async function createSystem(host, { reduced, onLayer }) {
   );
   return {
     state,
+    renderCurrent() {
+      sample();
+      renderer.render(scene, camera);
+    },
     bindPage,
     explode,
     reset,

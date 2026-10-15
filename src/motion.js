@@ -23,3 +23,17 @@ export function stageOffset(top, height, viewport, scroll, reduced) {
 export function clampScroll(value, height, viewport) {
   return Math.max(0, Math.min(value, Math.max(0, height - viewport)));
 }
+
+// The intro is an offset from the live hero pose, including its responsive Y.
+// At zero it is exactly the hero pose; there is no second coordinate system.
+export function introPose(base, progress, mobile) {
+  const t = Math.max(0, Math.min(1, progress));
+  return {
+    ...base,
+    px: base.px + (mobile ? 0 : 1.3) * t,
+    py: base.py + (0.2 - base.py) * t,
+    z: base.z + 2 * t,
+    ry: base.ry + 2.5 * t,
+    expl: Math.max(base.expl, 3.5 * t),
+  };
+}

@@ -5,11 +5,9 @@ import { carryVisual } from "./shared-visual.js";
 const routes = new Set([
   "index.html",
   "axion.html",
-  "OOP.html",
+  "bug-brain-chess.html",
   "snake.html",
   "3d_portfolio.html",
-  "SD2.html",
-  "SD1.html",
   "",
 ]);
 const pagePath = (url) => url.pathname.replace(/index\.html$/, "");
@@ -161,14 +159,30 @@ export function createRouter({ system, mount, unmount, reduced, closeMenu }) {
             ...incoming.querySelectorAll(
               ".case-main-visual img, .project-stage img",
             ),
-          ].map(async (img) => {
-            img.loading = "eager";
-            try {
-              await img.decode();
-            } catch {
-              /* Native image fallback remains available. */
-            }
-          }),
+          ]
+            .map(async (img) => {
+              img.loading = "eager";
+              try {
+                await img.decode();
+              } catch {
+                /* Native image fallback remains available. */
+              }
+            })
+            .concat(
+              [
+                ...incoming.querySelectorAll(
+                  ".case-main-visual video[poster], .project-stage video[poster]",
+                ),
+              ].map(async (video) => {
+                const poster = new Image();
+                poster.src = video.poster;
+                try {
+                  await poster.decode();
+                } catch {
+                  /* Native fallback. */
+                }
+              }),
+            ),
         ),
         signal,
       );
@@ -181,11 +195,36 @@ export function createRouter({ system, mount, unmount, reduced, closeMenu }) {
       const sticky = oldMain.querySelector(".engine-sticky");
       const stickyRect = sticky?.getBoundingClientRect();
       const sharedId = incoming.dataset.case || oldMain.dataset.case;
-      if (!oldMain.dataset.case && sharedId)
-        homePositions.set(sharedId, oldScroll);
+      if (!oldMain.dataset.case && sharedId) {
+        const stageRect = findStage(oldMain, sharedId)?.getBoundingClientRect();
+        homePositions.set(sharedId, {
+          scroll: oldScroll,
+          width: innerWidth,
+          height: innerHeight,
+          reduced: reduced(),
+          // Preserve the visual's viewport position when responsive reflow
+          // makes the old absolute scroll offset point at a different section.
+          stageTop:
+            stageRect && stageRect.bottom > 0 && stageRect.top < innerHeight
+              ? stageRect.top / innerHeight
+              : 0.25,
+        });
+      }
       let targetY = scroll?.[1];
-      if (targetY == null && !incoming.dataset.case && url.hash === "#projects")
-        targetY = homePositions.get(sharedId);
+      if (!incoming.dataset.case && url.hash === "#projects") {
+        const saved = homePositions.get(sharedId);
+        const reflowed =
+          saved &&
+          (saved.width !== innerWidth ||
+            saved.height !== innerHeight ||
+            saved.reduced !== reduced());
+        if (reflowed) {
+          const stage = findStage(incoming, sharedId);
+          if (stage)
+            targetY =
+              stage.getBoundingClientRect().top - saved.stageTop * innerHeight;
+        } else if (targetY == null) targetY = saved?.scroll;
+      }
       if (targetY == null) {
         const anchor =
           url.hash &&
@@ -281,6 +320,7 @@ export function createRouter({ system, mount, unmount, reduced, closeMenu }) {
           maxMs: Math.max(0, ...sorted),
           startErrorPx: startError ?? null,
           endpointErrorPx: endpointError ?? null,
+          intervals: frames.slice(1),
         });
       }
     } catch (error) {

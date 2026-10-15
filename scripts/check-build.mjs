@@ -38,8 +38,21 @@ assert.ok(
 for (const p of projects) {
   const html = readFileSync(join(root, projectPaths[p.id]), "utf8");
   assert.ok(html.includes(p.title));
-  assert.ok(html.includes("The original work."));
+  assert.ok(
+    html.includes(p.id === "chess" ? "Built to" : "The original work."),
+  );
 }
 console.log(
-  "Production audit passed: all seven documents, local links/media, semantic headings and portrait-free assets.",
+  "Production audit passed: all active documents, local links/media, semantic headings and portrait-free assets.",
+);
+
+for (const file of ["OOP.html", "SD1.html", "SD2.html"])
+  assert.ok(
+    readFileSync(join(root, file), "utf8").includes("index.html#projects"),
+  );
+assert.ok(existsSync(join(root, "Rivindu_Kowlinda_CV.pdf")));
+assert.ok(!existsSync(join(root, "CV.pdf")));
+assert.deepEqual(
+  readFileSync(join(root, "Rivindu_Kowlinda_CV.pdf")),
+  readFileSync("Rivindu_Kowlinda_CV.pdf"),
 );

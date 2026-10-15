@@ -1,4 +1,5 @@
 import { gsap } from "gsap";
+import { mountChapters } from "./chapter-motion.js";
 import { mountPlayground } from "./pathfinder.js";
 import { createRouter } from "./router.js";
 import { animateDialog } from "./dialog-motion.js";
@@ -76,8 +77,8 @@ const layerText = [
   ],
   [
     "The circuit carrier. Interfaces, services and data become useful when they work together.",
-    "See it in Ticket Manager ↗",
-    "OOP.html",
+    "Explore Bug Brain Chess ↗",
+    "bug-brain-chess.html",
   ],
 ];
 function showLayer(i) {
@@ -99,7 +100,24 @@ function mount() {
   const cleanups = [...main.querySelectorAll("[data-playground]")].map((r) =>
     mountPlayground(r, reduced),
   );
-  cleanups.push(mountAccordions(main, reduced));
+  cleanups.push(mountAccordions(main, reduced), mountChapters(main, reduced));
+  // Prepare native controls before the demo enters view, without fetching its
+  // media during the initial homepage hero. Playback remains user initiated.
+  const mediaObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach(({ target, isIntersecting }) => {
+        if (!isIntersecting) return;
+        target.preload = "metadata";
+        if (target.readyState === 0 && target.paused) target.load();
+        mediaObserver.unobserve(target);
+      });
+    },
+    { rootMargin: "600px" },
+  );
+  main
+    .querySelectorAll('video[data-shared="chess"][preload="none"]')
+    .forEach((video) => mediaObserver.observe(video));
+  cleanups.push(() => mediaObserver.disconnect());
   const abort = new AbortController(),
     opt = { signal: abort.signal };
   addEventListener(
@@ -259,6 +277,7 @@ function finishIntro() {
   if (scene) {
     gsap.killTweensOf(scene.state, "intro");
     scene.state.intro = 0;
+    scene.renderCurrent();
   }
   document.body.classList.remove("introducing");
   if ($("#intro")) $("#intro").hidden = true;
@@ -282,7 +301,11 @@ async function boot() {
   } catch {}
   const intro = $("#intro");
   const play =
-    !!intro && !seen && !reduced() && !location.hash && scrollY < 100;
+    !!intro &&
+    (!seen || new URLSearchParams(location.search).has("intro")) &&
+    !reduced() &&
+    !location.hash &&
+    scrollY < 100;
   if (play) {
     intro.hidden = false;
     document.body.classList.add("introducing");
@@ -294,7 +317,12 @@ async function boot() {
     if (new URLSearchParams(location.search).get("graphics") === "off")
       throw new Error("Static graphics requested");
     const { createSystem } = await import("./system.js");
-    scene = await createSystem($("#world"), { reduced, onLayer: showLayer });
+    scene = await createSystem($("#world"), {
+      reduced,
+      onLayer: showLayer,
+      initialIntro:
+        play && document.body.classList.contains("introducing") ? 1 : 0,
+    });
     if (play && document.body.classList.contains("introducing")) {
       scene.state.intro = 1;
       introTimeline = gsap.timeline({ onComplete: finishIntro });

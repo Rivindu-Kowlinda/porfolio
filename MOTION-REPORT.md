@@ -1,92 +1,86 @@
-# Motion repair report — 15 October 2026
+# Portfolio content and motion repair — 15 October 2026
 
-This pass repairs the existing Engine 001 design. It retains the six original URLs, project content, creative direction, portrait-free presentation, contact links and recordings.
+This report describes the current redo against the restored repository. The existing cinematic design and shared-visual router were retained; the previous report is not treated as proof that these changes worked.
 
-## 1. What caused the broken project transition
+## Intro defect and repair
 
-The supplied recording reproduced several problems in `src/router.js` and `src/system.js`:
+The actual position discontinuity was in src/system.js. The homepage assigned py = -0.08 on desktop and -0.25 on phones. While intro > 0, a later branch replaced that with py = 0.2 * intro. The intro therefore approached zero, then switched to the negative homepage value on its final frame. This produced a real transform snap.
 
-- Only the screenshot image was cloned. Its transformed bounding rectangle became a flat, fixed rectangle, losing both phone frames, their rotations and the nested perspective. The temporary image also used `object-fit: contain` while the original phone used `cover`.
-- Three independent sequences ran consecutively: move the screenshot into an arbitrary intermediate rectangle, swap the page and move it again, then exit the WebGL portal. The screenshot and engine consequently spent portions of the sequence stationary.
-- The fetch completed after the first movement, so a slow response could introduce another hold.
-- Replacing the page called `bindPage()`, resetting the engine's base pose while the enlarged engine was still visible. The portal also forced a normally hidden engine back over the project.
-- No font/image preparation established the destination's final layout before animation.
-- The wider audit found fractional CSS dimensions being rounded by GSAP and a collapsing top margin on the tree recording. These caused measurable endpoint discrepancies.
+src/motion.js now exports introPose(base, progress, mobile). Each intro transform is an offset from the sampled base pose. In particular, py = base.py + (0.2 - base.py) * progress. Progress zero returns the base pose exactly, including position, orientation, scale and camera distance. The renderer receives initialIntro before its first sampled render. Completion explicitly renders progress zero before removing the overlay. The renderer, camera and ambient clock persist.
 
-## 2. How continuity now works
+The canvas keeps the same stacking level through intro/home. Shadow opacity follows assembly continuously, instead of appearing at a binary handoff. Neither an extra fade nor a slower intro conceals the position defect.
 
-`src/shared-visual.js` transfers the actual complete visual tree into a persistent fixed layer. Axion keeps both phones, their frames, image fitting, transforms, transform origins and perspective. Other projects carry their entire screen, grid or recording composition.
+Measured final positive and first zero-progress frames:
 
-The router prepares the incoming HTML and waits for fonts and project images to decode before beginning the shot. It prefetches route HTML on pointer intent, focus and touch. An immediate busy cursor/ARIA state acknowledges preparation. A newer navigation can cancel preparation without waiting for an unused request.
+| Property | Desktop, 1280 × 720 | Phone, 390 × 844 |
+| --- | --- | --- |
+| Last positive progress | 0.000002 | 0.000002 |
+| Last positive py | -0.07999944 | -0.2499991 |
+| First zero py | -0.08 | -0.25 |
+| Camera z at zero | 10.4 | 10.7 |
+| Scale at zero | 1 | 0.55 |
+| Rotation at zero | (0.28, -0.4, -0.25) | (0.28, -0.4, -0.25) |
+| Shadow opacity at zero | 0.55 | 0.55 |
 
-At handoff, the old document is retained as an inert visual layer. The incoming document is mounted and its actual destination geometry is measured. One 0.92-second GSAP timeline moves the full visual and reveals the new document with a coordinated clipping boundary. There is no arbitrary intermediate screenshot rectangle, image fade, second flight or post-flight engine hold.
+The viewport/aspect and transform values remain unchanged when the introducing class is removed. The ambient clock continues. Regression tests assert zero-progress equality and continuity near zero for both responsive poses.
 
-The carried visual is adopted into the destination at the end. Fractional values are preserved with `autoRound: false`. Explicit formatting contexts prevent the recording margin from collapsing differently. The persistent WebGL renderer interpolates from its captured pose on the same timeline; it is no longer forced into an unrelated giant portal when opening a project whose engine is already offscreen.
+## Project transitions
 
-History restoration, direct HTML routes and normal-navigation error fallback remain. Duplicate requests do not create duplicate route entries; newer requests are queued during a running shot. Back/Forward can supersede it safely. Resize and reduced-motion changes settle the active shot and clean up its temporary layers. If the source visual is outside the viewport, the route uses the document transition without manufacturing an offscreen shared element.
+The restored shared-element implementation already carries the actual complete visual subtree, preserves fractional geometry and runs one coordinated route timeline. It was retained and tested with the new chess composition.
 
-## 3. Toolkit accordions
+This redo adds video poster decoding to the incoming document's preparation. An initial chess route showed a 136 ms interval before this change; the repeated measured desktop chess entry after preparation had a maximum interval of 22.3 ms. Preparation occurs before animation, and can be cancelled by newer navigation. A final Chromium poster check also exposed a native loading indicator while metadata was unavailable. The case now requests metadata, and the homepage requests it only as the demo approaches the viewport. Both remain paused until the visitor plays them.
 
-`src/accordion.js` keeps the native `details`/`summary` semantics and progressive fallback. Each row has one owned timeline:
+A second defect surfaced during visual verification: the chapter exit reduced engine opacity, but a later showcase calculation overwrote it with a higher value. Elevating the canvas during routing could then expose the hidden engine over the project. The showcase calculation now takes the minimum of both visibility values, so it cannot revive a scene whose chapter has ended.
 
-- The container animates between its current measured height and the content's natural height.
-- The plus rotates smoothly and the content reveals with a small stagger.
-- Closing retains the content until contraction finishes, then closes the native disclosure.
-- A repeated click kills the previous timeline and retargets from the current visible height and styles.
-- `ResizeObserver` updates an opening target when wrapping changes; settled open panels use `height: auto`.
-- `aria-expanded`, `aria-controls`, inert closed content, native keyboard activation and focus return are maintained.
-- Reduced motion completes the state change immediately.
+Home return positions also record viewport dimensions and the project's relative viewport position. Returning after responsive reflow uses the incoming project's geometry instead of an obsolete absolute scroll offset. Same-size navigation preserves the original scroll position.
 
-The four rows remain independently expandable. No arbitrary maximum heights or display-property animation are used.
+## Accordions and chapter motion
 
-## 4. Other repaired motion
+Toolkit and Experience panels use one owned timeline per row, with current-height measurement, interrupted-animation retargeting, coordinated icon/content movement and height:auto after settling. Native summary activation supports Enter and Space. Closed content is inert and closing returns focus when necessary.
 
-- Project parallax now derives from cached, untransformed layout positions. It no longer feeds its own previous transform back into the next calculation. Offscreen offsets are bounded.
-- The outgoing sticky engine chapter retains its captured viewport position when moved into the fixed transition layer.
-- WebGL opacity follows the scene clock directly; an extra CSS opacity transition no longer delays it.
-- WebGL scroll geometry is cached and invalidated on page/size changes instead of reading multiple layout rectangles in every render frame. The engine's scroll exit blends rotation and scale continuously.
-- Engine assembly takes control from the currently displayed separation. Reset blends back to automatic state, and property-specific overwrite prevents competing control tweens.
-- Engine buttons, slider and layer states stay synchronized with keyboard and pointer actions. Reset also restores the button label.
-- Menu and contact dialogs retain their DOM and focus trap through their closing animation. Reopening replaces the prior animation; Escape uses the same close sequence.
-- Intro cleanup kills only intro-owned state. Reduced motion settles active engine and intro motion.
-- Switching to reduced motion during the BFS animation now immediately finishes the current search; previously its timer continued running.
-- Gallery images have intrinsic dimensions so lazy loading does not change reserved layout space.
-- New shared motion constants live in `src/motion.js`. Page observers, input listeners and timers are cleaned up on navigation.
+A reduced-motion edge case was corrected: adding zero-duration tweens to an already running timeline could complete cleanup too early, leaving a fixed panel height. Timelines are now fully assembled while paused, then played. Browser verification confirmed height:auto in reduced motion and matching panel/content heights after phone/tablet reflow.
 
-## 5. Verification performed
+The Experience progress ring and responsibility reveals derive continuously from scroll position. The chess graph is explicitly conceptual; its animation runs only while visible, stops in reduced motion and supports drag/arrow-key rotation. Its sticky chapter is sized to keep navigation controls visible on a 720-pixel-tall desktop viewport. Mobile uses a linear layout.
 
-Tested the running development and production builds in the Codex in-app browser, including actual screenshots during animation:
+## Checks performed in this redo
 
-| Check | Result |
-| --- | --- |
-| All six homepage-to-project routes and return links, desktop 1280 × 720 | Passed |
-| Axion at 390 × 844, including intermediate frames | Passed; no horizontal overflow |
-| Browser Back and Forward, repeated visits, restored showcase position | Passed |
-| Back during a running shot; newer header navigation during a shot | Passed; no leftover overlays, inert content or busy state |
-| First route visit on a separate local origin; cached repeated visits | Passed |
-| Direct Axion URL reload | Passed; both images loaded, one WebGL canvas |
-| Each Toolkit row opened/closed; rapid keyboard reversals; opening another row | Passed |
-| Open accordions resized from 390 to 768 pixels wide | Passed; measured panel/content heights agree |
-| Menu opening, animated Escape close, focus return, section navigation | Passed |
-| Contact dialog opening/closing | Passed; no message submitted |
-| Rapid engine explode/assemble/reset and Enter/Home controls | Passed |
-| Navigation while the engine is visible, with intermediate captures | Passed; persistent canvas and continuous pose |
-| Reduced-motion route/accordion changes and switching during BFS | Passed |
-| BFS reset/step and algorithm/content regression suite | Passed |
-| Production build and all seven documents' asset/link/heading checks | Passed |
+- Desktop and phone intro frame audits, including the overlay-removal boundary.
+- Entry and return for all four active desktop project routes.
+- Phone chess and AXION entry, AXION return, and phone-to-tablet chess return.
+- Intermediate screenshot sequence during the chess return transition.
+- Browser Back during navigation and newer Experience navigation during an active route: no leftover busy state, inert main or transition wrappers.
+- Toolkit and Experience expansion, seven/nine rapid click reversals, Enter/Space activation and reduced-motion completion.
+- Open panels resized across 390/768 pixels: settled panel and content heights match.
+- Desktop, tablet and phone content inspection; no horizontal overflow in inspected views.
+- Actual chess MP4 playback: readyState 4, advancing time, 1920 × 930 dimensions, 32.67-second duration and no media error.
+- Conceptual graph pointer/keyboard controls and numbered chapter navigation.
+- Production engine Connections selection exposes the chess link and opens its case successfully, with no leftover transition layers.
+- Mobile menu content and navigation, including Experience/Education and the replacement CV.
+- Browser CV download, with SHA-256 equal to the supplied original. Both downloaded pages were rendered with Poppler and visually inspected. The in-app browser’s embedded PDF viewer stayed blank, so PDF readability is verified through the downloaded file rather than that viewer.
+- Browser warning/error log inspection: no warnings/errors in the checked flow.
+- Production preview on port 4173: all four direct case routes, all three legacy redirects, hashed chess video playback and route cleanup. The playing video continued after shared-element adoption into the homepage.
 
-The final desktop route matrix measured animation-tick medians of 16.6–16.7 ms, 95th percentiles of 16.9–18.5 ms and a maximum observed interval of 20.5 ms. Shared-element start/end rectangle differences were below 0.016 CSS pixels. The fresh-origin Axion pass measured 16.5 ms median, 17.6 ms at the 95th percentile, 18.1 ms maximum and a 0.008-pixel start/end discrepancy. The mobile Axion pass measured a 16.5 ms median and 18.5 ms at the 95th percentile.
+Selected route measurements, JavaScript animation intervals:
 
-These measure JavaScript animation ticks and DOM geometry on this machine, not GPU presentation timing or a universal 60 FPS guarantee. The source includes opt-in `?motion-audit=1` instrumentation; its latest result is available on `body[data-motion-audit]`. A null geometry result means there was no visible shared source, so only the document transition ran.
+| Route | Median ms | p95 ms | Maximum ms | Start/end geometry error |
+| --- | --- | --- | --- | --- |
+| Desktop AXION entry | 16.7 | 19.0 | 22.6 | 0.0078 px |
+| Desktop AXION return | 16.7 | 17.9 | 18.5 | 0.0078 px |
+| Desktop chess entry | 16.7 | 18.9 | 22.3 | 0.0078 px |
+| Phone chess entry | 16.7 | 21.0 | 24.0 | below 0.010 px |
+| Chess return after tablet resize | 16.7 | 17.6 | 18.6 | 0.0078 px |
+| Phone AXION entry | 16.7 | 18.8 | 19.8 | below 0.011 px |
+| Phone AXION return | 16.6 | 18.5 | 18.9 | below 0.011 px |
+| Final chess entry with metadata preparation, 1280 × 900 | 16.7 | 17.4 | 17.7 | 0.0078 px |
 
-Commands passed:
+These are animation tick intervals and DOM bounding-rectangle differences on this machine, not GPU presentation timing or a device-independent frame-rate guarantee. Screenshot captures were kept separate from the timing runs where possible. Only the measured routes above carry timing claims.
 
-```sh
-npm run check
-npm run build
-npm run check:build
-```
+## Reproduction and evidence
 
-Evidence saved in `.qa/` (local, ignored by Git): `desktop-motion-results.json`, `axion-final-*.jpg`, `axion-transition-proof.jpg`, `axion-mobile-sequence.jpg`, `toolkit-expansion.jpg` and `toolkit-tablet.jpg`.
+Use index.html?intro=1&motion-audit=1 to replay the intro with frame instrumentation. The resulting JSON is on #world[data-intro-audit]. Route instrumentation is enabled by starting with ?motion-audit=1; each completed route writes body[data-motion-audit]. Ordinary visitors do not record these arrays.
 
-Limits: physical touchscreen hardware, other browser engines, OS-level reduced-motion switching, artificial network throttling and low-end GPU profiling were not tested. The separate-origin test exercises a first visit without the router's warmed document cache; it is not a throttled-network benchmark. Live contact delivery was not tested. No deployment or commit was made.
+Local ignored evidence is in .qa/rebuild/: intro-desktop.json, intro-mobile.json, routes-desktop.json, routes-mobile-tablet.json, route-final-media.json, chess-return-00.png through chess-return-13.png and desktop/mobile screenshots.
+
+Verification commands: npm run check; npm run build; npm run check:build; git diff --check.
+
+Limitations: no physical touchscreen, other browser engines, artificial network throttling, low-end GPU profiling, OS-level preference change or live contact submission was tested. The graph is an illustration, not imported MaleCNS data. No deployment, commit or push was performed.

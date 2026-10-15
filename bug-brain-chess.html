@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f0f0ea" />
+    <meta
+      name="description"
+      content="A full-stack chess AI built around a 4,096-neuron, 208,165-edge subgraph of the MaleCNS fruit-fly connectome. A live interface brings its chess gameplay and 3D neural visualisation into the same view."
+    />
+    <meta property="og:title" content="Bug Brain Chess — Rivindu Kowlinda" />
+    <meta
+      property="og:description"
+      content="A full-stack chess AI built around a 4,096-neuron, 208,165-edge subgraph of the MaleCNS fruit-fly connectome. A live interface brings its chess gameplay and 3D neural visualisation into the same view."
+    />
+    <meta property="og:type" content="website" />
+    <title>Bug Brain Chess — Rivindu Kowlinda</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body data-project="chess">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div id="world" aria-hidden="true"></div>
+    <header class="site-header">
+      <a class="brand" href="index.html" aria-label="Rivindu Kowlinda home"
+        ><svg viewBox="0 0 64 48" aria-hidden="true">
+          <path
+            d="M5 43V5h19c17 0 18 22 2 23l15 15M39 5v38m2-19L59 5M41 24l18 19"
+          /></svg
+        ><span>RIVINDU<br />KOWLINDA</span></a
+      >
+      <nav class="header-links" aria-label="Primary">
+        <a href="index.html#projects">Selected work <sup>04</sup></a
+        ><a href="index.html#experience">Experience</a
+        ><a href="index.html#about">About</a>
+      </nav>
+      <div class="header-actions">
+        <button
+          id="motion-toggle"
+          class="motion-toggle"
+          aria-pressed="false"
+          aria-label="Reduce motion"
+        >
+          Ⅱ</button
+        ><button
+          class="menu-toggle"
+          aria-expanded="false"
+          aria-controls="site-menu"
+        >
+          <span>Menu</span><i></i>
+        </button>
+      </div>
+    </header>
+    <dialog id="site-menu" aria-label="Site navigation">
+      <div class="menu-art" aria-hidden="true">
+        MAKE<br />IT<br /><em>MOVE.</em>
+      </div>
+      <nav aria-label="Expanded">
+        <a href="index.html#projects"
+          ><small>01</small>Projects<span>↗</span></a
+        ><a href="index.html#experience"
+          ><small>02</small>Experience<span>↗</span></a
+        ><a href="index.html#about"><small>03</small>About<span>↗</span></a
+        ><a href="index.html#journey"
+          ><small>04</small>Education<span>↗</span></a
+        ><a href="index.html#skills"><small>05</small>Skills<span>↗</span></a
+        ><a href="index.html#contact"
+          ><small>06</small>Contact<span>↗</span></a
+        >
+      </nav>
+      <div class="menu-bottom mono">
+        <a
+          href="https://github.com/Rivindu-Kowlinda"
+          target="_blank"
+          rel="noreferrer"
+          >GITHUB ↗</a
+        ><a
+          href="https://www.linkedin.com/in/rivindu-kowlinda-52929527b"
+          target="_blank"
+          rel="noreferrer"
+          >LINKEDIN ↗</a
+        ><a href="Rivindu_Kowlinda_CV.pdf" download>DOWNLOAD CV ↓</a>
+      </div>
+      <button class="menu-close" aria-label="Close menu">Close ×</button>
+    </dialog>
+    <main
+      id="main"
+      class="case-main chess-case"
+      tabindex="-1"
+      data-case="chess"
+    >
+      <section class="chess-case-hero">
+        <div class="chess-case-heading">
+          <a class="back-link mono" href="index.html#projects">↖ ALL WORK</a>
+          <div class="eyebrow">
+            <span>01 / AI & FULL-STACK ENGINEERING</span
+            ><span>September 2026 – Present</span>
+          </div>
+          <div class="chess-title">
+            <h1>Bug Brain<br /><em>Chess.</em></h1>
+            <div>
+              <span class="eyebrow">Neuro-inspired Chess AI</span>
+              <p>
+                A tiny brain.<br />
+                A different kind<br />
+                of chess.
+              </p>
+              <span class="mono">Independent project · in development</span>
+            </div>
+          </div>
+        </div>
+        <div class="case-main-visual">
+          <div class="chess-visual">
+            <div class="chess-grid" aria-hidden="true"></div>
+            <div class="chess-display">
+              <div class="chess-display-bar mono">
+                <span><i></i> BUG BRAIN CHESS</span
+                ><span>GAMEPLAY × NEURAL VISUALISATION</span>
+              </div>
+              <video
+                data-shared="chess"
+                controls
+                playsinline
+                preload="metadata"
+                poster="images/bug-brain-chess-poster.jpg"
+                aria-label="Play the Bug Brain Chess project demonstration"
+              >
+                <source src="videos/bug-brain-chess.mp4" type="video/mp4" />
+                Your browser cannot play this recording.
+              </video>
+              <div class="chess-display-bottom mono">
+                <span>RECORDED FROM THE REAL APPLICATION</span
+                ><span>00:32 / DEMO</span>
+              </div>
+            </div>
+            <span class="chess-visual-index mono" aria-hidden="true"
+              >MALECNS / 4,096 NODES / 208,165 CONNECTIONS</span
+            >
+          </div>
+        </div>
+        <div class="chess-facts">
+          <div><b>4,096</b><span>Neurons in the subgraph</span></div>
+          <div><b>208,165</b><span>Connections between them</span></div>
+          <div><b>68</b><span>Frontend & backend tests</span></div>
+        </div>
+      </section>
+      <section class="chess-intro section-pad">
+        <span class="eyebrow">01 / THE IDEA</span>
+        <div>
+          <h2>
+            Biology as<br />a starting point.<br /><em
+              >Software as the experiment.</em
+            >
+          </h2>
+          <div class="chess-intro-copy">
+            <p>
+              A full-stack chess AI built around a 4,096-neuron, 208,165-edge
+              subgraph of the MaleCNS fruit-fly connectome. A live interface
+              brings its chess gameplay and 3D neural visualisation into the
+              same view.
+            </p>
+            <p>
+              Explore how a biological connectivity graph can inform a chess
+              system, and make the resulting software understandable through a
+              responsive visual interface.
+            </p>
+            <p>
+              Recurrent neural processing, trainable policy and value
+              interfaces, and shallow search form the decision system. A FastAPI
+              backend connects model and game state to a React/TypeScript
+              frontend, while WebSocket telemetry drives a Three.js neural view
+              beside animated chess gameplay.
+            </p>
+          </div>
+        </div>
+      </section>
+      <section
+        class="chess-process section-pad"
+        aria-labelledby="process-title"
+      >
+        <div class="chess-process-sticky">
+          <span class="eyebrow">02 / FROM CONNECTIVITY TO A MOVE</span>
+          <h2 id="process-title">Inside the<br /><em>decision.</em></h2>
+          <div class="neural-map">
+            <canvas
+              data-neural-map
+              role="img"
+              aria-label="Conceptual graph illustrating the data, processing and interface stages"
+            ></canvas>
+            <div class="neural-map-label mono">
+              <span data-neural-label>01 / CONNECTIVITY</span
+              ><span>DRAG TO ROTATE ↔</span>
+            </div>
+          </div>
+          <p class="neural-caption">
+            Conceptual system map. The actual neural visualisation is shown in
+            the recording above.
+          </p>
+          <nav class="process-nav" aria-label="Explore the chess system">
+            <a href="#chess-data" aria-label="Explore data and structure">01</a
+            ><a
+              href="#chess-decision"
+              aria-label="Explore neural processing and search"
+              >02</a
+            ><a href="#chess-interface" aria-label="Explore the live interface"
+              >03</a
+            >
+          </nav>
+        </div>
+        <div class="chess-process-steps">
+          <article id="chess-data" data-process-step="0">
+            <span class="eyebrow">01 / DATA & STRUCTURE</span>
+            <h3>A connected<br /><em>starting point.</em></h3>
+            <p>
+              A reproducible pipeline prepares a subgraph from the MaleCNS
+              fruit-fly connectome: 4,096 neurons and 208,165 edges. That
+              connectivity informs the neural architecture.
+            </p>
+            <div class="tags">
+              <span>MaleCNS</span><span>Python</span
+              ><span>Reproducible processing</span>
+            </div>
+          </article>
+          <article id="chess-decision" data-process-step="1">
+            <span class="eyebrow">02 / PROCESSING & SEARCH</span>
+            <h3>From recurrent<br />state to <em>a move.</em></h3>
+            <p>
+              PyTorch supports recurrent neural processing and trainable policy
+              and value interfaces. Shallow chess search explores candidate
+              moves; Stockfish supplies opponents and evaluation.
+            </p>
+            <p class="process-note">
+              An ongoing engineering experiment in neuro-inspired game AI.
+            </p>
+            <div class="tags">
+              <span>PyTorch</span><span>Policy / value</span
+              ><span>Shallow search</span>
+            </div>
+          </article>
+          <article id="chess-interface" data-process-step="2">
+            <span class="eyebrow">03 / THE LIVE INTERFACE</span>
+            <h3>See the game.<br /><em>Inspect the system.</em></h3>
+            <p>
+              FastAPI connects model and game state to a React and TypeScript
+              frontend. WebSocket telemetry powers a real-time Three.js neural
+              view alongside animated chess gameplay.
+            </p>
+            <p>
+              Replay and Elo tracking make games reviewable. Model and game
+              state persist across sessions.
+            </p>
+            <div class="tags">
+              <span>FastAPI</span><span>WebSockets</span
+              ><span>React / TypeScript</span><span>Three.js</span>
+            </div>
+          </article>
+        </div>
+      </section>
+      <section class="chess-engineering section-pad">
+        <div>
+          <span class="eyebrow">03 / ENGINEERING THE EXPERIMENT</span>
+          <h2>Built to<br /><em>keep exploring.</em></h2>
+        </div>
+        <div>
+          <p>
+            68 automated tests span the frontend and backend. Reproducible data
+            processing and persistent state support an experiment that can be
+            revisited and developed further.
+          </p>
+          <ul class="feature-list">
+            <li>4,096 neurons and 208,165 edges</li>
+            <li>Stockfish-based opponents and evaluation</li>
+            <li>Animated gameplay, replay and Elo tracking</li>
+            <li>Persistent model and game state</li>
+            <li>Reproducible data processing</li>
+            <li>68 automated tests across frontend and backend</li>
+          </ul>
+          <span class="development-status mono"
+            ><i></i> IN DEVELOPMENT / SEPTEMBER 2026 — PRESENT</span
+          >
+        </div>
+      </section>
+      <a class="next-project" href="axion.html"
+        ><span class="eyebrow">NEXT PROJECT / 02</span><span>AXION</span
+        ><b aria-hidden="true">↗</b></a
+      >
+    </main>
+    <footer class="site-footer">
+      <a href="index.html" class="footer-mark" aria-label="Home"
+        ><svg viewBox="0 0 64 48" aria-hidden="true">
+          <path
+            d="M5 43V5h19c17 0 18 22 2 23l15 15M39 5v38m2-19L59 5M41 24l18 19"
+          /></svg></a
+      ><span class="mono">RIVINDU KOWLINDA / BUILT WITH CURIOSITY</span
+      ><a href="index.html#hero" class="mono">BACK TO TOP ↑</a>
+    </footer>
+    <dialog id="message-dialog" aria-labelledby="message-title">
+      <button class="dialog-close" aria-label="Close message form">×</button
+      ><span class="eyebrow">LET'S MAKE A CONNECTION</span>
+      <h2 id="message-title">Hello, there.</h2>
+      <form
+        action="https://formspree.io/f/xqapaqne"
+        method="POST"
+        id="contact-form"
+      >
+        <label
+          >Your name<input name="name" autocomplete="name" required /></label
+        ><label
+          >Email address<input
+            name="_replyto"
+            type="email"
+            autocomplete="email"
+            required /></label
+        ><label
+          >What are you thinking?<textarea
+            name="message"
+            rows="4"
+            required
+          ></textarea></label
+        ><button class="button cobalt" type="submit">Send message ↗</button>
+        <p class="form-status" role="status"></p>
+      </form>
+    </dialog>
+    <div id="toast" role="status"></div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

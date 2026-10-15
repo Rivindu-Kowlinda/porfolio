@@ -6,7 +6,7 @@ export default defineConfig({
     {
       name: "preserve-portfolio-assets",
       closeBundle() {
-        copyFileSync("CV.pdf", "dist/CV.pdf");
+        copyFileSync("Rivindu_Kowlinda_CV.pdf", "dist/Rivindu_Kowlinda_CV.pdf");
         copyFileSync("fonts/OFL-Manrope.txt", "dist/OFL-Manrope.txt");
         copyFileSync(
           "fonts/OFL-IBM-Plex-Mono.txt",
@@ -20,6 +20,7 @@ export default defineConfig({
       input: [
         "index.html",
         "axion.html",
+        "bug-brain-chess.html",
         "snake.html",
         "OOP.html",
         "SD1.html",

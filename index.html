@@ -33,7 +33,8 @@
         ><span>RIVINDU<br />KOWLINDA</span></a
       >
       <nav class="header-links" aria-label="Primary">
-        <a href="index.html#projects">Selected work <sup>06</sup></a
+        <a href="index.html#projects">Selected work <sup>04</sup></a
+        ><a href="index.html#experience">Experience</a
         ><a href="index.html#about">About</a>
       </nav>
       <div class="header-actions">
@@ -60,12 +61,14 @@
       <nav aria-label="Expanded">
         <a href="index.html#projects"
           ><small>01</small>Projects<span>↗</span></a
-        ><a href="index.html#about"><small>02</small>About<span>↗</span></a
+        ><a href="index.html#experience"
+          ><small>02</small>Experience<span>↗</span></a
+        ><a href="index.html#about"><small>03</small>About<span>↗</span></a
         ><a href="index.html#journey"
-          ><small>03</small>Experience<span>↗</span></a
-        ><a href="index.html#skills"><small>04</small>Skills<span>↗</span></a
+          ><small>04</small>Education<span>↗</span></a
+        ><a href="index.html#skills"><small>05</small>Skills<span>↗</span></a
         ><a href="index.html#contact"
-          ><small>05</small>Contact<span>↗</span></a
+          ><small>06</small>Contact<span>↗</span></a
         >
       </nav>
       <div class="menu-bottom mono">
@@ -79,14 +82,14 @@
           target="_blank"
           rel="noreferrer"
           >LINKEDIN ↗</a
-        ><a href="CV.pdf" download>DOWNLOAD CV ↓</a>
+        ><a href="Rivindu_Kowlinda_CV.pdf" download>DOWNLOAD CV ↓</a>
       </div>
       <button class="menu-close" aria-label="Close menu">Close ×</button>
     </dialog>
     <main id="main" tabindex="-1">
       <section id="hero" class="hero">
         <div class="hero-topline mono">
-          <span>SOFTWARE ENGINEER / CREATIVE MIND</span
+          <span>SOFTWARE ENGINEERING STUDENT / CREATIVE DEVELOPER</span
           ><span>PORTFOLIO — VOL. 02</span>
         </div>
         <h1 class="hero-name">
@@ -96,9 +99,14 @@
           >
         </h1>
         <div class="hero-baseline">
-          <p>
-            Engineering the logic.<br /><em>Imagining the possibilities.</em>
-          </p>
+          <div class="hero-intro">
+            <p>
+              Engineering the logic.<br /><em>Imagining the possibilities.</em>
+            </p>
+            <a class="hero-experience mono" href="#experience"
+              >ONE YEAR IN INDUSTRY / HSENID ↗</a
+            >
+          </div>
           <a class="round-link" href="#projects"
             ><span>EXPLORE<br />THE WORK</span><b>↘</b></a
           >
@@ -165,20 +173,73 @@
         </div>
       </section>
       <section id="projects" class="work-intro section-pad">
-        <span class="eyebrow">02 / SELECTED WORK — 2023–2025</span>
+        <span class="eyebrow">02 / SELECTED WORK — 2024–2026</span>
         <h2>Ideas.<br /><span>Made real.</span><i>↙</i></h2>
         <p>
-          From the first line of logic to the last detail of an interface.<br />Six
-          explorations in building things that work.
+          From the first line of logic to the last detail of an interface.<br />From
+          neuro-inspired AI to collaborative mobile engineering.
         </p>
       </section>
-      <article class="project-showcase project-axion" data-showcase="axion">
+      <article class="project-showcase project-chess" data-showcase="chess">
         <div class="project-title-row">
           <span class="project-number">01</span>
           <div>
-            <span class="eyebrow">Mobile development / 2025</span>
+            <span class="eyebrow"
+              >AI / full-stack engineering / 2026 — Present</span
+            >
             <h2>
-              <a href="axion.html">Axion<span>↗</span></a>
+              <a href="bug-brain-chess.html">Bug Brain Chess<span>↗</span></a>
+            </h2>
+          </div>
+        </div>
+        <div class="project-stage">
+          <div class="chess-visual">
+            <div class="chess-grid" aria-hidden="true"></div>
+            <div class="chess-display">
+              <div class="chess-display-bar mono">
+                <span><i></i> BUG BRAIN CHESS</span
+                ><span>GAMEPLAY × NEURAL VISUALISATION</span>
+              </div>
+              <video
+                data-shared="chess"
+                controls
+                playsinline
+                preload="none"
+                poster="images/bug-brain-chess-poster.jpg"
+                aria-label="Play the Bug Brain Chess project demonstration"
+              >
+                <source src="videos/bug-brain-chess.mp4" type="video/mp4" />
+                Your browser cannot play this recording.
+              </video>
+              <div class="chess-display-bottom mono">
+                <span>RECORDED FROM THE REAL APPLICATION</span
+                ><span>00:32 / DEMO</span>
+              </div>
+            </div>
+            <span class="chess-visual-index mono" aria-hidden="true"
+              >MALECNS / 4,096 NODES / 208,165 CONNECTIONS</span
+            >
+          </div>
+        </div>
+        <div class="project-bottom">
+          <p>A tiny brain. A different kind of chess.</p>
+          <div class="project-stack mono">
+            Python / PyTorch / FastAPI / React / TypeScript / Three.js
+          </div>
+          <a class="button" href="bug-brain-chess.html"
+            >Explore project <span>↗</span></a
+          >
+        </div>
+      </article>
+      <article class="project-showcase project-axion" data-showcase="axion">
+        <div class="project-title-row">
+          <span class="project-number">02</span>
+          <div>
+            <span class="eyebrow"
+              >Collaborative mobile engineering / 2024 — 2026</span
+            >
+            <h2>
+              <a href="axion.html">AXION<span>↗</span></a>
             </h2>
           </div>
         </div>
@@ -209,56 +270,61 @@
         </div>
         <div class="project-bottom">
           <p>A little clarity. A lot of care.</p>
-          <div class="project-stack mono">Flutter / Dart / GraphQL</div>
+          <div class="project-stack mono">Flutter / Dart / Firebase</div>
           <a class="button" href="axion.html"
             >Explore project <span>↗</span></a
           >
         </div>
       </article>
-      <article class="project-showcase project-ticket" data-showcase="ticket">
+      <article
+        class="project-showcase project-tree project-supporting"
+        data-showcase="tree"
+      >
         <div class="project-title-row">
-          <span class="project-number">02</span>
+          <span class="project-number">03</span>
           <div>
-            <span class="eyebrow">Full-stack engineering / 2024</span>
+            <span class="eyebrow">Creative frontend engineering / 2025</span>
             <h2>
-              <a href="OOP.html">Ticket Manager<span>↗</span></a>
+              <a href="3d_portfolio.html"
+                >3D Interactive Portfolio<span>↗</span></a
+              >
             </h2>
           </div>
         </div>
         <div class="project-stage">
-          <div class="screen-composition screen-ticket">
-            <span class="screen-watermark" aria-hidden="true"
-              >REQUEST / RESPONSE</span
-            >
-            <div class="screen-shell">
-              <div class="window-label mono">
-                <span>ANGULAR → SPRING BOOT</span><i></i>
-              </div>
-              <img
-                data-shared="ticket"
-                src="images/ticket-preview.jpg"
-                alt="Ticket Manager original application interface"
-                loading="lazy"
-                width="1600"
-                height="950"
-              />
+          <div class="recording-frame">
+            <div class="window-label mono">
+              <span>SPATIAL INTERFACES</span><span>THREE.JS ↗</span>
             </div>
-            <span class="media-caption"
-              >Frame from the original running application</span
+            <video
+              data-shared="tree"
+              controls
+              playsinline
+              preload="none"
+              poster="images/tree-preview.jpg"
+            >
+              <source src="videos/video1.mp4" type="video/mp4" /></video
+            ><span class="media-caption"
+              >Play the original 3D portfolio recording</span
             >
           </div>
         </div>
         <div class="project-bottom">
-          <p>Connected from interface to API.</p>
+          <p>An early exploration of the spatial web.</p>
           <div class="project-stack mono">
-            Angular / Spring Boot / Java / TypeScript
+            HTML / CSS / JavaScript / Three.js
           </div>
-          <a class="button" href="OOP.html">Explore project <span>↗</span></a>
+          <a class="button" href="3d_portfolio.html"
+            >Explore project <span>↗</span></a
+          >
         </div>
       </article>
-      <article class="project-showcase project-snake" data-showcase="snake">
+      <article
+        class="project-showcase project-snake project-supporting"
+        data-showcase="snake"
+      >
         <div class="project-title-row">
-          <span class="project-number">03</span>
+          <span class="project-number">04</span>
           <div>
             <span class="eyebrow">Algorithms & desktop / 2025</span>
             <h2>
@@ -285,121 +351,6 @@
           <a class="button" href="snake.html"
             >Explore project <span>↗</span></a
           >
-        </div>
-      </article>
-      <article class="project-showcase project-tree" data-showcase="tree">
-        <div class="project-title-row">
-          <span class="project-number">04</span>
-          <div>
-            <span class="eyebrow">Creative development / 2025</span>
-            <h2>
-              <a href="3d_portfolio.html">3D Tree Portfolio<span>↗</span></a>
-            </h2>
-          </div>
-        </div>
-        <div class="project-stage">
-          <div class="recording-frame">
-            <div class="window-label mono">
-              <span>SPATIAL INTERFACES</span><span>THREE.JS ↗</span>
-            </div>
-            <video
-              data-shared="tree"
-              controls
-              playsinline
-              preload="none"
-              poster="images/tree-preview.jpg"
-            >
-              <source src="videos/video1.mp4" type="video/mp4" /></video
-            ><span class="media-caption"
-              >Play the original 3D tree recording</span
-            >
-          </div>
-        </div>
-        <div class="project-bottom">
-          <p>An interface that grows branches.</p>
-          <div class="project-stack mono">Three.js / JavaScript / WebGL</div>
-          <a class="button" href="3d_portfolio.html"
-            >Explore project <span>↗</span></a
-          >
-        </div>
-      </article>
-      <article class="project-showcase project-plane" data-showcase="plane">
-        <div class="project-title-row">
-          <span class="project-number">05</span>
-          <div>
-            <span class="eyebrow">Core programming / 2024</span>
-            <h2>
-              <a href="SD2.html">Plane Seat Manager<span>↗</span></a>
-            </h2>
-          </div>
-        </div>
-        <div class="project-stage">
-          <div class="screen-composition screen-plane">
-            <span class="screen-watermark" aria-hidden="true"
-              >READY FOR TAKEOFF</span
-            >
-            <div class="screen-shell">
-              <div class="window-label mono">
-                <span>PLANE MANAGEMENT / JAVA</span><i></i>
-              </div>
-              <img
-                data-shared="plane"
-                src="images/SD2_CLI.jpg"
-                alt="Plane Seat Manager original console interface"
-                loading="lazy"
-                width="1600"
-                height="950"
-              />
-            </div>
-            <span class="media-caption">Original command-line application</span>
-          </div>
-        </div>
-        <div class="project-bottom">
-          <p>A solid foundation, seat by seat.</p>
-          <div class="project-stack mono">Java / OOP / File I/O</div>
-          <a class="button" href="SD2.html">Explore project <span>↗</span></a>
-        </div>
-      </article>
-      <article
-        class="project-showcase project-progress"
-        data-showcase="progress"
-      >
-        <div class="project-title-row">
-          <span class="project-number">06</span>
-          <div>
-            <span class="eyebrow">Data & visualisation / 2023</span>
-            <h2>
-              <a href="SD1.html">Student Progress<span>↗</span></a>
-            </h2>
-          </div>
-        </div>
-        <div class="project-stage">
-          <div class="screen-composition screen-progress">
-            <span class="screen-watermark" aria-hidden="true"
-              >MAKE IT COUNT</span
-            >
-            <div class="screen-shell">
-              <div class="window-label mono">
-                <span>PROGRESSION OUTCOMES / PYTHON</span><i></i>
-              </div>
-              <img
-                data-shared="progress"
-                src="images/SD1_Histogram.jpg"
-                alt="Student Progress original histogram"
-                loading="lazy"
-                width="1600"
-                height="950"
-              />
-            </div>
-            <span class="media-caption">Original outcome histogram</span>
-          </div>
-        </div>
-        <div class="project-bottom">
-          <p>From credits to a clearer picture.</p>
-          <div class="project-stack mono">
-            Python / Data validation / Graphics
-          </div>
-          <a class="button" href="SD1.html">Explore project <span>↗</span></a>
         </div>
       </article>
       <section class="lab section-pad" id="playground">
@@ -452,8 +403,116 @@
           </p>
         </div>
       </section>
+      <section
+        class="experience section-pad"
+        id="experience"
+        aria-labelledby="experience-title"
+        data-progress-chapter
+      >
+        <div class="experience-heading">
+          <span class="eyebrow">04 / PROFESSIONAL EXPERIENCE</span>
+          <h2 id="experience-title">A year in<br /><em>production.</em></h2>
+          <p>
+            Real applications. Real users.<br />A different kind of
+            responsibility.
+          </p>
+        </div>
+        <div class="experience-layout">
+          <aside class="experience-profile">
+            <div class="career-orbit" aria-hidden="true">
+              <svg viewBox="0 0 240 240">
+                <circle class="orbit-track" cx="120" cy="120" r="108" />
+                <circle
+                  class="orbit-progress"
+                  cx="120"
+                  cy="120"
+                  r="108"
+                  pathLength="1"
+                /></svg
+              ><span><b>12</b><small>MONTHS / INDUSTRY</small></span>
+            </div>
+            <span class="eyebrow">JULY 2025 — JULY 2026</span>
+            <h3>hSenid<br />Software Lanka</h3>
+            <p>Software Engineering Intern</p>
+            <a class="text-link" href="Rivindu_Kowlinda_CV.pdf" download
+              >The full story in my CV ↓</a
+            >
+          </aside>
+          <div class="experience-work">
+            <p class="experience-lead">
+              I contributed to production-grade healthcare and safety mobile
+              applications, working with senior engineers and QA to improve the
+              software people already relied on.
+            </p>
+            <div class="experience-track">
+              <article class="experience-step" data-scroll-reveal>
+                <span class="mono">01 / INVESTIGATE</span>
+                <h4>Understand the<br /><em>real problem.</em></h4>
+                <p>
+                  Investigated issues, traced root causes and resolved
+                  functional and UI bugs across existing mobile applications.
+                </p>
+              </article>
+              <article class="experience-step" data-scroll-reveal>
+                <span class="mono">02 / IMPROVE</span>
+                <h4>Make the next<br /><em>release better.</em></h4>
+                <p>
+                  Contributed feature enhancements and stability improvements,
+                  maintaining backward compatibility and minimising disruption
+                  for existing users.
+                </p>
+              </article>
+              <article class="experience-step" data-scroll-reveal>
+                <span class="mono">03 / COLLABORATE</span>
+                <h4>Build within<br /><em>a real team.</em></h4>
+                <p>
+                  Worked with senior engineers and QA teams, following
+                  established coding practices, version-control workflows and
+                  internal review processes.
+                </p>
+              </article>
+            </div>
+            <div class="experience-apps">
+              <span class="eyebrow">SELECTED APPLICATIONS</span>
+              <details data-disclosure>
+                <summary>
+                  <span class="mono">PHT</span>
+                  <h4>Healthcare</h4>
+                  <b>+</b>
+                </summary>
+                <div class="disclosure-content">
+                  <p>
+                    A healthcare mobile application supporting patient-related
+                    workflows. I contributed functional bug fixes, UI
+                    improvements, reliability work and feature development.
+                  </p>
+                </div>
+              </details>
+              <details data-disclosure>
+                <summary>
+                  <span class="mono">SRA</span>
+                  <h4>Safety & emergency</h4>
+                  <b>+</b>
+                </summary>
+                <div class="disclosure-content">
+                  <p>
+                    A safety application designed for natural-disaster scenarios
+                    in Japan. I contributed bug fixes and feature improvements
+                    with a focus on reliability under critical conditions.
+                  </p>
+                </div>
+              </details>
+            </div>
+          </div>
+        </div>
+        <div class="experience-end mono">
+          <span>ACADEMIC FOUNDATIONS</span><i aria-hidden="true"></i
+          ><span>PRODUCTION ENGINEERING</span><i aria-hidden="true"></i
+          ><span>WHAT COMES NEXT ↗</span>
+        </div>
+      </section>
       <section class="about section-pad" id="about">
-        <span class="eyebrow">04 / THE PERSON BEHIND THE SYSTEM</span>
+        <span class="eyebrow">05 / THE PERSON BEHIND THE SYSTEM</span>
         <h2>A curious mind.<br />A builder <em>at heart.</em></h2>
         <div class="about-columns">
           <div class="about-monogram" aria-hidden="true">
@@ -469,21 +528,25 @@
               that feel clear, useful and a little unexpected.
             </p>
             <p>
-              I’m studying for a BEng (Hons) in Software Engineering from the
-              University of Westminster, delivered at the Informatics Institute
-              of Technology. My work moves between mobile interfaces, Java
-              systems, algorithms and interactive 3D.
+              I’m a third-year student working toward a BEng (Hons) in Software
+              Engineering from the University of Westminster, delivered at the
+              Informatics Institute of Technology. My work spans production
+              mobile applications, neuro-inspired AI and interactive 3D. From
+              July 2025 to July 2026, I worked as a Software Engineering Intern
+              at hSenid Software Lanka.
             </p>
             <p>
               What connects it all is curiosity: understanding how things work,
               then finding a more thoughtful way to build them.
             </p>
-            <a class="button" href="CV.pdf" download>Download my CV ↓</a>
+            <a class="button" href="Rivindu_Kowlinda_CV.pdf" download
+              >Download my CV ↓</a
+            >
           </div>
         </div>
       </section>
       <section class="skills section-pad" id="skills">
-        <span class="eyebrow">05 / THE TOOLKIT</span>
+        <span class="eyebrow">06 / THE TOOLKIT</span>
         <h2>Different tools.<br />One <em>way of thinking.</em></h2>
         <div class="skills-list">
           <details open>
@@ -499,14 +562,14 @@
               </p>
               <div>
                 <div class="tags">
-                  <span>Angular</span><span>Flutter</span><span>TypeScript</span
-                  ><span>JavaScript</span><span>Dart</span
-                  ><span>HTML & CSS</span>
+                  <span>React</span><span>TypeScript</span><span>Flutter</span
+                  ><span>Dart</span><span>HTML & CSS</span>
                 </div>
                 <div class="skill-connections mono">
-                  IN PRACTICE: <a href="axion.html">Axion ↗</a
-                  ><a href="OOP.html">Ticket Manager ↗</a
-                  ><a href="3d_portfolio.html">3D Tree Portfolio ↗</a>
+                  IN PRACTICE:
+                  <a href="bug-brain-chess.html">Bug Brain Chess ↗</a
+                  ><a href="axion.html">AXION ↗</a
+                  ><a href="3d_portfolio.html">3D Interactive Portfolio ↗</a>
                 </div>
               </div>
             </div>
@@ -519,20 +582,20 @@
             </summary>
             <div class="skill-detail">
               <p>
-                From object-oriented models to API services and pathfinding:
-                working through the logic that makes an application useful.
+                Working through model behaviour, application services and
+                algorithms, from recurrent neural processing to chess search and
+                pathfinding.
               </p>
               <div>
                 <div class="tags">
-                  <span>Java</span><span>Spring Boot</span><span>Python</span
-                  ><span>SQL</span><span>Kotlin</span><span>REST APIs</span
-                  ><span>GraphQL</span>
+                  <span>Python</span><span>PyTorch</span><span>FastAPI</span
+                  ><span>Java</span><span>Firebase</span><span>WebSockets</span>
                 </div>
                 <div class="skill-connections mono">
-                  IN PRACTICE: <a href="OOP.html">Ticket Manager ↗</a
-                  ><a href="snake.html">Snake Battle ↗</a
-                  ><a href="SD2.html">Plane Seat Manager ↗</a
-                  ><a href="SD1.html">Student Progress ↗</a>
+                  IN PRACTICE:
+                  <a href="bug-brain-chess.html">Bug Brain Chess ↗</a
+                  ><a href="axion.html">AXION ↗</a
+                  ><a href="snake.html">Snake Battle ↗</a>
                 </div>
               </div>
             </div>
@@ -555,7 +618,8 @@
                 </div>
                 <div class="skill-connections mono">
                   IN PRACTICE:
-                  <a href="3d_portfolio.html">3D Tree Portfolio ↗</a>
+                  <a href="bug-brain-chess.html">Bug Brain Chess ↗</a
+                  ><a href="3d_portfolio.html">3D Interactive Portfolio ↗</a>
                 </div>
               </div>
             </div>
@@ -568,22 +632,20 @@
             </summary>
             <div class="skill-detail">
               <p>
-                Designing, building, and checking ideas with tools that keep the
-                development process clear and collaborative.
+                Version control, reproducible work, automated tests and careful
+                collaboration. Practices developed through personal projects and
+                a year in production software.
               </p>
               <div>
                 <div class="tags">
-                  <span>GitHub</span><span>VS Code</span
-                  ><span>IntelliJ IDEA</span><span>Figma</span
-                  ><span>Postman</span>
+                  <span>Git / GitHub</span><span>Automated testing</span
+                  ><span>Postman</span><span>Code review</span
+                  ><span>QA collaboration</span>
                 </div>
                 <div class="skill-connections mono">
-                  IN PRACTICE: <a href="axion.html">Axion ↗</a
-                  ><a href="OOP.html">Ticket Manager ↗</a
-                  ><a href="snake.html">Snake Battle ↗</a
-                  ><a href="3d_portfolio.html">3D Tree Portfolio ↗</a
-                  ><a href="SD2.html">Plane Seat Manager ↗</a
-                  ><a href="SD1.html">Student Progress ↗</a>
+                  IN PRACTICE:
+                  <a href="bug-brain-chess.html">Bug Brain Chess ↗</a
+                  ><a href="axion.html">AXION ↗</a>
                 </div>
               </div>
             </div>
@@ -592,7 +654,7 @@
       </section>
       <section class="journey section-pad" id="journey">
         <div>
-          <span class="eyebrow">06 / EXPERIENCE & EDUCATION</span>
+          <span class="eyebrow">07 / EDUCATION</span>
           <h2>Always<br /><em>becoming.</em></h2>
           <p>Building a foundation.<br />Learning by making.</p>
         </div>
@@ -603,22 +665,6 @@
             <p>
               BEng (Hons), University of Westminster.<br />Delivered at
               Informatics Institute of Technology (IIT).
-            </p>
-          </li>
-          <li>
-            <span class="mono">2024–2025 / PROJECT EXPERIENCE</span>
-            <h3>From logic to living systems</h3>
-            <p>
-              Java reservation systems, an Angular and Spring Boot application,
-              and frontend development for the Axion SDGP group project.
-            </p>
-          </li>
-          <li>
-            <span class="mono">2025 / CREATIVE EXPLORATION</span>
-            <h3>Following the “what if?”</h3>
-            <p>
-              Procedural 3D navigation in Three.js. Autonomous snakes using
-              breadth-first search.
             </p>
           </li>
           <li>
@@ -637,7 +683,7 @@
         </ol>
       </section>
       <section class="contact section-pad" id="contact">
-        <span class="eyebrow">07 / THE NEXT CONNECTION</span>
+        <span class="eyebrow">08 / THE NEXT CONNECTION</span>
         <h2>LET’S BUILD<br /><em>SOMETHING.</em><span>↗</span></h2>
         <div class="contact-bottom">
           <p>

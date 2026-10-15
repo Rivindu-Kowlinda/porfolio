@@ -1316,8 +1316,7 @@ body.introducing {
   overflow: hidden;
 }
 body.introducing #world {
-  z-index: 21;
-  background: var(--paper);
+  z-index: 2;
 }
 body.introducing #intro {
   z-index: 22;
@@ -2610,4 +2609,762 @@ body.routing .site-header {
 .project-stage,
 .case-main-visual {
   display: flow-root;
+}
+
+/* Current work. Motion values are owned by the chapter controller. */
+.hero-experience {
+  display: inline-block;
+  pointer-events: auto;
+  font-size: 9px;
+  letter-spacing: 0.045em;
+  margin-top: 14px;
+  color: var(--blue);
+}
+.project-chess {
+  background: #dce5e5;
+}
+.project-supporting .project-stage {
+  height: 500px;
+}
+.chess-visual {
+  height: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 35px 5%;
+  isolation: isolate;
+  overflow: hidden;
+}
+.chess-grid {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image:
+    linear-gradient(#42636c12 1px, transparent 1px),
+    linear-gradient(90deg, #42636c12 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse, #000 15%, transparent 70%);
+}
+.chess-display {
+  width: min(100%, 1120px);
+  background: #141b21;
+  color: #e6efee;
+  border-radius: 14px;
+  padding: 9px;
+  box-shadow:
+    0 30px 65px #13344938,
+    0 2px 4px #13344935;
+}
+.chess-display-bar,
+.chess-display-bottom {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: center;
+  padding: 12px 13px;
+  font-size: 8px;
+  letter-spacing: 0.055em;
+}
+.chess-display-bar span:first-child {
+  display: flex;
+  gap: 9px;
+  align-items: center;
+}
+.chess-display-bar i,
+.development-status i {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  background: #bcf17d;
+  border-radius: 50%;
+}
+.chess-display-bottom {
+  padding: 11px 13px 4px;
+  color: #acbeba;
+  font-size: 7px;
+}
+.chess-display video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 2806/1358;
+  object-fit: contain;
+  border-radius: 6px;
+  background: #11191d;
+}
+.chess-visual-index {
+  position: absolute;
+  left: 12px;
+  bottom: 12px;
+  font-size: 7px;
+  letter-spacing: 0.06em;
+  color: #536b71;
+}
+.chess-case-hero {
+  background: #dce5e5;
+  padding: 145px var(--pad) 65px;
+}
+.chess-case-heading .eyebrow {
+  display: flex;
+  justify-content: space-between;
+  gap: 25px;
+  border-top: 1px solid #233f462c;
+  padding-top: 20px;
+}
+.chess-title {
+  display: grid;
+  grid-template-columns: 1.35fr 1fr;
+  align-items: end;
+  gap: 8vw;
+  padding: 30px 0 50px;
+}
+.chess-title h1 {
+  font-size: clamp(80px, 10.7vw, 165px);
+  line-height: 0.87;
+  letter-spacing: -0.075em;
+}
+.chess-title h1 em {
+  font-style: normal;
+  color: #2c4dec;
+}
+.chess-title > div {
+  padding-bottom: 7px;
+}
+.chess-title > div .eyebrow {
+  border: 0;
+  padding: 0;
+  margin-bottom: 18px;
+}
+.chess-title > div p {
+  font-size: clamp(23px, 3.5vw, 48px);
+  letter-spacing: -0.045em;
+  line-height: 1.1;
+  margin-bottom: 25px;
+}
+.chess-title > div > .mono {
+  font-size: 9px;
+  text-transform: uppercase;
+}
+.chess-case .case-main-visual {
+  margin-top: 0;
+  height: min(57vw, 720px);
+  min-height: 410px;
+}
+.chess-facts {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 30px;
+  border-top: 1px solid #233f4635;
+}
+.chess-facts > div {
+  padding: 25px 0 0 30px;
+  border-left: 1px solid #233f4635;
+}
+.chess-facts > div:first-child {
+  border-left: 0;
+  padding-left: 0;
+}
+.chess-facts b {
+  font-size: clamp(38px, 6.5vw, 94px);
+  font-weight: 500;
+  letter-spacing: -0.06em;
+  display: block;
+}
+.chess-facts span {
+  font: 9px/1.5 var(--mono);
+  text-transform: uppercase;
+  color: #4b6265;
+}
+.chess-intro {
+  background: var(--paper);
+}
+.chess-intro > div {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 9vw;
+  margin-top: 35px;
+}
+.chess-intro h2 {
+  font-size: clamp(40px, 5vw, 76px);
+  line-height: 1.05;
+}
+.chess-intro h2 em {
+  color: var(--blue);
+}
+.chess-intro-copy p {
+  font-size: 16px;
+  line-height: 1.7;
+  margin-bottom: 25px;
+}
+.chess-process {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10vw;
+  background: #171c23;
+  color: #eff1e9;
+  position: relative;
+  align-items: start;
+}
+.chess-process-sticky {
+  position: sticky;
+  top: 105px;
+}
+.chess-process h2 {
+  font-size: clamp(48px, min(6.5vw, 9vh), 98px);
+  line-height: 0.95;
+}
+.chess-process h2 em {
+  color: #bde2d9;
+}
+.neural-map {
+  position: relative;
+  margin: 15px -20px 0;
+  height: min(28vw, calc(100svh - 420px), 370px);
+  min-height: 160px;
+}
+.neural-map canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+  touch-action: pan-y;
+  cursor: grab;
+}
+.neural-map canvas:active {
+  cursor: grabbing;
+}
+.neural-map-label {
+  position: absolute;
+  bottom: 8px;
+  left: 20px;
+  right: 20px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 7px;
+  color: #b3cbc9;
+  pointer-events: none;
+}
+.neural-caption {
+  max-width: 410px;
+  font-size: 11px;
+  color: #96a8aa;
+  line-height: 1.6;
+}
+.process-nav {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+}
+.process-nav a {
+  width: 38px;
+  height: 38px;
+  border: 1px solid #829a9a66;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font: 10px var(--mono);
+  transition:
+    background-color 0.2s,
+    color 0.2s;
+}
+.process-nav a[aria-current="step"] {
+  color: #171c23;
+  background: #bde2d9;
+  border-color: #bde2d9;
+}
+.chess-process-steps article {
+  min-height: 75vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-top: 1px solid #93aaa644;
+  padding: 80px 0;
+  scroll-margin-top: 120px;
+}
+.chess-process-steps article:last-child {
+  min-height: 70vh;
+}
+.chess-process-steps h3 {
+  font-size: clamp(38px, 4.5vw, 68px);
+  line-height: 1.05;
+  margin: 15px 0 30px;
+}
+.chess-process-steps h3 em {
+  color: #bde2d9;
+}
+.chess-process-steps p {
+  font-size: 16px;
+  line-height: 1.7;
+  margin-bottom: 25px;
+  color: #ccd7d4;
+}
+.chess-process-steps .process-note {
+  font-size: 12px;
+  color: #9fb4b0;
+}
+.chess-process .tags span {
+  border-color: #b9cdc755;
+  font-size: 9px;
+}
+.chess-engineering {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10vw;
+  background: #e7ebe4;
+}
+.chess-engineering h2 {
+  font-size: clamp(50px, 6.4vw, 96px);
+  line-height: 0.95;
+}
+.chess-engineering h2 em {
+  color: var(--blue);
+}
+.chess-engineering > div > p {
+  font-size: 19px;
+  line-height: 1.6;
+  margin-bottom: 40px;
+}
+.development-status {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 8px;
+  margin-top: 35px;
+}
+.development-status i {
+  background: #416b53;
+}
+.experience {
+  position: relative;
+  z-index: 3;
+  background: #e2e7e3;
+}
+.experience-heading {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  align-items: end;
+  gap: 0 8vw;
+  border-bottom: 1px solid #52665944;
+  padding-bottom: 65px;
+}
+.experience-heading .eyebrow {
+  grid-column: 1/-1;
+}
+.experience-heading h2 {
+  font-size: clamp(60px, 10vw, 150px);
+  line-height: 0.9;
+  margin-top: 35px;
+}
+.experience-heading h2 em {
+  color: #335e69;
+}
+.experience-heading > p {
+  font-size: clamp(18px, 2.5vw, 36px);
+  line-height: 1.3;
+  letter-spacing: -0.025em;
+  padding-bottom: 6px;
+}
+.experience-layout {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: 10vw;
+  padding-top: 90px;
+  align-items: start;
+}
+.experience-profile {
+  position: sticky;
+  top: 110px;
+}
+.career-orbit {
+  width: clamp(160px, 20vw, 260px);
+  aspect-ratio: 1;
+  position: relative;
+  margin-bottom: 45px;
+}
+.career-orbit svg {
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke-width: 1;
+  transform: rotate(-90deg);
+}
+.orbit-track {
+  stroke: #335e6933;
+}
+.orbit-progress {
+  stroke: #335e69;
+  stroke-width: 2;
+  stroke-dasharray: 1;
+  stroke-dashoffset: calc(1 - var(--chapter-progress, 0));
+}
+.career-orbit > span {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.career-orbit b {
+  font-size: clamp(72px, 9vw, 120px);
+  letter-spacing: -0.08em;
+  line-height: 1;
+  font-weight: 500;
+}
+.career-orbit small {
+  font: 8px var(--mono);
+  letter-spacing: 0.06em;
+  margin-top: 10px;
+}
+.experience-profile .eyebrow {
+  font-size: 9px;
+}
+.experience-profile h3 {
+  font-size: clamp(32px, 3.8vw, 56px);
+  line-height: 1.08;
+  letter-spacing: -0.045em;
+}
+.experience-profile > p {
+  margin: 17px 0 27px;
+  font-size: 15px;
+}
+.experience-profile .text-link {
+  font-size: 11px;
+}
+.experience-lead {
+  font-size: clamp(23px, 2.5vw, 36px);
+  line-height: 1.4;
+  letter-spacing: -0.035em;
+  margin: 10px 0 65px;
+}
+.experience-track {
+  border-left: 1px solid #335e6940;
+  padding-left: 40px;
+}
+.experience-step {
+  padding: 0 0 65px;
+  position: relative;
+}
+.experience-step::before {
+  content: "";
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  background: #e2e7e3;
+  border: 1px solid #335e69;
+  border-radius: 50%;
+  top: 3px;
+  left: -45px;
+}
+.experience-step .mono {
+  font-size: 9px;
+  color: #335e69;
+}
+.experience-step h4 {
+  font-size: clamp(35px, 4.5vw, 68px);
+  line-height: 1.03;
+  margin: 25px 0;
+  letter-spacing: -0.05em;
+}
+.experience-step h4 em {
+  color: #335e69;
+}
+.experience-step p {
+  font-size: 15px;
+  max-width: 480px;
+  line-height: 1.7;
+}
+[data-scroll-reveal].reveal-ready {
+  opacity: calc(0.35 + var(--reveal, 1) * 0.65);
+  transform: translateY(calc((1 - var(--reveal, 1)) * 28px));
+}
+.experience-apps {
+  margin-top: 5px;
+}
+.experience-apps .eyebrow {
+  font-size: 8px;
+}
+.experience-apps details {
+  border-top: 1px solid #335e6944;
+  overflow-anchor: none;
+}
+.experience-apps details:last-child {
+  border-bottom: 1px solid #335e6944;
+}
+.experience-apps summary {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  list-style: none;
+  padding: 23px 0;
+  cursor: pointer;
+}
+.experience-apps summary::-webkit-details-marker {
+  display: none;
+}
+.experience-apps summary .mono {
+  font-size: 9px;
+  min-width: 38px;
+  color: #335e69;
+}
+.experience-apps summary h4 {
+  font-size: clamp(23px, 2.5vw, 36px);
+  letter-spacing: -0.04em;
+}
+.experience-apps summary b {
+  margin-left: auto;
+  font-size: 27px;
+  font-weight: 400;
+}
+.experience-apps details[open]:not([data-animated]) summary b {
+  transform: rotate(45deg);
+}
+.disclosure-content {
+  padding: 0 35px 30px 56px;
+}
+.disclosure-content p {
+  font-size: 14px;
+  line-height: 1.7;
+}
+.experience-end {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+  margin-top: 90px;
+  font-size: 8px;
+  color: #335e69;
+}
+.experience-end i {
+  height: 1px;
+  background: #335e6944;
+  flex: 1;
+}
+@media (max-width: 900px) {
+  .experience-heading {
+    grid-template-columns: 1fr;
+  }
+  .experience-heading > p {
+    margin-top: 35px;
+  }
+  .experience-layout {
+    gap: 6vw;
+    grid-template-columns: 0.8fr 1.2fr;
+  }
+  .experience-track {
+    padding-left: 25px;
+  }
+  .experience-step::before {
+    left: -30px;
+  }
+  .chess-title {
+    gap: 4vw;
+  }
+  .chess-process {
+    gap: 6vw;
+  }
+  .chess-process-sticky {
+    top: 100px;
+  }
+  .neural-map {
+    min-height: 210px;
+  }
+  .chess-intro > div {
+    grid-template-columns: 1fr;
+    gap: 35px;
+  }
+}
+@media (max-width: 600px) {
+  .hero-experience {
+    font-size: 7px;
+    max-width: 195px;
+    margin-top: 9px;
+  }
+  .project-supporting .project-stage {
+    height: 360px;
+  }
+  .chess-visual {
+    padding: 20px 0;
+  }
+  .chess-display {
+    border-radius: 8px;
+    padding: 5px;
+  }
+  .chess-display-bar {
+    padding: 9px 5px;
+    font-size: 6px;
+  }
+  .chess-display-bar span:last-child {
+    max-width: 130px;
+    text-align: right;
+    line-height: 1.5;
+  }
+  .chess-display-bottom {
+    font-size: 5px;
+    padding: 7px 4px 3px;
+    gap: 5px;
+  }
+  .chess-visual-index {
+    left: 0;
+    bottom: 6px;
+    font-size: 5px;
+  }
+  .project-chess .project-stage {
+    height: 300px;
+  }
+  .chess-case-hero {
+    padding-top: 125px;
+    padding-bottom: 35px;
+  }
+  .chess-case-heading .eyebrow {
+    font-size: 6px;
+    gap: 12px;
+  }
+  .chess-title {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    padding: 20px 0 10px;
+  }
+  .chess-title h1 {
+    font-size: 21vw;
+  }
+  .chess-title > div p {
+    font-size: 27px;
+    margin-bottom: 18px;
+  }
+  .chess-title > div p br {
+    display: none;
+  }
+  .chess-title > div .eyebrow {
+    font-size: 9px;
+  }
+  .chess-title > div > .mono {
+    font-size: 7px;
+  }
+  .chess-case .case-main-visual {
+    min-height: 0;
+    height: 270px;
+  }
+  .chess-facts {
+    margin-top: 5px;
+  }
+  .chess-facts > div {
+    padding: 18px 0 0 12px;
+  }
+  .chess-facts b {
+    font-size: clamp(22px, 7.2vw, 36px);
+  }
+  .chess-facts span {
+    font-size: 6px;
+    display: block;
+    max-width: 85px;
+  }
+  .chess-intro h2 {
+    font-size: 38px;
+  }
+  .chess-intro-copy p {
+    font-size: 14px;
+  }
+  .chess-process {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  .chess-process-sticky {
+    position: relative;
+    top: 0;
+  }
+  .chess-process h2 {
+    font-size: 55px;
+  }
+  .neural-map {
+    height: 300px;
+  }
+  .chess-process-steps article,
+  .chess-process-steps article:last-child {
+    min-height: 0;
+    padding: 45px 0;
+  }
+  .chess-process-steps h3 {
+    font-size: 40px;
+  }
+  .chess-process-steps p {
+    font-size: 14px;
+  }
+  .chess-engineering {
+    grid-template-columns: 1fr;
+    gap: 35px;
+  }
+  .chess-engineering h2 {
+    font-size: 52px;
+  }
+  .chess-engineering > div > p {
+    font-size: 16px;
+  }
+  .experience-heading {
+    padding-bottom: 35px;
+  }
+  .experience-heading h2 {
+    font-size: 18vw;
+    margin-top: 20px;
+  }
+  .experience-heading > p {
+    font-size: 21px;
+    margin-top: 25px;
+  }
+  .experience-layout {
+    grid-template-columns: 1fr;
+    padding-top: 45px;
+    gap: 45px;
+  }
+  .experience-profile {
+    position: relative;
+    top: 0;
+    padding-right: 145px;
+  }
+  .career-orbit {
+    position: absolute;
+    right: 0;
+    top: 5px;
+    width: 125px;
+    margin: 0;
+  }
+  .career-orbit b {
+    font-size: 58px;
+  }
+  .career-orbit small {
+    font-size: 6px;
+  }
+  .experience-profile h3 {
+    font-size: 32px;
+  }
+  .experience-profile .eyebrow {
+    font-size: 7px;
+  }
+  .experience-profile > p {
+    font-size: 13px;
+    margin: 14px 0 18px;
+  }
+  .experience-lead {
+    font-size: 23px;
+    margin-bottom: 40px;
+  }
+  .experience-step {
+    padding-bottom: 45px;
+  }
+  .experience-step h4 {
+    font-size: 40px;
+  }
+  .experience-step p {
+    font-size: 14px;
+  }
+  .experience-apps summary h4 {
+    font-size: 25px;
+  }
+  .disclosure-content {
+    padding: 0 0 25px 56px;
+  }
+  .experience-end {
+    gap: 12px;
+    font-size: 6px;
+    margin-top: 45px;
+    line-height: 1.6;
+  }
 }
