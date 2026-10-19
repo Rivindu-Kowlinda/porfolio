@@ -26,6 +26,9 @@ const toast = (text) => {
   toast.timer = setTimeout(() => $("#toast").classList.remove("visible"), 2600);
 };
 function syncMotion() {
+  // Capture the visible chapter before reduced-motion CSS changes the height
+  // of earlier sections and invalidates document offsets.
+  dispatchEvent(new Event("motionwillchange"));
   document.body.classList.toggle("reduced-motion", reduced());
   $("#motion-toggle").setAttribute("aria-pressed", String(reduced()));
   $("#motion-toggle").setAttribute(

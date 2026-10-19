@@ -9,9 +9,9 @@ export function renderShowcase(projects) {
           (
             p,
           ) => `<article id="project-${p.id}" class="project-showcase project-${p.id}${p.supporting ? " project-supporting" : ""}" data-showcase="${p.id}" aria-labelledby="project-title-${p.id}">
-        <div class="project-title-row"><span class="project-number">${p.number}</span><div><span class="eyebrow">${p.kind} / ${p.year}</span><h2 id="project-title-${p.id}"><a href="${projectPaths[p.id]}">${p.title}<span aria-hidden="true">↗</span></a></h2></div></div>
+        <div class="reel-heading"><div class="project-title-row"><span class="project-number">${p.number}</span><div><span class="eyebrow">${p.kind} / ${p.year}</span><h2 id="project-title-${p.id}"><a href="${projectPaths[p.id]}">${p.title}<span aria-hidden="true">↗</span></a></h2></div></div></div>
         <div class="project-stage">${projectVisual(p)}</div>
-        <div class="project-bottom"><p>${p.short}</p><div class="project-stack mono">${p.stack.join(" / ")}</div><a class="button" href="${projectPaths[p.id]}" aria-label="Explore ${p.title}">Explore project <span aria-hidden="true">↗</span></a></div>
+        <div class="reel-details"><div class="project-bottom"><p>${p.short}</p><div class="project-stack mono">${p.stack.join(" / ")}</div><a class="button" href="${projectPaths[p.id]}" aria-label="Explore ${p.title}">Explore project <span aria-hidden="true">↗</span></a></div></div>
       </article>`,
         )
         .join("")}</div>

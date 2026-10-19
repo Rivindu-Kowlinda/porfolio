@@ -17,6 +17,12 @@ const findStage = (main, id) =>
     ? main.querySelector(".case-main-visual")
     : main.querySelector(`[data-showcase="${id}"] .project-stage`);
 
+export function routeAnchor(root, hash) {
+  return hash
+    ? root.querySelector(`#${CSS.escape(decodeURIComponent(hash.slice(1)))}`)
+    : null;
+}
+
 // Cancel preparation immediately when newer navigation supersedes it; the shared
 // fetch may still populate the cache, but cannot mutate the mounted document.
 function waitForPreparation(promise, signal) {
@@ -124,13 +130,21 @@ export function createRouter({ system, mount, unmount, reduced, closeMenu }) {
         history.pushState({}, "", url);
       }
       renderedURL = url;
-      const target =
-        url.hash &&
-        document.getElementById(decodeURIComponent(url.hash.slice(1)));
+      const target = routeAnchor(document, url.hash);
+      const projectTop = target?.dataset.showcase
+        ? showcaseDestination(
+            document.querySelector("main"),
+            target.dataset.showcase,
+          )
+        : null;
       window.scrollTo({
         top:
           scroll?.[1] ??
-          (target ? target.getBoundingClientRect().top + scrollY : 0),
+          (projectTop != null
+            ? projectTop + scrollY
+            : target
+              ? target.getBoundingClientRect().top + scrollY
+              : 0),
         behavior: reduced() || pop ? "instant" : "smooth",
       });
       return;
@@ -209,6 +223,9 @@ export function createRouter({ system, mount, unmount, reduced, closeMenu }) {
           reduced: reduced(),
           showcasePosition:
             oldMain.querySelector(".reel-ready")?.dataset.position,
+          stageVisible: Boolean(
+            stageRect && stageRect.bottom > 0 && stageRect.top < innerHeight,
+          ),
           // Preserve the visual's viewport position when responsive reflow
           // makes the old absolute scroll offset point at a different section.
           stageTop:
@@ -218,8 +235,11 @@ export function createRouter({ system, mount, unmount, reduced, closeMenu }) {
         });
       }
       let targetY = scroll?.[1];
-      if (!incoming.dataset.case && url.hash === "#projects") {
-        const saved = homePositions.get(sharedId);
+      const saved = homePositions.get(sharedId);
+      if (
+        !incoming.dataset.case &&
+        (url.hash === "#projects" || (pop && saved?.stageVisible))
+      ) {
         const reflowed =
           saved &&
           (saved.width !== innerWidth ||
@@ -242,12 +262,11 @@ export function createRouter({ system, mount, unmount, reduced, closeMenu }) {
         if (targetY == null) targetY = showcaseDestination(incoming, sharedId);
       }
       if (targetY == null) {
-        const anchor =
-          url.hash &&
-          incoming.querySelector(
-            `#${CSS.escape(decodeURIComponent(url.hash.slice(1)))}`,
-          );
-        targetY = anchor ? anchor.getBoundingClientRect().top : 0;
+        const anchor = routeAnchor(incoming, url.hash);
+        targetY =
+          (anchor?.dataset.showcase &&
+            showcaseDestination(incoming, anchor.dataset.showcase)) ??
+          (anchor ? anchor.getBoundingClientRect().top : 0);
       }
       if (!reduced() && sharedId && findStage(incoming, sharedId))
         shared = carryVisual(findStage(oldMain, sharedId));

@@ -28,6 +28,7 @@ const geometry = [
   "borderBottomWidth",
   "borderLeftWidth",
   "opacity",
+  "backgroundColor",
 ];
 const tree = (root) => [root, ...root.querySelectorAll("*")];
 function snapshot(root) {

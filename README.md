@@ -33,7 +33,7 @@ Rivindu_Kowlinda_CV.pdf is an exact copy of the supplied latest CV. The previous
 
 ## Media and motion
 
-The homepage projects share one sticky stage. Native scroll position coordinates media, copy, rolling numbering, index progress and background colour. The project index scrolls through the same reversible presentation; reduced motion and short screens expose the four articles in normal flow. Tree's recording is rounded and clipped in the showcase, case hero and gallery. See [SHOWCASE-REPORT.md](SHOWCASE-REPORT.md) for implementation details, history findings and verification.
+The homepage projects share one sticky stage. Native vertical scroll drives upward media travel with a restrained perspective fold, sequential title/copy reveals, rolling numbering, index progress and background colour. The project tabs scroll through that same reversible coordinate. Reduced motion and short screens expose four articles in normal flow. Tree's recording retains its rounded clipping in the showcase, case hero and gallery. See [FLIP-SHOWCASE-REPORT.md](FLIP-SHOWCASE-REPORT.md) for the 19 October replacement, route fixes and actual browser verification. [SHOWCASE-REPORT.md](SHOWCASE-REPORT.md) records the earlier implementation and its historical checks.
 
 The supplied chess recording is encoded as a 1920 × 930, 30 fps H.264 MP4, approximately 1.47 MB and 32.67 seconds. It has a real poster frame, native playback controls and inline mobile playback. On the homepage, preload="none" defers media until the demo approaches the viewport; metadata is then requested to prepare the controls. The dedicated case requests metadata immediately. It does not autoplay. The additional graph is explicitly labelled a conceptual illustration; the actual neural visualisation remains in the recording.
 
@@ -65,7 +65,9 @@ Edit authored source and regenerate; generated HTML is not the source of truth.
 
 ## Verification
 
-The current update was checked at 1280 × 720, 768 × 1024 and 390 × 844 in the Codex in-app browser. Checks included desktop/mobile intro endpoints, project entry/return, history interruption, newer navigation during transitions, responsive return restoration, accordion click reversals and keyboard activation, reduced motion, video playback, CV download and no horizontal overflow in inspected views. Browser warning/error logs were empty during the checked flow.
+The 19 October vertical-fold update was checked in the in-app browser at desktop, tablet, phone, narrow-phone, tall-screen and short-landscape sizes. Tests covered stopped forward/reverse poses, rapid scrolling and tabs, sticky entry/exit, all four shared-element case routes, history, responsive return restoration, direct Tree entry, reduced motion and video playback. The missing-fragment route exception was reproduced and fixed; no subsequent warning/error appeared in the checked flows. Content, motion math and production checks pass. Full measurements and limitations are in FLIP-SHOWCASE-REPORT.md; local evidence is in .qa/upward-fold/ (ignored by Git).
+
+The earlier portfolio content update was checked at 1280 × 720, 768 × 1024 and 390 × 844 in the Codex in-app browser. Checks included desktop/mobile intro endpoints, project entry/return, history interruption, newer navigation during transitions, responsive return restoration, accordion click reversals and keyboard activation, reduced motion, video playback, CV download and no horizontal overflow in inspected views. Browser warning/error logs were empty during that earlier checked flow.
 
 Automated checks cover active project relationships, retired links, source/build CV integrity, media references, generated local links, headings, portrait exclusion, BFS correctness and intro/motion math. Local evidence is under .qa/rebuild/ (ignored by Git).
 

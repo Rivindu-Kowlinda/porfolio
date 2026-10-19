@@ -2451,7 +2451,7 @@ body.introducing #intro {
   *::after {
     scroll-behavior: auto !important;
     animation-duration: 0.01ms !important;
-    transition-duration: 0.01ms !important;
+    transition: none !important;
   }
   .engine-chapter {
     height: auto;
@@ -2471,7 +2471,9 @@ body.reduced-motion .engine-sticky {
   position: relative;
 }
 body.reduced-motion * {
-  transition-duration: 0.01ms !important;
+  /* A nonzero universal duration also transitions layout properties whose
+     default transition-property is all, invalidating scroll restoration. */
+  transition: none !important;
 }
 /* Keep the chapter's semantic content above the persistent canvas. */
 .engine-chapter {
@@ -3375,12 +3377,14 @@ body.routing .site-header {
   width: 100%;
   height: 100%;
   display: flow-root;
+  position: relative;
   transform-origin: 50% 50%;
 }
 .project-reel {
   position: relative;
   z-index: 3;
   background: #dce5e5;
+  overflow-anchor: none;
 }
 .reel-toolbar,
 .reel-index {
@@ -3408,6 +3412,9 @@ body.routing .site-header {
 }
 .reel-index button[aria-pressed="true"] {
   opacity: 1;
+}
+.reel-index button:focus-visible {
+  outline-offset: -3px;
 }
 .reel-index button > .mono {
   font-size: 8px;
@@ -3481,7 +3488,7 @@ body.routing .site-header {
   border: 0;
   padding: 14px 0 10px;
   display: grid;
-  grid-template-rows: 86px minmax(0, 1fr) 78px;
+  grid-template-rows: 108px minmax(0, 1fr) 78px;
   gap: 8px;
   overflow: visible;
   background: transparent;
@@ -3494,6 +3501,16 @@ body.routing .site-header {
 }
 .reel-ready .project-title-row {
   min-width: 0;
+  height: 100%;
+  transform-origin: 50% 50%;
+  will-change: transform, opacity;
+}
+.reel-ready .reel-heading,
+.reel-ready .reel-details {
+  min-height: 0;
+}
+.reel-ready .reel-details {
+  border-top: 1px solid #0003;
 }
 .reel-ready .project-title-row .eyebrow {
   font-size: 8px;
@@ -3513,14 +3530,19 @@ body.routing .site-header {
   min-height: 0;
   margin: 0;
   container-type: size;
+  overflow: clip;
 }
 .reel-ready .project-visual {
-  will-change: transform, opacity;
+  will-change: transform;
+  backface-visibility: hidden;
 }
 .reel-ready .project-bottom {
   padding-top: 15px;
   grid-template-columns: 1fr 1fr auto;
   gap: 22px;
+  height: 100%;
+  border-top: 0;
+  will-change: transform;
 }
 .reel-ready .project-bottom p {
   font-size: 15px;
@@ -3637,7 +3659,8 @@ body.routing .site-header {
   display: block;
 }
 .reel-ready .recording-frame {
-  width: min(86%, calc((100cqh - 75px) * 1.678));
+  /* Leave room for the frame chrome, caption and its existing 2deg rotation. */
+  width: min(86%, calc((100cqh - 85px) * 1.58));
   margin: 0;
   top: 50%;
   transform: translateY(-50%) rotate(2deg);
@@ -3679,7 +3702,7 @@ body.routing .site-header {
     margin-left: 6px;
   }
   .reel-ready .project-showcase {
-    grid-template-rows: 100px minmax(0, 1fr) 116px;
+    grid-template-rows: 122px minmax(0, 1fr) 116px;
     gap: 8px;
     padding-top: 20px;
   }
@@ -3742,7 +3765,7 @@ body.routing .site-header {
     margin-bottom: 4px;
   }
   .reel-ready .chess-display {
-    width: 100%;
+    width: min(100%, calc((100cqh - 80px) * 2.065));
     padding: 5px;
     border-radius: 10px;
   }
@@ -3767,7 +3790,7 @@ body.routing .site-header {
     top: 10%;
   }
   .reel-ready .recording-frame {
-    width: 92%;
+    width: min(92%, calc((100cqh - 65px) * 1.58));
   }
   .recording-window {
     border-radius: 12px;

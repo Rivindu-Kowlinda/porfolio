@@ -6,23 +6,34 @@ const smooth = (t) => t * t * (3 - 2 * t);
 export function showcasePosition(raw, count) {
   const p = clamp(raw, 0, count - 1),
     base = Math.floor(p);
-  return base + smooth(clamp((p - base - 0.22) / 0.58));
+  return base + smooth(p - base);
 }
-export function showcasePose(position, index) {
-  const distance = clamp(index - position, -1, 1),
-    weight = 1 - Math.abs(distance);
+// A vertical page succession, not an orbit: translation is linear in the
+// presentation coordinate. Small, independent folds never invert a surface.
+export function showcasePose(position, index, height = 400, mobile = false) {
+  const distance = clamp(index - position, -1, 1);
+  const departing = distance < 0;
+  const travel = Math.abs(distance);
+  // Text hands off in sequence, before the incoming project becomes active.
+  // Whole headings translate a few pixels; no glyph is sliced by a slot mask.
+  const text = departing
+    ? 1 - smooth(clamp(travel / 0.42))
+    : smooth(clamp((1 - travel - 0.52) / 0.48));
   return {
-    weight,
-    copy: smooth(clamp((weight - 0.48) / 0.52)),
-    y: distance * 48,
-    scale: 1 - Math.abs(distance) * 0.055,
-    rotate: distance * 3,
-    textY: distance * 28,
+    visible: Math.abs(index - position) < 1,
+    y: distance * (height + 32),
+    z: -height * 0.12 * travel,
+    rotate: -distance * (departing ? (mobile ? 8 : 14) : mobile ? 4 : 8),
+    scale: 1 - travel * 0.015,
+    textOpacity: text,
+    textY: distance * (mobile ? 16 : 24),
   };
 }
 export function showcaseLayout(count, width, height) {
   const top = width <= 600 ? 64 : 74;
-  const stage = Math.min(height - top, width <= 600 ? 700 : 950);
+  // The sticky stage fills the available viewport. A capped height exposes the
+  // next section before the final transition completes on tall screens.
+  const stage = height - top;
   const step = Math.max(420, Math.min(height * 0.88, 900));
   return { top, stage, step, total: stage + step * (count - 1) };
 }
@@ -79,8 +90,14 @@ export function mountShowcase(main, reduced) {
     frame = 0,
     active = -1,
     naturalTops = [],
+    naturalBottoms = [],
     reelHeight = 0,
-    measuring = false;
+    measuring = false,
+    mediaHeight = 400,
+    lastPosition = null,
+    lastInView = null,
+    resizeFrame = 0,
+    anchorFrame = 0;
   function prepareMedia(index) {
     const panel = panels[index];
     if (!panel || prepared.has(panel)) return;
@@ -107,6 +124,7 @@ export function mountShowcase(main, reduced) {
     reel.dataset.activeProject = panels[index].dataset.showcase;
   }
   function update() {
+    cancelAnimationFrame(frame);
     frame = 0;
     if (!layout) return;
     const near =
@@ -121,6 +139,15 @@ export function mountShowcase(main, reduced) {
         prepareMedia(index);
         prepareMedia(index + 1);
       }
+      panels.forEach((panel, i) => {
+        if (
+          naturalBottoms[i] <= scrollY ||
+          naturalTops[i] >= scrollY + innerHeight
+        )
+          panel.querySelectorAll("video").forEach((video) => {
+            if (!video.paused) video.pause();
+          });
+      });
       return;
     }
     const raw = clamp(
@@ -132,6 +159,16 @@ export function mountShowcase(main, reduced) {
       index = Math.round(position);
     selectActive(index);
     reel.dataset.position = String(raw);
+    const inView =
+      scrollY + innerHeight > origin && scrollY < origin + reelHeight;
+    if (near) {
+      prepareMedia(index);
+      prepareMedia(index + 1);
+      prepareMedia(index - 1);
+    }
+    if (position === lastPosition && inView === lastInView) return;
+    lastPosition = position;
+    lastInView = inView;
     reel.dataset.presentation = position.toFixed(4);
     reel.style.setProperty("--reel-position", String(position));
     const base = Math.floor(position),
@@ -140,22 +177,18 @@ export function mountShowcase(main, reduced) {
       b = colours[Math.min(base + 1, colours.length - 1)];
     reel.style.backgroundColor = `rgb(${a.map((v, i) => v + (b[i] - v) * blend).join(" ")})`;
     elements.forEach(({ panel, title, media, bottom }, i) => {
-      const pose = showcasePose(position, i),
-        visible = pose.weight > 0.0001;
-      panel.style.visibility = visible ? "visible" : "hidden";
-      panel.style.zIndex = i === index ? "2" : "1";
+      const pose = showcasePose(position, i, mediaHeight, innerWidth <= 600);
+      panel.style.visibility = pose.visible ? "visible" : "hidden";
+      // Constant paint order: there is no z-index swap at the halfway point.
       if (i !== index && panel.contains(document.activeElement))
         buttons[index].focus({ preventScroll: true });
       panel.inert = i !== index;
       panel.setAttribute("aria-hidden", String(i !== index));
-      media.style.opacity = String(pose.weight);
-      // Match CSSPlugin's transform order so a partial scroll pose can also
-      // be interpolated exactly by the shared-element route timeline.
-      media.style.transform = `translate3d(0,${pose.y}px,0) rotateX(${pose.rotate}deg) scale(${pose.scale})`;
-      title.style.opacity = bottom.style.opacity = String(pose.copy);
+      media.style.transform = `translate3d(0,${pose.y}px,${pose.z}px) rotateX(${pose.rotate}deg) scale(${pose.scale})`;
+      title.style.opacity = bottom.style.opacity = String(pose.textOpacity);
       title.style.transform = `translate3d(0,${pose.textY}px,0)`;
-      bottom.style.transform = `translate3d(0,${pose.textY * 0.5}px,0)`;
-      if (!visible)
+      bottom.style.transform = `translate3d(0,${pose.textY * 0.7}px,0)`;
+      if (!pose.visible || !inView)
         panel.querySelectorAll("video").forEach((video) => {
           if (!video.paused) video.pause();
         });
@@ -164,10 +197,6 @@ export function mountShowcase(main, reduced) {
         String(clamp(position - i + 1)),
       );
     });
-    if (near) {
-      prepareMedia(index);
-      prepareMedia(index + 1);
-    }
   }
   function measure() {
     if (measuring) return;
@@ -175,6 +204,8 @@ export function mountShowcase(main, reduced) {
     layout = prepareShowcase(main, reduced());
     origin = reel.getBoundingClientRect().top + scrollY;
     reelHeight = reel.offsetHeight;
+    mediaHeight = panels[0].querySelector(".project-stage").offsetHeight;
+    lastPosition = null;
     if (!layout.enabled) {
       reel.style.removeProperty("background-color");
       elements.forEach(({ panel, title, media, bottom }) => {
@@ -190,18 +221,55 @@ export function mountShowcase(main, reduced) {
       naturalTops = panels.map(
         (panel) => panel.getBoundingClientRect().top + scrollY,
       );
+      naturalBottoms = panels.map(
+        (panel, i) => naturalTops[i] + panel.offsetHeight,
+      );
     }
     update();
     measuring = false;
   }
+  function refresh() {
+    // Only retain a pinned pose. Resizing while approaching or leaving the
+    // section must not pull the visitor back into it.
+    const pinned =
+      layout?.enabled &&
+      scrollY >= origin - layout.top &&
+      scrollY <= origin - layout.top + layout.step * (panels.length - 1);
+    const linearProject =
+      !layout?.enabled &&
+      active >= 0 &&
+      naturalTops[active] < scrollY + innerHeight &&
+      naturalBottoms[active] > scrollY;
+    const anchor = pinned
+      ? { position: Number(reel.dataset.position), index: active, pinned: true }
+      : linearProject
+        ? { position: active, index: active, pinned: false }
+        : null;
+    cancelAnimationFrame(resizeFrame);
+    resizeFrame = requestAnimationFrame(() => {
+      measure();
+      if (anchor && (layout.enabled || anchor.pinned)) {
+        window.scrollTo({
+          top: layout.enabled
+            ? origin - layout.top + anchor.position * layout.step
+            : naturalTops[anchor.index] - layout.top,
+          behavior: "instant",
+        });
+        update();
+      }
+    });
+  }
   function schedule() {
     if (!frame) frame = requestAnimationFrame(update);
   }
-  function choose(index) {
+  function choose(index, instant = false) {
     const top = layout.enabled
       ? origin - layout.top + index * layout.step
       : naturalTops[index] - layout.top;
-    window.scrollTo({ top, behavior: reduced() ? "instant" : "smooth" });
+    window.scrollTo({
+      top,
+      behavior: instant || reduced() ? "instant" : "smooth",
+    });
   }
   buttons.forEach((button, index) => {
     button.addEventListener("click", () => choose(index), options);
@@ -210,9 +278,9 @@ export function mountShowcase(main, reduced) {
       (event) => {
         const next =
           event.key === "ArrowRight"
-            ? (index + 1) % panels.length
+            ? Math.min(index + 1, panels.length - 1)
             : event.key === "ArrowLeft"
-              ? (index + panels.length - 1) % panels.length
+              ? Math.max(index - 1, 0)
               : event.key === "Home"
                 ? 0
                 : event.key === "End"
@@ -237,14 +305,43 @@ export function mountShowcase(main, reduced) {
     options,
   );
   addEventListener("scroll", schedule, { passive: true, ...options });
-  addEventListener("resize", measure, options);
-  addEventListener("motionchange", measure, options);
+  addEventListener("resize", refresh, options);
+  addEventListener("motionwillchange", refresh, options);
   const observer = new ResizeObserver(measure);
   observer.observe(main);
+  main.addEventListener("loadedmetadata", measure, {
+    capture: true,
+    ...options,
+  });
+  // A native anchor points at overlapping articles once the stage is sticky.
+  // Resolve it to its actual chapter coordinate on the first page load only;
+  // the router owns restoration on subsequent mounts.
+  const initialIndex = document.body.hasAttribute("aria-busy")
+    ? -1
+    : panels.findIndex((panel) => `#${panel.id}` === location.hash);
+  document.fonts.ready.then(() => {
+    if (abort.signal.aborted) return;
+    measure();
+    const alignAnchor = () => {
+      if (abort.signal.aborted || initialIndex < 0) return;
+      anchorFrame = requestAnimationFrame(() => {
+        if (`#${panels[initialIndex].id}` !== location.hash) return;
+        measure();
+        choose(initialIndex, true);
+        update();
+      });
+    };
+    // Native fragment scrolling happens at load. Resolve after it, rather than
+    // racing it with an earlier font-ready callback.
+    if (document.readyState === "complete") alignAnchor();
+    else addEventListener("load", alignAnchor, { once: true, ...options });
+  });
   measure();
   return () => {
     abort.abort();
     observer.disconnect();
     cancelAnimationFrame(frame);
+    cancelAnimationFrame(resizeFrame);
+    cancelAnimationFrame(anchorFrame);
   };
 }
