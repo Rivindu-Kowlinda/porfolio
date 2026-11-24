@@ -48,5 +48,5 @@ for (const file of ["OOP.html", "SD1.html", "SD2.html"])
     ),
   );
 console.log(
-  "Generated four case studies, homepage and three legacy redirects.",
+  `Generated ${projects.length} case studies, homepage and three legacy redirects.`,
 );

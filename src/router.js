@@ -9,6 +9,8 @@ const routes = new Set([
   "bug-brain-chess.html",
   "snake.html",
   "3d_portfolio.html",
+  "soundshare.html",
+  "echo.html",
   "",
 ]);
 const pagePath = (url) => url.pathname.replace(/index\.html$/, "");

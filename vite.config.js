@@ -26,6 +26,8 @@ export default defineConfig({
         "SD1.html",
         "SD2.html",
         "3d_portfolio.html",
+        "soundshare.html",
+        "echo.html",
       ],
     },
     chunkSizeWarningLimit: 600,

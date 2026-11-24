@@ -123,13 +123,27 @@ function mount() {
     { rootMargin: "600px" },
   );
   main
-    .querySelectorAll('video[data-shared="chess"][preload="none"]')
+    .querySelectorAll(
+      'video[data-shared="chess"][preload="none"], .demo-gallery video[preload="none"]',
+    )
     .forEach((video) => {
       if (!video.closest("[data-project-reel]")) mediaObserver.observe(video);
     });
   cleanups.push(() => mediaObserver.disconnect());
   const abort = new AbortController(),
     opt = { signal: abort.signal };
+  const demos = [...main.querySelectorAll(".demo-gallery video")];
+  demos.forEach((video) =>
+    video.addEventListener(
+      "play",
+      () => {
+        demos.forEach((other) => {
+          if (other !== video && !other.paused) other.pause();
+        });
+      },
+      opt,
+    ),
+  );
   addEventListener(
     "enginechange",
     ({ detail }) => {

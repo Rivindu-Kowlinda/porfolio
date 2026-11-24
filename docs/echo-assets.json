@@ -1,0 +1,102 @@
+{
+  "capturedOn": "2026-11-23",
+  "provenance": "Browser screenshots and direct Canvas/WebGL MediaRecorder captures. Poster images extracted from videos. No generative imagery or synthetic frame interpolation.",
+  "assets": [
+    {
+      "path": "images/echo-brain-poster.jpg",
+      "type": "image",
+      "bytes": 207853,
+      "sha256": "a3a70848a816bf6138f91c51afbad127e800653bcc63ef81cebbe6fa6425f5db",
+      "width": 1920,
+      "height": 1080,
+      "codec": "mjpeg",
+      "durationSeconds": null,
+      "frameRate": null,
+      "frames": null
+    },
+    {
+      "path": "images/echo-brain.jpg",
+      "type": "image",
+      "bytes": 68778,
+      "sha256": "f8134754959541fe97e30fc009a737f5c42cbe9cb1941445d18a08a79f4e1b23",
+      "width": 1280,
+      "height": 720,
+      "codec": "mjpeg",
+      "durationSeconds": null,
+      "frameRate": null,
+      "frames": null
+    },
+    {
+      "path": "images/echo-ecosystem-poster.jpg",
+      "type": "image",
+      "bytes": 114820,
+      "sha256": "b331bd6f9011d4e17fcd7d9544babf5bd3e82af49db938211a44e979d61e604c",
+      "width": 1920,
+      "height": 1080,
+      "codec": "mjpeg",
+      "durationSeconds": null,
+      "frameRate": null,
+      "frames": null
+    },
+    {
+      "path": "images/echo-ecosystem.jpg",
+      "type": "image",
+      "bytes": 64443,
+      "sha256": "23a64144822fa37c6fef37b8c67cf39e2d46b1a04339f2f676e51b0e63965244",
+      "width": 1280,
+      "height": 720,
+      "codec": "mjpeg",
+      "durationSeconds": null,
+      "frameRate": null,
+      "frames": null
+    },
+    {
+      "path": "images/echo-neural-lab.jpg",
+      "type": "image",
+      "bytes": 97402,
+      "sha256": "47509337cce3be1c90f3e2ff489afb0e8ba9983b46baf37487dceb80b34a02f5",
+      "width": 1280,
+      "height": 720,
+      "codec": "mjpeg",
+      "durationSeconds": null,
+      "frameRate": null,
+      "frames": null
+    },
+    {
+      "path": "images/echo-observatory.jpg",
+      "type": "image",
+      "bytes": 79196,
+      "sha256": "615e334900b1f6960695aba5137e3f654f6a3d7836c06bc46deb1cdd6bdc4929",
+      "width": 1280,
+      "height": 720,
+      "codec": "mjpeg",
+      "durationSeconds": null,
+      "frameRate": null,
+      "frames": null
+    },
+    {
+      "path": "videos/echo-brain.mp4",
+      "type": "video",
+      "bytes": 5663001,
+      "sha256": "6b57ed171a4194fae5198374ae76587245244032581c56235267aff388c93a9b",
+      "width": 1920,
+      "height": 1080,
+      "codec": "h264",
+      "durationSeconds": 11.4,
+      "frameRate": "30/1",
+      "frames": 342
+    },
+    {
+      "path": "videos/echo-ecosystem.mp4",
+      "type": "video",
+      "bytes": 2887642,
+      "sha256": "6061b75d16e72acd89015fd0870b684abcd2b57d9520bd24d32a7411fcb7131c",
+      "width": 1920,
+      "height": 1080,
+      "codec": "h264",
+      "durationSeconds": 10.9,
+      "frameRate": "30/1",
+      "frames": 327
+    }
+  ]
+}

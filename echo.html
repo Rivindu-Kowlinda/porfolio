@@ -1,0 +1,413 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f0f0ea" />
+    <meta
+      name="description"
+      content="ECHO is a local-first artificial-life simulation that makes the relationship between perception, computation and behaviour visible. A living 2D ecosystem sits beside an interactive 3D neural field, revealing the connections and activations behind an organism’s actions. Offspring inherit mutated neural parameters and physiological traits, making it possible to explore adaptation across generations."
+    />
+    <meta
+      property="og:title"
+      content="ECHO — Artificial Life Experiment — Rivindu Kowlinda"
+    />
+    <meta
+      property="og:description"
+      content="ECHO is a local-first artificial-life simulation that makes the relationship between perception, computation and behaviour visible. A living 2D ecosystem sits beside an interactive 3D neural field, revealing the connections and activations behind an organism’s actions. Offspring inherit mutated neural parameters and physiological traits, making it possible to explore adaptation across generations."
+    />
+    <meta property="og:type" content="website" />
+    <title>ECHO — Artificial Life Experiment — Rivindu Kowlinda</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body data-project="echo">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div id="world" aria-hidden="true"></div>
+    <header class="site-header">
+      <a class="brand" href="index.html" aria-label="Rivindu Kowlinda home"
+        ><svg viewBox="0 0 64 48" aria-hidden="true">
+          <path
+            d="M5 43V5h19c17 0 18 22 2 23l15 15M39 5v38m2-19L59 5M41 24l18 19"
+          /></svg
+        ><span>RIVINDU<br />KOWLINDA</span></a
+      >
+      <nav class="header-links" aria-label="Primary">
+        <a href="index.html#projects">Selected work <sup>06</sup></a
+        ><a href="index.html#experience">Experience</a
+        ><a href="index.html#about">About</a>
+      </nav>
+      <div class="header-actions">
+        <button
+          id="motion-toggle"
+          class="motion-toggle"
+          aria-pressed="false"
+          aria-label="Reduce motion"
+        >
+          Ⅱ</button
+        ><button
+          class="menu-toggle"
+          aria-expanded="false"
+          aria-controls="site-menu"
+        >
+          <span>Menu</span><i></i>
+        </button>
+      </div>
+    </header>
+    <dialog id="site-menu" aria-label="Site navigation">
+      <div class="menu-art" aria-hidden="true">
+        MAKE<br />IT<br /><em>MOVE.</em>
+      </div>
+      <nav aria-label="Expanded">
+        <a href="index.html#projects"
+          ><small>01</small>Projects<span>↗</span></a
+        ><a href="index.html#experience"
+          ><small>02</small>Experience<span>↗</span></a
+        ><a href="index.html#about"><small>03</small>About<span>↗</span></a
+        ><a href="index.html#journey"
+          ><small>04</small>Education<span>↗</span></a
+        ><a href="index.html#skills"><small>05</small>Skills<span>↗</span></a
+        ><a href="index.html#contact"
+          ><small>06</small>Contact<span>↗</span></a
+        >
+      </nav>
+      <div class="menu-bottom mono">
+        <a
+          href="https://github.com/Rivindu-Kowlinda"
+          target="_blank"
+          rel="noreferrer"
+          >GITHUB ↗</a
+        ><a
+          href="https://www.linkedin.com/in/rivindu-kowlinda-52929527b"
+          target="_blank"
+          rel="noreferrer"
+          >LINKEDIN ↗</a
+        ><a href="Rivindu_Kowlinda_CV.pdf" download>DOWNLOAD CV ↓</a>
+      </div>
+      <button class="menu-close" aria-label="Close menu">Close ×</button>
+    </dialog>
+    <main id="main" class="case-main" tabindex="-1" data-case="echo">
+      <section class="case-hero project-echo">
+        <div class="case-heading">
+          <a class="back-link mono" href="index.html#projects">↖ ALL WORK</a>
+          <div class="eyebrow">
+            <span
+              >PROJECT 01 / Artificial life / neural networks / interactive
+              visualisation</span
+            ><span>2026</span>
+          </div>
+          <h1>ECHO</h1>
+          <div class="case-intro">
+            <p>Artificial Life Experiment</p>
+            <div>
+              <p>
+                ECHO is a local-first artificial-life simulation that makes the
+                relationship between perception, computation and behaviour
+                visible. A living 2D ecosystem sits beside an interactive 3D
+                neural field, revealing the connections and activations behind
+                an organism’s actions. Offspring inherit mutated neural
+                parameters and physiological traits, making it possible to
+                explore adaptation across generations.
+              </p>
+              <span class="mono"
+                >Full-stack development, simulation design and interactive data
+                visualisation</span
+              >
+            </div>
+          </div>
+        </div>
+        <div class="case-main-visual">
+          <div class="project-visual">
+            <figure
+              class="recording-frame screenshot-frame"
+              data-media-slot="primary"
+            >
+              <div class="recording-window">
+                <div class="window-label mono">
+                  <span>ECHO</span
+                  ><span>ARTIFICIAL LIFE / NEURAL FIELD ↗</span>
+                </div>
+                <div class="project-image-frame">
+                  <img
+                    src="images/echo-brain-poster.jpg"
+                    alt="ECHO’s layered neural network, rendered as fine luminous filaments on a graphite background."
+                    width="1920"
+                    height="1080"
+                    loading="eager"
+                  />
+                </div>
+              </div>
+              <figcaption class="media-caption">
+                ECHO / A FRAME FROM THE REAL NEURAL CANVAS
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+      <section class="case-story section-pad">
+        <div class="case-facts">
+          <span class="mono">THE BUILD</span>
+          <p>
+            Full-stack development, simulation design and interactive data
+            visualisation
+          </p>
+          <div class="tags">
+            <span>React</span><span>TypeScript</span><span>Node.js</span
+            ><span>Canvas</span><span>Three.js</span><span>WebGL</span>
+          </div>
+          <span class="mono"
+            >2026 / Artificial life / neural networks / interactive
+            visualisation</span
+          >
+        </div>
+        <div class="case-copy">
+          <span class="eyebrow">01 / THE QUESTION</span>
+          <h2>The challenge.</h2>
+          <p>
+            Make an evolving simulated ecosystem understandable by connecting
+            observable behaviour to the actual neural computation that drives
+            it.
+          </p>
+          <span class="eyebrow">02 / THE RESPONSE</span>
+          <h2>Inside the build.</h2>
+          <p>
+            A separate Node.js and TypeScript backend advances the world at a
+            fixed 20 Hz, independently of the browser, with an HTTP API and
+            WebSocket snapshots at up to 10 Hz. React, TypeScript and Vite power
+            the observatory, using custom CSS and Lucide icons, with Canvas 2D
+            for the ecosystem and Three.js, WebGL and custom GLSL shaders for
+            the neural field. Local JSON autosaves, disk checkpoints and stored
+            configurations keep experiments resumable.
+          </p>
+          <h3 class="technical-heading">From perception to action.</h3>
+          <p>
+            Each organism has a custom 24 → 32 → 24 → 16 → 7 feedforward
+            network: 103 neurons, 2,032 weights, 79 biases and 2,111 parameters.
+            Inference runs in TypeScript. Hidden layers and turning use tanh;
+            the other outputs use sigmoid. Seven outputs control thrust,
+            turning, locomotion effort, consumption or attack intention, rest,
+            social signalling and reproductive intention. Physics and biological
+            rules determine what happens next.
+          </p>
+          <h3 class="technical-heading">Connections you can inspect.</h3>
+          <p>
+            Every neural filament maps to a real weight. Activations and
+            weighted contributions can be inspected alongside sensory inputs and
+            motor outputs, with connectome, heatmap and influence views.
+            Brightness follows measured neural data; ambient movement and
+            travelling pulses illustrate activity, rather than measured
+            processing latency.
+          </p>
+          <h3 class="technical-heading">Change across generations.</h3>
+          <p>
+            Founders begin with seeded viable pathways plus variation.
+            Descendants inherit neural parameters and physiological traits with
+            mutations. Survival and reproduction may produce population-level
+            adaptation, but improvement is not guaranteed. There is no
+            within-lifetime learning, backpropagation or reinforcement learning.
+          </p>
+          <div class="architecture" aria-label="Project architecture">
+            <div>
+              <span class="mono">01</span>
+              <h3>Sense the world</h3>
+            </div>
+            <div>
+              <span class="mono">02</span>
+              <h3>Compute & act</h3>
+            </div>
+            <div>
+              <span class="mono">03</span>
+              <h3>Inherit & mutate</h3>
+            </div>
+          </div>
+          <ul class="feature-list">
+            <li>
+              A continuous ecosystem with food, hazards, foragers, hunters,
+              resource costs, reproduction and death
+            </li>
+            <li>
+              Clickable sensory and motor channels, neuron contributions, layer
+              isolation and strong-path filtering
+            </li>
+            <li>
+              Same-input brain comparisons, parent–offspring differences and
+              parameter surgery
+            </li>
+            <li>
+              Lineage exploration, organism histories, measured telemetry and
+              sampled replay
+            </li>
+            <li>
+              Configurable scenarios, seeded experiments and cinematic spectator
+              modes
+            </li>
+            <li>
+              Verification uses Vitest, TypeScript checks and browser validation
+            </li>
+          </ul>
+          <h3 class="technical-heading">The working result.</h3>
+          <p>
+            A working local research-style interface for observing neural
+            control and experimenting with inheritance, mutation and ecological
+            interactions. The project demonstrates custom simulation
+            engineering, real-time client/server integration and data-faithful
+            3D visualisation.
+          </p>
+        </div>
+      </section>
+      <section
+        class="case-gallery section-pad"
+        aria-label="Original project media"
+      >
+        <div class="eyebrow">03 / EVIDENCE IN THE DETAILS</div>
+        <h2>The original work.</h2>
+        <p class="gallery-note">
+          Real interface screenshots and direct Canvas/WebGL recordings from one
+          saved simulation run. Population and generation values describe that
+          run. The two silent clips preserve their captured timing.
+        </p>
+        <div class="gallery-grid">
+          <figure class="gallery-wide" data-media-slot="neural-lab">
+            <div class="project-image-frame">
+              <img
+                src="images/echo-neural-lab.jpg"
+                alt="ECHO Neural Lab linking a living organism, its neural network and measured motor outputs."
+                width="1280"
+                height="720"
+                loading="lazy"
+              />
+            </div>
+            <figcaption class="mono">
+              NEURAL LAB / LIVE INTERFACE CAPTURE
+            </figcaption>
+          </figure>
+          <figure class="gallery-wide" data-media-slot="observatory">
+            <div class="project-image-frame">
+              <img
+                src="images/echo-observatory.jpg"
+                alt="ECHO’s living-world observatory with organism telemetry and a neural preview."
+                width="1280"
+                height="720"
+                loading="lazy"
+              />
+            </div>
+            <figcaption class="mono">
+              OBSERVATORY / ECOSYSTEM &amp; SELECTED ORGANISM
+            </figcaption>
+          </figure>
+          <figure data-media-slot="brain-view">
+            <div class="project-image-frame">
+              <img
+                src="images/echo-brain.jpg"
+                alt="ECHO’s full-screen neural field with sensory, hidden and motor layer labels."
+                width="1280"
+                height="720"
+                loading="lazy"
+              />
+            </div>
+            <figcaption class="mono">
+              BRAIN VIEW / APPLICATION CAPTURE
+            </figcaption>
+          </figure>
+          <figure data-media-slot="ecosystem-view">
+            <div class="project-image-frame">
+              <img
+                src="images/echo-ecosystem.jpg"
+                alt="ECHO’s cinematic ecosystem view with organisms and application labels."
+                width="1280"
+                height="720"
+                loading="lazy"
+              />
+            </div>
+            <figcaption class="mono">
+              ECOSYSTEM / APPLICATION CAPTURE
+            </figcaption>
+          </figure>
+        </div>
+        <div class="case-recording">
+          <span class="eyebrow">PROJECT RECORDINGS</span>
+          <div class="gallery-grid demo-gallery">
+            <figure data-media-slot="brain-demo">
+              <h3 class="demo-title">Inside the brain</h3>
+              <div class="video-clip demo-frame">
+                <video
+                  controls
+                  playsinline
+                  preload="none"
+                  aria-label="Inside the brain"
+                  poster="images/echo-brain-poster.jpg"
+                  src="videos/echo-brain.mp4"
+                >
+                  Your browser cannot play this recording.
+                </video>
+              </div>
+              <figcaption class="mono">
+                NEURAL CANVAS / 11.4 SECONDS / SILENT LIVE CAPTURE
+              </figcaption>
+            </figure>
+            <figure data-media-slot="ecosystem-demo">
+              <h3 class="demo-title">The living ecosystem</h3>
+              <div class="video-clip demo-frame">
+                <video
+                  controls
+                  playsinline
+                  preload="none"
+                  aria-label="The living ecosystem"
+                  poster="images/echo-ecosystem-poster.jpg"
+                  src="videos/echo-ecosystem.mp4"
+                >
+                  Your browser cannot play this recording.
+                </video>
+              </div>
+              <figcaption class="mono">
+                ECOSYSTEM CANVAS / 10.9 SECONDS / SILENT LIVE CAPTURE
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+      <a class="next-project" href="bug-brain-chess.html"
+        ><span class="eyebrow">KEEP EXPLORING / 02</span
+        ><span>Bug Brain Chess</span><b aria-hidden="true">↗</b></a
+      >
+    </main>
+    <footer class="site-footer">
+      <a href="index.html" class="footer-mark" aria-label="Home"
+        ><svg viewBox="0 0 64 48" aria-hidden="true">
+          <path
+            d="M5 43V5h19c17 0 18 22 2 23l15 15M39 5v38m2-19L59 5M41 24l18 19"
+          /></svg></a
+      ><span class="mono">RIVINDU KOWLINDA / BUILT WITH CURIOSITY</span
+      ><a href="index.html#hero" class="mono">BACK TO TOP ↑</a>
+    </footer>
+    <dialog id="message-dialog" aria-labelledby="message-title">
+      <button class="dialog-close" aria-label="Close message form">×</button
+      ><span class="eyebrow">LET'S MAKE A CONNECTION</span>
+      <h2 id="message-title">Hello, there.</h2>
+      <form
+        action="https://formspree.io/f/xqapaqne"
+        method="POST"
+        id="contact-form"
+      >
+        <label
+          >Your name<input name="name" autocomplete="name" required /></label
+        ><label
+          >Email address<input
+            name="_replyto"
+            type="email"
+            autocomplete="email"
+            required /></label
+        ><label
+          >What are you thinking?<textarea
+            name="message"
+            rows="4"
+            required
+          ></textarea></label
+        ><button class="button cobalt" type="submit">Send message ↗</button>
+        <p class="form-status" role="status"></p>
+      </form>
+    </dialog>
+    <div id="toast" role="status"></div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

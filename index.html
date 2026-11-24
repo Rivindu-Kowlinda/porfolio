@@ -33,7 +33,7 @@
         ><span>RIVINDU<br />KOWLINDA</span></a
       >
       <nav class="header-links" aria-label="Primary">
-        <a href="index.html#projects">Selected work <sup>04</sup></a
+        <a href="index.html#projects">Selected work <sup>06</sup></a
         ><a href="index.html#experience">Experience</a
         ><a href="index.html#about">About</a>
       </nav>
@@ -182,6 +182,7 @@
       </section>
       <section
         class="project-reel"
+        style="--project-count: 6"
         data-project-reel
         aria-label="Selected project showcase"
       >
@@ -191,23 +192,93 @@
             <div class="reel-count" aria-hidden="true">
               <span class="reel-current"
                 ><span class="reel-digits"
-                  ><span>01</span><span>02</span><span>03</span
-                  ><span>04</span></span
+                  ><span>01</span><span>02</span><span>03</span><span>04</span
+                  ><span>05</span><span>06</span></span
                 ></span
-              ><span>/ 04</span>
+              ><span>/ 06</span>
             </div>
             <a href="#playground">CONTINUE ↓</a>
           </div>
           <div class="reel-panels">
             <article
-              id="project-chess"
-              class="project-showcase project-chess"
-              data-showcase="chess"
-              aria-labelledby="project-title-chess"
+              id="project-echo"
+              class="project-showcase project-echo"
+              data-showcase="echo"
+              data-showcase-color="#d8e2db"
+              aria-labelledby="project-title-echo"
             >
               <div class="reel-heading">
                 <div class="project-title-row">
                   <span class="project-number">01</span>
+                  <div>
+                    <span class="eyebrow"
+                      >Artificial life / neural networks / interactive
+                      visualisation / 2026</span
+                    >
+                    <h2 id="project-title-echo">
+                      <a href="echo.html"
+                        >ECHO<span aria-hidden="true">↗</span></a
+                      >
+                    </h2>
+                  </div>
+                </div>
+              </div>
+              <div class="project-stage">
+                <div class="project-visual">
+                  <figure
+                    class="recording-frame screenshot-frame"
+                    data-media-slot="primary"
+                  >
+                    <div class="recording-window">
+                      <div class="window-label mono">
+                        <span>ECHO</span
+                        ><span>ARTIFICIAL LIFE / NEURAL FIELD ↗</span>
+                      </div>
+                      <div class="project-image-frame">
+                        <img
+                          src="images/echo-brain-poster.jpg"
+                          alt="ECHO’s layered neural network, rendered as fine luminous filaments on a graphite background."
+                          width="1920"
+                          height="1080"
+                          loading="lazy"
+                        />
+                      </div>
+                    </div>
+                    <figcaption class="media-caption">
+                      ECHO / A FRAME FROM THE REAL NEURAL CANVAS
+                    </figcaption>
+                  </figure>
+                </div>
+              </div>
+              <div class="reel-details">
+                <div class="project-bottom">
+                  <p>
+                    An artificial-life observatory where neural-network-driven
+                    organisms perceive, act, survive and reproduce—and their
+                    internal computation becomes visible in real time.
+                  </p>
+                  <div class="project-stack mono">
+                    React / TypeScript / Node.js / Canvas / Three.js / WebGL
+                  </div>
+                  <a
+                    class="button"
+                    href="echo.html"
+                    aria-label="Explore ECHO — Artificial Life Experiment"
+                    >Explore project <span aria-hidden="true">↗</span></a
+                  >
+                </div>
+              </div>
+            </article>
+            <article
+              id="project-chess"
+              class="project-showcase project-chess"
+              data-showcase="chess"
+              data-showcase-color="#dce5e5"
+              aria-labelledby="project-title-chess"
+            >
+              <div class="reel-heading">
+                <div class="project-title-row">
+                  <span class="project-number">02</span>
                   <div>
                     <span class="eyebrow"
                       >AI / full-stack engineering / 2026 — Present</span
@@ -270,14 +341,84 @@
               </div>
             </article>
             <article
+              id="project-soundshare"
+              class="project-showcase project-soundshare"
+              data-showcase="soundshare"
+              data-showcase-color="#e7e4ef"
+              aria-labelledby="project-title-soundshare"
+            >
+              <div class="reel-heading">
+                <div class="project-title-row">
+                  <span class="project-number">03</span>
+                  <div>
+                    <span class="eyebrow"
+                      >Browser engineering / audio transmission / 2026</span
+                    >
+                    <h2 id="project-title-soundshare">
+                      <a href="soundshare.html"
+                        >SoundShare<span aria-hidden="true">↗</span></a
+                      >
+                    </h2>
+                  </div>
+                </div>
+              </div>
+              <div class="project-stage">
+                <div class="project-visual">
+                  <figure
+                    class="recording-frame screenshot-frame"
+                    data-media-slot="primary"
+                  >
+                    <div class="recording-window">
+                      <div class="window-label mono">
+                        <span>SOUNDSHARE</span
+                        ><span>IMAGES THROUGH SOUND ↗</span>
+                      </div>
+                      <div class="project-image-frame">
+                        <img
+                          src="images/soundshare-transmission.png"
+                          alt="SoundShare sender workspace showing original and compressed cat images, an audio waveform and packet transmission progress."
+                          width="2940"
+                          height="1662"
+                          loading="lazy"
+                        />
+                      </div>
+                    </div>
+                    <figcaption class="media-caption">
+                      SOUNDSHARE / IMAGE PREPARATION & SPEAKER TRANSMISSION
+                    </figcaption>
+                  </figure>
+                </div>
+              </div>
+              <div class="reel-details">
+                <div class="project-bottom">
+                  <p>
+                    A browser-based app that sends images through sound. One
+                    laptop plays the image through its speaker, and another
+                    reconstructs it through its microphone, frame by frame.
+                  </p>
+                  <div class="project-stack mono">
+                    React / TypeScript / Vite / Tailwind CSS / Web Audio /
+                    WebAssembly
+                  </div>
+                  <a
+                    class="button"
+                    href="soundshare.html"
+                    aria-label="Explore SoundShare"
+                    >Explore project <span aria-hidden="true">↗</span></a
+                  >
+                </div>
+              </div>
+            </article>
+            <article
               id="project-axion"
               class="project-showcase project-axion"
               data-showcase="axion"
+              data-showcase-color="#dfe5f1"
               aria-labelledby="project-title-axion"
             >
               <div class="reel-heading">
                 <div class="project-title-row">
-                  <span class="project-number">02</span>
+                  <span class="project-number">04</span>
                   <div>
                     <span class="eyebrow"
                       >Collaborative mobile engineering / 2024 — 2026</span
@@ -335,11 +476,12 @@
               id="project-tree"
               class="project-showcase project-tree project-supporting"
               data-showcase="tree"
+              data-showcase-color="#efe7db"
               aria-labelledby="project-title-tree"
             >
               <div class="reel-heading">
                 <div class="project-title-row">
-                  <span class="project-number">03</span>
+                  <span class="project-number">05</span>
                   <div>
                     <span class="eyebrow"
                       >Creative frontend engineering / 2025</span
@@ -398,11 +540,12 @@
               id="project-snake"
               class="project-showcase project-snake project-supporting"
               data-showcase="snake"
+              data-showcase-color="#e2ebd0"
               aria-labelledby="project-title-snake"
             >
               <div class="reel-heading">
                 <div class="project-title-row">
-                  <span class="project-number">04</span>
+                  <span class="project-number">06</span>
                   <div>
                     <span class="eyebrow">Algorithms & desktop / 2025</span>
                     <h2 id="project-title-snake">
@@ -446,34 +589,50 @@
             <button
               type="button"
               data-project-select="0"
-              aria-controls="project-chess"
+              aria-controls="project-echo"
               aria-pressed="true"
             >
-              <span class="mono">01</span><span>Bug Brain Chess</span
+              <span class="mono">01</span><span>ECHO</span
               ><i aria-hidden="true"></i></button
             ><button
               type="button"
               data-project-select="1"
-              aria-controls="project-axion"
+              aria-controls="project-chess"
               aria-pressed="false"
             >
-              <span class="mono">02</span><span>AXION</span
+              <span class="mono">02</span><span>Bug Brain Chess</span
               ><i aria-hidden="true"></i></button
             ><button
               type="button"
               data-project-select="2"
-              aria-controls="project-tree"
+              aria-controls="project-soundshare"
               aria-pressed="false"
             >
-              <span class="mono">03</span><span>3D Interactive Portfolio</span
+              <span class="mono">03</span><span>SoundShare</span
               ><i aria-hidden="true"></i></button
             ><button
               type="button"
               data-project-select="3"
+              aria-controls="project-axion"
+              aria-pressed="false"
+            >
+              <span class="mono">04</span><span>AXION</span
+              ><i aria-hidden="true"></i></button
+            ><button
+              type="button"
+              data-project-select="4"
+              aria-controls="project-tree"
+              aria-pressed="false"
+            >
+              <span class="mono">05</span><span>3D Interactive Portfolio</span
+              ><i aria-hidden="true"></i></button
+            ><button
+              type="button"
+              data-project-select="5"
               aria-controls="project-snake"
               aria-pressed="false"
             >
-              <span class="mono">04</span><span>Snake Battle</span
+              <span class="mono">06</span><span>Snake Battle</span
               ><i aria-hidden="true"></i>
             </button>
           </nav>

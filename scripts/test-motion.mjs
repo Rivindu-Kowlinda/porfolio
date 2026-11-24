@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { projects } from "../src/content.js";
 import { routeAnchor } from "../src/router.js";
 import { stageOffset, clampScroll, introPose } from "../src/motion.js";
 import {
@@ -48,24 +49,29 @@ for (const mobile of [false, true]) {
   assert.equal(introPose(base, 1, mobile).py, 0.2);
 }
 // Scroll direction cannot change a frame: every project shares one coordinate.
-const forward = Array.from({ length: 301 }, (_, i) => i / 100);
+const count = projects.length;
+const indices = projects.map((_, i) => i);
+const forward = Array.from(
+  { length: (count - 1) * 100 + 1 },
+  (_, i) => i / 100,
+);
 const reverse = forward.slice().reverse();
 assert.deepEqual(
-  forward.map((p) => showcasePosition(p, 4)),
-  reverse.map((p) => showcasePosition(p, 4)).reverse(),
+  forward.map((p) => showcasePosition(p, count)),
+  reverse.map((p) => showcasePosition(p, count)).reverse(),
 );
 for (const mobile of [false, true]) {
   const frames = forward.map((raw) =>
-    [0, 1, 2, 3].map((i) =>
-      showcasePose(showcasePosition(raw, 4), i, 400, mobile),
+    indices.map((i) =>
+      showcasePose(showcasePosition(raw, count), i, 400, mobile),
     ),
   );
   assert.deepEqual(
     frames,
     reverse
       .map((raw) =>
-        [0, 1, 2, 3].map((i) =>
-          showcasePose(showcasePosition(raw, 4), i, 400, mobile),
+        indices.map((i) =>
+          showcasePose(showcasePosition(raw, count), i, 400, mobile),
         ),
       )
       .reverse(),
@@ -77,8 +83,8 @@ for (const mobile of [false, true]) {
       visible.every((p) => p.z <= 0 && p.scale >= 0.965 && p.scale <= 1),
     );
   }
-  for (let i = 0; i < 4; i++) {
-    assert.equal(showcasePosition(i, 4), i);
+  for (let i = 0; i < count; i++) {
+    assert.equal(showcasePosition(i, count), i);
     const pose = showcasePose(i, i, 400, mobile);
     assert.ok(pose.visible);
     for (const key of ["y", "z", "rotate", "textY"])
@@ -116,9 +122,9 @@ for (const mobile of [false, true]) {
   // handoff. Visibility may change only where the plane is outside the mask
   // of the viewport; transform values themselves remain continuous.
   let previous = null;
-  for (let step = 0; step <= 3000; step++) {
-    const poses = [0, 1, 2, 3].map((i) =>
-      showcasePose(showcasePosition(step / 1000, 4), i, 400, mobile),
+  for (let step = 0; step <= (count - 1) * 1000; step++) {
+    const poses = indices.map((i) =>
+      showcasePose(showcasePosition(step / 1000, count), i, 400, mobile),
     );
     if (previous)
       poses.forEach((p, i) => {
@@ -135,13 +141,13 @@ for (const mobile of [false, true]) {
   assert.equal(outgoing.y, -incoming.y);
   assert.equal(outgoing.z, incoming.z);
 }
-assert.equal(showcasePosition(-10, 4), 0);
-assert.equal(showcasePosition(9, 4), 3);
-const phone = showcaseLayout(4, 390, 844),
-  desktop = showcaseLayout(4, 1280, 800);
+assert.equal(showcasePosition(-10, count), 0);
+assert.equal(showcasePosition(9, count), count - 1);
+const phone = showcaseLayout(count, 390, 844),
+  desktop = showcaseLayout(count, 1280, 800);
 assert.equal(phone.stage, 844 - phone.top);
 assert.equal(desktop.stage, 800 - desktop.top);
-assert.equal(phone.total - phone.stage, phone.step * 3);
+assert.equal(phone.total - phone.stage, phone.step * (count - 1));
 
 // Direct anchors and responsive return routes use chapter offsets, never the
 // bounding box of one of the overlapping absolute-positioned articles.
@@ -154,7 +160,7 @@ for (const [width, height] of [
 ]) {
   globalThis.innerWidth = width;
   globalThis.innerHeight = height;
-  const panels = ["chess", "axion", "tree", "snake"].map((id) => ({
+  const panels = projects.map(({ id }) => ({
     dataset: { showcase: id },
   }));
   const reel = {
@@ -162,19 +168,21 @@ for (const [width, height] of [
     getBoundingClientRect: () => ({ top: 2400 }),
   };
   const main = { querySelector: () => reel };
-  const layout = showcaseLayout(4, width, height);
+  const layout = showcaseLayout(count, width, height);
   assert.equal(layout.stage + layout.top, height);
-  for (const progress of [0, 0.2, 1.5, 2.8, 3]) {
+  for (const progress of [0, 0.2, 1.5, 2.8, 3.5, 3.8, 4, 4.5, 5]) {
     const nextSectionTop = layout.total - progress * layout.step + layout.top;
     assert.ok(
       nextSectionTop >= height,
       "Next section exposed before final project",
     );
   }
-  assert.equal(
-    showcaseDestination(main, "tree"),
-    2400 - layout.top + 2 * layout.step,
-  );
+  for (const [index, project] of projects.entries()) {
+    assert.equal(
+      showcaseDestination(main, project.id),
+      2400 - layout.top + index * layout.step,
+    );
+  }
   assert.equal(
     showcaseDestination(main, "axion", 1.38),
     2400 - layout.top + 1.38 * layout.step,

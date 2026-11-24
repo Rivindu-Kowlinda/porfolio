@@ -76,12 +76,12 @@ export function mountShowcase(main, reduced) {
     },
     bottom: panel.querySelector(".project-bottom"),
   }));
-  const colours = [
-    [220, 229, 229],
-    [223, 229, 241],
-    [239, 231, 219],
-    [226, 235, 208],
-  ];
+  const colours = panels.map((panel) =>
+    panel.dataset.showcaseColor
+      .slice(1)
+      .match(/../g)
+      .map((hex) => parseInt(hex, 16)),
+  );
   const abort = new AbortController(),
     options = { signal: abort.signal };
   const prepared = new WeakSet();
@@ -93,7 +93,7 @@ export function mountShowcase(main, reduced) {
     naturalBottoms = [],
     reelHeight = 0,
     measuring = false,
-    mediaHeight = 400,
+    mediaHeights = [],
     lastPosition = null,
     lastInView = null,
     resizeFrame = 0,
@@ -177,7 +177,12 @@ export function mountShowcase(main, reduced) {
       b = colours[Math.min(base + 1, colours.length - 1)];
     reel.style.backgroundColor = `rgb(${a.map((v, i) => v + (b[i] - v) * blend).join(" ")})`;
     elements.forEach(({ panel, title, media, bottom }, i) => {
-      const pose = showcasePose(position, i, mediaHeight, innerWidth <= 600);
+      const pose = showcasePose(
+        position,
+        i,
+        mediaHeights[i],
+        innerWidth <= 600,
+      );
       panel.style.visibility = pose.visible ? "visible" : "hidden";
       // Constant paint order: there is no z-index swap at the halfway point.
       if (i !== index && panel.contains(document.activeElement))
@@ -204,7 +209,9 @@ export function mountShowcase(main, reduced) {
     layout = prepareShowcase(main, reduced());
     origin = reel.getBoundingClientRect().top + scrollY;
     reelHeight = reel.offsetHeight;
-    mediaHeight = panels[0].querySelector(".project-stage").offsetHeight;
+    mediaHeights = panels.map(
+      (panel) => panel.querySelector(".project-stage").offsetHeight,
+    );
     lastPosition = null;
     if (!layout.enabled) {
       reel.style.removeProperty("background-color");

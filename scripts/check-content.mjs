@@ -5,7 +5,7 @@ import { projects, profile, skillGroups } from "../src/content.js";
 import { projectPaths } from "../src/render-project.js";
 assert.deepEqual(
   projects.map((p) => p.id),
-  ["chess", "axion", "tree", "snake"],
+  ["echo", "chess", "soundshare", "axion", "tree", "snake"],
 );
 const home = readFileSync("index.html", "utf8");
 assert.ok(
@@ -14,7 +14,15 @@ assert.ok(
     home.includes("July 2025"),
 );
 assert.ok(home.includes(profile.email));
-assert.ok(home.includes("Selected work <sup>04</sup>"));
+assert.ok(home.includes("Selected work <sup>06</sup>"));
+assert.deepEqual(
+  [...home.matchAll(/data-showcase="([^"]+)"/g)].map((match) => match[1]),
+  projects.map((p) => p.id),
+);
+assert.deepEqual(
+  projects.map((p) => p.number),
+  ["01", "02", "03", "04", "05", "06"],
+);
 for (const p of projects) {
   const html = readFileSync(projectPaths[p.id], "utf8");
   for (const value of [p.challenge, p.solution, ...p.details])
@@ -22,7 +30,11 @@ for (const p of projects) {
       html.replace(/\s+/g, " ").includes(value.replace(/\s+/g, " ")),
       `${p.id}: missing ${value}`,
     );
-  for (const asset of [...p.images, ...(p.video ? [p.video] : [])])
+  for (const asset of [
+    ...(p.images || []),
+    ...(p.video ? [p.video] : []),
+    ...(p.media || []).flatMap((m) => [m.src, m.poster].filter(Boolean)),
+  ])
     assert.ok(existsSync(asset), `Missing media ${asset}`);
   assert.ok(html.includes("Rivindu_Kowlinda_CV.pdf"));
 }
@@ -41,5 +53,5 @@ assert.equal(
   "ee8cccc82b6fe3a4e14df9ce8d357e998ad93bcd00c4551cdd5e06a0b07af53f",
 );
 console.log(
-  "Verified four active projects, case facts, experience, media, relationships, redirects and exact CV bytes.",
+  "Verified six active projects, case facts, experience, media, relationships, redirects and exact CV bytes.",
 );

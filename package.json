@@ -7,7 +7,7 @@
     "dev": "vite --host 127.0.0.1",
     "build": "vite build",
     "preview": "vite preview --host 127.0.0.1",
-    "check": "node scripts/check-content.mjs && node scripts/test-pathfinder.mjs && node scripts/test-motion.mjs",
+    "check": "node scripts/check-content.mjs && node scripts/test-pathfinder.mjs && node scripts/test-motion.mjs && node scripts/test-project-media.mjs",
     "prebuild": "node scripts/generate-projects.mjs",
     "generate": "node scripts/generate-projects.mjs",
     "format": "prettier --write src scripts vite.config.js",
